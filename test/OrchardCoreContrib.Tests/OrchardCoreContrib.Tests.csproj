@@ -34,4 +34,10 @@
     <ProjectReference Include="..\..\src\OrchardCoreContrib.Shortcodes.Core\OrchardCoreContrib.Shortcodes.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Linq\occ.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
