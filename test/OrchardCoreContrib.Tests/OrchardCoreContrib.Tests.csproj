@@ -6,15 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Linq\occ.db" />
     <None Remove="Localization\JsonFiles\First.json" />
     <None Remove="Localization\JsonFiles\Second.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Linq\occ.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <EmbeddedResource Include="Localization\JsonFiles\First.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -37,5 +33,9 @@
     <ProjectReference Include="..\..\src\OrchardCoreContrib.Localization.Json\OrchardCoreContrib.Localization.Json.csproj" />
     <ProjectReference Include="..\..\src\OrchardCoreContrib.Shortcodes.Core\OrchardCoreContrib.Shortcodes.Core.csproj" />
   </ItemGroup>
+	
+  <Target Name="CopyDLLs" AfterTargets="Build">
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\Linq\occ.db" DestinationFiles="$(TargetDir)\occ.db" />
+  </Target>
 
 </Project>
