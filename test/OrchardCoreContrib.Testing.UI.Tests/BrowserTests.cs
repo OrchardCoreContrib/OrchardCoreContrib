@@ -22,10 +22,11 @@ public class BrowserTests
         _browserMock.Setup(b => b.Version).Returns(version);
 
         // Act
-        var browser = new Browser(_browserMock.Object);
+        var browser = new Browser(_browserMock.Object, BrowserType.Edge);
 
         // Assert
         Assert.NotNull(browser);
+        Assert.Equal(BrowserType.Edge, browser.Type);
         Assert.Equal(version, browser.Version);
     }
 
@@ -33,7 +34,7 @@ public class BrowserTests
     public async Task ShouldOpenPage()
     {
         // Arrange
-        var browser = new Browser(_browserMock.Object);
+        var browser = new Browser(_browserMock.Object, BrowserType.Edge);
 
         // Act
         var page = await browser.OpenPageAsync("https://www.orchardcore.net");

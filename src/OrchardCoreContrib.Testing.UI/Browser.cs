@@ -9,8 +9,15 @@ namespace OrchardCoreContrib.Testing.UI;
 /// Creates an instance of <see cref="Browser"/>.
 /// </remarks>
 /// <param name="browser">The <see cref="PlaywrightBrowser"/></param>
-public class Browser(PlaywrightBrowser browser) : IBrowser
+/// <param name="type">The <see cref="BrowserType"/></param>
+public class Browser(PlaywrightBrowser browser, BrowserType type) : IBrowser
 {
+    /// <inheritdoc/>
+    PlaywrightBrowser IBrowser.InnerBrowser => browser;
+
+    /// <inheritdoc/>
+    public BrowserType Type => type;
+
     /// <inheritdoc/>
     public string Version => browser.Version;
 
