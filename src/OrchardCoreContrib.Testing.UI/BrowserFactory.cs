@@ -29,6 +29,6 @@ public static class BrowserFactory
             _ => throw new NotSupportedException()
         };
 
-        return new Browser(browser, browserType);
+        return new Browser(new PlaywrightBrowserAccessor(browser), browserType);
     }
 }

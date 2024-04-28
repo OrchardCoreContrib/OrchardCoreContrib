@@ -1,6 +1,4 @@
-﻿using PlaywrightPage = Microsoft.Playwright.IPage;
-
-namespace OrchardCoreContrib.Testing.UI;
+﻿namespace OrchardCoreContrib.Testing.UI;
 
 /// <summary>
 /// Represents a page.
@@ -8,11 +6,14 @@ namespace OrchardCoreContrib.Testing.UI;
 /// <remarks>
 /// Creates an instance of <see cref="Page"/>.
 /// </remarks>
-/// <param name="page">The <see cref="PlaywrightPage"/>.</param>
-public class Page(PlaywrightPage page) : IPage
+/// <param name="playwrightPageAccessor">The <see cref="IPlaywrightPageAccessor"/>.</param>
+public class Page(IPlaywrightPageAccessor playwrightPageAccessor) : IPage
 {
-    private readonly Lazy<string> _title = new(() => page.TitleAsync().GetAwaiter().GetResult());
-    private readonly Lazy<string> _content = new(() => page.ContentAsync().GetAwaiter().GetResult());
+    private readonly Lazy<string> _title = new(() => playwrightPageAccessor.PlaywrightPage.TitleAsync().GetAwaiter().GetResult());
+    private readonly Lazy<string> _content = new(() => playwrightPageAccessor.PlaywrightPage.ContentAsync().GetAwaiter().GetResult());
+
+    /// <inheritdoc/>
+    public Microsoft.Playwright.IPage InnerPage => playwrightPageAccessor.PlaywrightPage;
 
     /// <inheritdoc/>
     public string Title => _title.Value;
@@ -21,5 +22,15 @@ public class Page(PlaywrightPage page) : IPage
     public string Content => _content.Value;
 
     /// <inheritdoc/>
-    public async Task GoToAsync(string url) => await page.GotoAsync(url);
+    public async Task GoToAsync(string url) => await InnerPage.GotoAsync(url);
+
+    /// <inheritdoc/>
+    public IElement FindElement(string selector)
+    {
+        var locator = InnerPage.Locator(selector);
+
+        return new Element(locator);
+    }
+
+    public async Task ClickAsync(string selector) => await FindElement(selector).ClickAsync();
 }

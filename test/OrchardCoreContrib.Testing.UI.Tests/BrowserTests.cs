@@ -21,20 +21,24 @@ public class BrowserTests
 
         _browserMock.Setup(b => b.Version).Returns(version);
 
+        var playwrightBrowserAccessor = new PlaywrightBrowserAccessor(_browserMock.Object);
+
         // Act
-        var browser = new Browser(_browserMock.Object, BrowserType.Edge);
+        var browser = new Browser(playwrightBrowserAccessor, BrowserType.Edge);
 
         // Assert
         Assert.NotNull(browser);
         Assert.Equal(BrowserType.Edge, browser.Type);
         Assert.Equal(version, browser.Version);
+        Assert.Same(playwrightBrowserAccessor.PlaywrightBrowser, browser.InnerBrowser);
     }
 
     [Fact]
     public async Task ShouldOpenPage()
     {
         // Arrange
-        var browser = new Browser(_browserMock.Object, BrowserType.Edge);
+        var playwrightBrowserAccessor = new PlaywrightBrowserAccessor(_browserMock.Object);
+        var browser = new Browser(playwrightBrowserAccessor, BrowserType.Edge);
 
         // Act
         var page = await browser.OpenPageAsync("https://www.orchardcore.net");

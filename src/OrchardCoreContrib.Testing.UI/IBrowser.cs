@@ -8,7 +8,7 @@ public interface IBrowser
     /// <summary>
     /// Gets the inner playwright browser instance.
     /// </summary>
-    protected internal Microsoft.Playwright.IBrowser InnerBrowser { get; }
+    public Microsoft.Playwright.IBrowser InnerBrowser { get; }
 
     /// <summary>
     /// Gets the browser type.

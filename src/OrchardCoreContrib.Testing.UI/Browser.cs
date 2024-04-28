@@ -8,26 +8,26 @@ namespace OrchardCoreContrib.Testing.UI;
 /// <remarks>
 /// Creates an instance of <see cref="Browser"/>.
 /// </remarks>
-/// <param name="browser">The <see cref="PlaywrightBrowser"/></param>
+/// <param name="playwrightBrowserAccessor">The <see cref="IPlaywrightBrowserAccessor"/></param>
 /// <param name="type">The <see cref="BrowserType"/></param>
-public class Browser(PlaywrightBrowser browser, BrowserType type) : IBrowser
+public class Browser(IPlaywrightBrowserAccessor playwrightBrowserAccessor, BrowserType type) : IBrowser
 {
     /// <inheritdoc/>
-    PlaywrightBrowser IBrowser.InnerBrowser => browser;
+    public PlaywrightBrowser InnerBrowser => playwrightBrowserAccessor.PlaywrightBrowser;
 
     /// <inheritdoc/>
     public BrowserType Type => type;
 
     /// <inheritdoc/>
-    public string Version => browser.Version;
+    public string Version => InnerBrowser.Version;
 
     /// <inheritdoc/>
     public async Task<IPage> OpenPageAsync(string url)
     {
-        var page = await browser.NewPageAsync();
+        var page = await InnerBrowser.NewPageAsync();
 
         await page.GotoAsync(url);
 
-        return new Page(page);
+        return new Page(new PlaywrightPageAccessor(page));
     }
 }
