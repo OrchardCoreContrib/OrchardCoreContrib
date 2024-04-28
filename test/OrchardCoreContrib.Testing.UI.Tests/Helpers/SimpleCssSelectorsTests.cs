@@ -1,7 +1,17 @@
 ﻿namespace OrchardCoreContrib.Testing.UI.Helpers.Tests;
 
-public class ByTests
+public class SimpleCssSelectorsTests
 {
+    [Fact]
+    public void ShouldGenerateCssSelectorForAllElements()
+    {
+        // Act
+        var selector = By.All();
+
+        // Assert
+        Assert.Equal("*", selector);
+    }
+
     [Fact]
     public void ShouldGenerateCssSelectorByName()
     {
@@ -10,6 +20,16 @@ public class ByTests
 
         // Assert
         Assert.Equal("p", selector);
+    }
+
+    [Fact]
+    public void ShouldGenerateCssSelectorByNames()
+    {
+        // Act
+        var selector = By.Name("h1", "h2", "h3");
+
+        // Assert
+        Assert.Equal("h1, h2, h3", selector);
     }
 
     [Fact]
@@ -32,17 +52,13 @@ public class ByTests
         Assert.Equal(".red", selector);
     }
 
-    [InlineData("target", null, "[target]")]
-    [InlineData("name", "txtName", "[name='txtName']")]
-    [InlineData("type", "password", "[type='password']")]
-    [InlineData("type", "submit", "[type='submit']")]
-    [Theory]
-    public void ShouldGenerateCssSelectorByAttribute(string name, string value, string expectedSelector)
+    [Fact]
+    public void ShouldGenerateCssSelectorByElementAndClass()
     {
         // Act
-        var selector = By.Attribute(name, value);
+        var selector = By.Class("p", "red");
 
         // Assert
-        Assert.Equal(expectedSelector, selector);
+        Assert.Equal("p.red", selector);
     }
 }

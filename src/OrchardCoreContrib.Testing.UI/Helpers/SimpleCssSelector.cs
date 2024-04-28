@@ -5,8 +5,13 @@ namespace OrchardCoreContrib.Testing.UI.Helpers;
 /// <summary>
 /// Represents a utility class for creating CSS selectors.
 /// </summary>
-public static class By
+public static partial class By
 {
+    /// <summary>
+    /// Generates a CSS selector to select all the elements.
+    /// </summary>
+    public static string All() => "*";
+
     /// <summary>
     /// Generates a CSS selector for an element with the specified id.
     /// </summary>
@@ -30,6 +35,20 @@ public static class By
     }
 
     /// <summary>
+    /// Generates a CSS selector for specified element and class names.
+    /// </summary>
+    /// <param name="elementName">The element name.</param>
+    /// <param name="className">The CSS class name.</param>
+    /// <returns></returns>
+    public static string Class(string elementName, string className)
+    {
+        Guard.ArgumentNotNullOrEmpty(elementName, nameof(elementName));
+        Guard.ArgumentNotNullOrEmpty(className, nameof(className));
+
+        return $"{elementName}.{className}";
+    }
+
+    /// <summary>
     /// Generates a CSS selector for an element with the specified name.
     /// </summary>
     /// <param name="name">The element name.</param>
@@ -41,16 +60,14 @@ public static class By
     }
 
     /// <summary>
-    /// Generates a CSS selector for an element with the specified attribute.
+    /// Generates a CSS selector for set of element names aka grouping selector.
     /// </summary>
-    /// <param name="name">The attribute name.</param>
-    /// <param name="value">The attribute value.</param>
-    public static string Attribute(string name, string value = null)
+    /// <param name="elementNames">The element names.</param>
+    /// <returns></returns>
+    public static string Name(params string[] elementNames)
     {
-        Guard.ArgumentNotNullOrEmpty(name, nameof(name));
-        
-        return value == null
-            ? $"[{name}]"
-            : $"[{name}='{value}']";
+        Guard.ArgumentNotNullOrEmpty(elementNames, nameof(elementNames));
+
+        return string.Join(", ", elementNames);
     }
 }
