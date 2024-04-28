@@ -5,6 +5,8 @@ namespace OrchardCoreContrib.Testing.UI.Tests;
 
 public class PageTests
 {
+    private static readonly string _pagesFolderPath = Path.Combine(Path.GetDirectoryName(typeof(PageTests).Assembly.Location), "Pages");
+
     [Fact]
     public void ShouldCreatePage()
     {
@@ -60,5 +62,31 @@ public class PageTests
 
         // Assert
         Assert.NotNull(result);
+    }
+
+    [Fact]
+    public async Task ShouldClickAnElement()
+    {
+        // Arrange
+        var playwrightPage = await CreatePlaywrightPageAsync();
+
+        await playwrightPage.GotoAsync(Path.Combine(_pagesFolderPath, "index.html"));
+
+        var page = new Page(new PlaywrightPageAccessor(playwrightPage));
+
+        // Act
+        await page.ClickAsync("button");
+
+        // Assert
+        var paragraph = page.FindElement("#para");
+        Assert.Equal("The button is clicked!!", paragraph.InnerText);
+    }
+
+    private static async Task<Microsoft.Playwright.IPage> CreatePlaywrightPageAsync()
+    {
+        var playwright = await Playwright.CreateAsync();
+        var browser = await playwright.Chromium.LaunchAsync();
+        
+        return await browser.NewPageAsync();
     }
 }

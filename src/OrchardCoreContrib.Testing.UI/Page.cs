@@ -32,5 +32,6 @@ public class Page(IPlaywrightPageAccessor playwrightPageAccessor) : IPage
         return new Element(locator);
     }
 
+    /// <inheritdoc/>
     public async Task ClickAsync(string selector) => await FindElement(selector).ClickAsync();
 }

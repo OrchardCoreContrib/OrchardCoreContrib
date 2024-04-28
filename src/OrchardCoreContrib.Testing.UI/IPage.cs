@@ -30,8 +30,11 @@ public interface IPage
     /// Finds an element with a page using a given selector.
     /// </summary>
     /// <param name="selector">A selector to be used to look for the element within the page.</param>
-    /// <returns></returns>
     public IElement FindElement(string selector);
 
+    /// <summary>
+    /// Clicks an element with a given selector.
+    /// </summary>
+    /// <param name="selector"></param>
     public Task ClickAsync(string selector);
 }
