@@ -5,22 +5,26 @@ namespace OrchardCoreContrib.Testing.UI.Tests;
 
 public class BrowserFactoryTests
 {
-    [InlineData(BrowserType.Chrome, PlaywrightBrowserType.Chromium)]
-    [InlineData(BrowserType.Edge, PlaywrightBrowserType.Chromium)]
-    [InlineData(BrowserType.Firefox, PlaywrightBrowserType.Firefox)]
+    [InlineData(BrowserType.Chrome, PlaywrightBrowserType.Chromium, false)]
+    [InlineData(BrowserType.Edge, PlaywrightBrowserType.Chromium, false)]
+    [InlineData(BrowserType.Firefox, PlaywrightBrowserType.Firefox, false)]
+    [InlineData(BrowserType.Chrome, PlaywrightBrowserType.Chromium, true)]
+    [InlineData(BrowserType.Edge, PlaywrightBrowserType.Chromium, true)]
+    [InlineData(BrowserType.Firefox, PlaywrightBrowserType.Firefox, true)]
     [Theory]
-    public async Task CreateBrowser(BrowserType browserType, string playwrightBrowserType)
+    public async Task CreateBrowser(BrowserType browserType, string playwrightBrowserType, bool headless)
     {
         // Arrange
         var playwright = await Playwright.CreateAsync();
 
         // Act
-        var browser = await BrowserFactory.CreateAsync(playwright, browserType);
+        var browser = await BrowserFactory.CreateAsync(playwright, browserType, headless);
 
         // Assert
         Assert.NotNull(browser);
         Assert.Equal(browserType, browser.Type);
         Assert.Equal(playwrightBrowserType, browser.InnerBrowser.BrowserType.Name);
+        Assert.Equal(headless, browser.Headless);
     }
 
     [Fact]
@@ -32,7 +36,7 @@ public class BrowserFactoryTests
         // Act & Assert
         await Assert.ThrowsAsync<NotSupportedException>(async () =>
         {
-            await BrowserFactory.CreateAsync(playwright, BrowserType.NotSet);
+            await BrowserFactory.CreateAsync(playwright, BrowserType.NotSet, headless: true);
         });
     }
 }

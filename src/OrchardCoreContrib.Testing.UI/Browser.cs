@@ -8,12 +8,16 @@ namespace OrchardCoreContrib.Testing.UI;
 /// <remarks>
 /// Creates an instance of <see cref="Browser"/>.
 /// </remarks>
-/// <param name="playwrightBrowserAccessor">The <see cref="IPlaywrightBrowserAccessor"/></param>
-/// <param name="type">The <see cref="BrowserType"/></param>
-public class Browser(IPlaywrightBrowserAccessor playwrightBrowserAccessor, BrowserType type) : IBrowser
+/// <param name="playwrightBrowserAccessor">The <see cref="IPlaywrightBrowserAccessor"/>.</param>
+/// <param name="type">The <see cref="BrowserType"/>.</param>
+/// <param name="headless">Whether to run browser in headless mode.</param>
+public class Browser(IPlaywrightBrowserAccessor playwrightBrowserAccessor, BrowserType type, bool headless) : IBrowser
 {
     /// <inheritdoc/>
     public PlaywrightBrowser InnerBrowser => playwrightBrowserAccessor.PlaywrightBrowser;
+
+    /// <inheritdoc/>
+    public bool Headless => headless;
 
     /// <inheritdoc/>
     public BrowserType Type => type;

@@ -11,6 +11,11 @@ public interface IBrowser
     public Microsoft.Playwright.IBrowser InnerBrowser { get; }
 
     /// <summary>
+    /// Gets whether the browser runs on headless mode or not.
+    /// </summary>
+    public bool Headless { get; }
+
+    /// <summary>
     /// Gets the browser type.
     /// </summary>
     public BrowserType Type { get; }
