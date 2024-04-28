@@ -37,4 +37,11 @@ public interface IPage
     /// </summary>
     /// <param name="selector"></param>
     public Task ClickAsync(string selector);
+
+    /// <summary>
+    /// Takes a screenshot of the page.
+    /// </summary>
+    /// <param name="path">The path for the saved image.</param>
+    /// <param name="fullPage">Whether the screenshot taken for a full page or a vidible view port.</param>
+    public Task ScreenShotAsync(string path, bool fullPage = false);
 }

@@ -5,7 +5,8 @@ namespace OrchardCoreContrib.Testing.UI.Tests;
 
 public class PageTests
 {
-    private static readonly string _pagesFolderPath = Path.Combine(Path.GetDirectoryName(typeof(PageTests).Assembly.Location), "Pages");
+    private static readonly string _binFolderPath = Path.GetDirectoryName(typeof(PageTests).Assembly.Location);
+    private static readonly string _pagesFolderPath = Path.Combine(_binFolderPath, "Pages");
 
     [Fact]
     public void ShouldCreatePage()
@@ -80,6 +81,26 @@ public class PageTests
         // Assert
         var paragraph = page.FindElement("#para");
         Assert.Equal("The button is clicked!!", paragraph.InnerText);
+    }
+
+    [Fact]
+    public async Task ShouldTakeScreenshot()
+    {
+        // Arrange
+        var screenshotFilePath = "screenshot.jpg";
+
+        var playwrightPage = await CreatePlaywrightPageAsync();
+
+        await playwrightPage.GotoAsync(Path.Combine(_pagesFolderPath, "index.html"));
+
+        var page = new Page(new PlaywrightPageAccessor(playwrightPage));
+
+        // Act
+        await page.ScreenShotAsync(screenshotFilePath);
+
+        // Assert
+        Assert.True(File.Exists(screenshotFilePath));
+        File.Delete(screenshotFilePath);
     }
 
     private static async Task<Microsoft.Playwright.IPage> CreatePlaywrightPageAsync()

@@ -1,4 +1,6 @@
-﻿namespace OrchardCoreContrib.Testing.UI;
+﻿using Microsoft.Playwright;
+
+namespace OrchardCoreContrib.Testing.UI;
 
 /// <summary>
 /// Represents a page.
@@ -34,4 +36,8 @@ public class Page(IPlaywrightPageAccessor playwrightPageAccessor) : IPage
 
     /// <inheritdoc/>
     public async Task ClickAsync(string selector) => await FindElement(selector).ClickAsync();
+
+    /// <inheritdoc/>
+    public async Task ScreenShotAsync(string path, bool fullPage = false)
+        => await InnerPage.ScreenshotAsync(new PageScreenshotOptions { Path = path, FullPage = fullPage });
 }
