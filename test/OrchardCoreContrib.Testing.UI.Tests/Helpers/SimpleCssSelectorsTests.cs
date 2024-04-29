@@ -13,20 +13,20 @@ public class SimpleCssSelectorsTests
     }
 
     [Fact]
-    public void ShouldGenerateCssSelectorByName()
+    public void ShouldGenerateCssSelectorByTagName()
     {
         // Act
-        var selector = By.Name("p");
+        var selector = By.TagName("p");
 
         // Assert
         Assert.Equal("p", selector);
     }
 
     [Fact]
-    public void ShouldGenerateCssSelectorByNames()
+    public void ShouldGenerateCssSelectorByTagNames()
     {
         // Act
-        var selector = By.Name("h1", "h2", "h3");
+        var selector = By.TagName("h1", "h2", "h3");
 
         // Assert
         Assert.Equal("h1, h2, h3", selector);
@@ -43,20 +43,20 @@ public class SimpleCssSelectorsTests
     }
 
     [Fact]
-    public void ShouldGenerateCssSelectorByClass()
+    public void ShouldGenerateCssSelectorByClassName()
     {
         // Act
-        var selector = By.Class("red");
+        var selector = By.ClassName("red");
 
         // Assert
         Assert.Equal(".red", selector);
     }
 
     [Fact]
-    public void ShouldGenerateCssSelectorByElementAndClass()
+    public void ShouldGenerateCssSelectorByElementAndClassName()
     {
         // Act
-        var selector = By.Class("p", "red");
+        var selector = By.ClassName("p", "red");
 
         // Assert
         Assert.Equal("p.red", selector);

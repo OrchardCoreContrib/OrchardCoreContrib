@@ -26,33 +26,33 @@ public static partial class By
     /// <summary>
     /// Generates a CSS selector for an element with the specified class name.
     /// </summary>
-    /// <param name="className">The element class name.</param>
-    public static string Class(string className)
+    /// <param name="name">The element class name.</param>
+    public static string ClassName(string name)
     {
-        Guard.ArgumentNotNullOrEmpty(className, nameof(className));
+        Guard.ArgumentNotNullOrEmpty(name, nameof(name));
 
-        return $".{className}";
+        return $".{name}";
     }
 
     /// <summary>
     /// Generates a CSS selector for specified element and class names.
     /// </summary>
     /// <param name="elementName">The element name.</param>
-    /// <param name="className">The CSS class name.</param>
+    /// <param name="name">The CSS class name.</param>
     /// <returns></returns>
-    public static string Class(string elementName, string className)
+    public static string ClassName(string elementName, string name)
     {
         Guard.ArgumentNotNullOrEmpty(elementName, nameof(elementName));
-        Guard.ArgumentNotNullOrEmpty(className, nameof(className));
+        Guard.ArgumentNotNullOrEmpty(name, nameof(name));
 
-        return $"{elementName}.{className}";
+        return $"{elementName}.{name}";
     }
 
     /// <summary>
-    /// Generates a CSS selector for an element with the specified name.
+    /// Generates a CSS selector for an element with the specified tag name.
     /// </summary>
-    /// <param name="name">The element name.</param>
-    public static string Name(string name)
+    /// <param name="name">The tag name.</param>
+    public static string TagName(string name)
     {
         Guard.ArgumentNotNullOrEmpty(name, nameof(name));
 
@@ -60,14 +60,14 @@ public static partial class By
     }
 
     /// <summary>
-    /// Generates a CSS selector for set of element names aka grouping selector.
+    /// Generates a CSS selector for set of element by tag names aka grouping selector.
     /// </summary>
-    /// <param name="elementNames">The element names.</param>
+    /// <param name="tagNames">The tag names.</param>
     /// <returns></returns>
-    public static string Name(params string[] elementNames)
+    public static string TagName(params string[] tagNames)
     {
-        Guard.ArgumentNotNullOrEmpty(elementNames, nameof(elementNames));
+        Guard.ArgumentNotNullOrEmpty(tagNames, nameof(tagNames));
 
-        return string.Join(", ", elementNames);
+        return string.Join(", ", tagNames);
     }
 }
