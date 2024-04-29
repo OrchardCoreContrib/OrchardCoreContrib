@@ -2,24 +2,16 @@
 
 public class AttributeCssSelectorsTests
 {
-    [Fact]
-    public void ShouldGenerateCssSelectorByAttribute()
-    {
-        // Act
-        var selector = By.Attribute("target");
-
-        // Assert
-        Assert.Equal("[target]", selector);
-    }
-
-    [InlineData("name", "txtName", "[name='txtName']")]
-    [InlineData("type", "password", "[type='password']")]
-    [InlineData("type", "submit", "[type='submit']")]
+    [InlineData("target", null, null, "[target]")]
+    [InlineData("target", null, "a", "a[target]")]
+    [InlineData("target", "_blank", "a", "a[target=\"_blank\"]")]
+    [InlineData("type", "submit", null, "[type=\"submit\"]")]
+    [InlineData("name", "txtName", "input", "input[name=\"txtName\"]")]
     [Theory]
-    public void ShouldGenerateCssSelectorByAttributeAndValue(string name, string value, string expectedSelector)
+    public void ShouldGenerateCssSelectorByAttribute(string name, string value, string elementName, string expectedSelector)
     {
         // Act
-        var selector = By.Attribute(name, value);
+        var selector = By.Attribute(name, value, elementName);
 
         // Assert
         Assert.Equal(expectedSelector, selector);
@@ -31,7 +23,7 @@ public class AttributeCssSelectorsTests
     public void ShouldGenerateCssSelectorByAttributeContainsValue(string name, string value, bool isWord, string expectedSelector)
     {
         // Act
-        var selector = By.AttributeContains(name, value, isWord);
+        var selector = By.AttributeContains(name, value, isWord: isWord);
 
         // Assert
         Assert.Equal(expectedSelector, selector);
