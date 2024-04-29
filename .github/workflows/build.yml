@@ -22,5 +22,7 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
+    - name: Installing Playwright Browsers and dependencies
+      run: pwsh test/OrchardCoreContrib.Testing.UI.Tests/bin/Release/net8.0/playwright.ps1 install --with-deps
     - name: Test
       run: dotnet test --no-restore --verbosity normal

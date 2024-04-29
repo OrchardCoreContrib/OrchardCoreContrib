@@ -30,12 +30,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="Pages\selectors.html">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="Pages\index.html">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
+		<None Update="Pages\selectors.html">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Pages\index.html">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="build\playwright.ps1" Link="build\playwright.ps1" CopyToOutputDirectory="PreserveNewest" />
 	</ItemGroup>
 
 </Project>
