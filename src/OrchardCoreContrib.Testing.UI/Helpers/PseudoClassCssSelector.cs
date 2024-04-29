@@ -8,40 +8,26 @@ namespace OrchardCoreContrib.Testing.UI.Helpers;
 public static partial class By
 {
     /// <summary>
-    /// Generates a CSS selector for all elements with a specified pseudo class.
+    /// Generates a CSS selector for a specified pseudo class and optional selctor.
     /// </summary>
     /// <param name="pseudoClass">The pseudo class.</param>
+    /// <param name="selector">The optional selector.</param>
     /// <remarks>
     /// <code>
     /// :root {
     ///     background: #ff0000;
     /// }
-    /// </code>
-    /// </remarks>
-    public static string PseudoClass(string pseudoClass)
-    {
-        Guard.ArgumentNotNullOrEmpty(pseudoClass, nameof(pseudoClass));
-
-        return $":{pseudoClass}";
-    }
-
-    /// <summary>
-    /// Generates a CSS selector for a specified selector and pseudo class.
-    /// </summary>
-    /// <param name="selector">The selector.</param>
-    /// <param name="pseudoClass">The pseudo class.</param>
-    /// <remarks>
-    /// <code>
     /// a:link {
     ///     color: #FF0000;
     /// }
     /// </code>
     /// </remarks>
-    public static string PseudoClass(string selector, string pseudoClass)
+    public static string PseudoClass(string pseudoClass, string selector = null)
     {
-        Guard.ArgumentNotNullOrEmpty(selector, nameof(selector));
         Guard.ArgumentNotNullOrEmpty(pseudoClass, nameof(pseudoClass));
 
-        return $"{selector}:{pseudoClass}";
+        return selector is null
+            ? $":{pseudoClass}"
+            : $"{selector}:{pseudoClass}";
     }
 }

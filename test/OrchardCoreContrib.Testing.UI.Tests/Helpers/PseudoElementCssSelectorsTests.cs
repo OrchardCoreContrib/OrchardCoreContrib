@@ -2,27 +2,15 @@
 
 public class PseudoElementCssSelectorsTests
 {
-    [Fact]
-    public void ShouldGenerateCssSelectorByPseudoElementOnly()
-    {
-        // Arrange
-        var pseudoElement = "marker";
-
-        // Act
-        var result = By.PseudoElement(pseudoElement);
-
-        // Assert
-        Assert.Equal($"::{pseudoElement}", result);
-    }
-
-    [InlineData("p", "after", "p::after")]
-    [InlineData("p.intro", "first-letter", "p.intro::first-letter")]
-    [InlineData("div p", "selection", "div p::selection")]
+    [InlineData("marker", null, "::marker")]
+    [InlineData("after", "p", "p::after")]
+    [InlineData("first-letter", "p.intro", "p.intro::first-letter")]
+    [InlineData("selection", "div p", "div p::selection")]
     [Theory]
-    public void ShouldGenerateCssSelectorByPseudoElement(string selector, string pseudoElement, string expectedSelector)
+    public void ShouldGenerateCssSelectorByPseudoElement(string pseudoElement, string selector, string expectedSelector)
     {
         // Act
-        var result = By.PseudoElement(selector, pseudoElement);
+        var result = By.PseudoElement(pseudoElement, selector);
 
         // Assert
         Assert.Equal(expectedSelector, result);

@@ -2,34 +2,16 @@
 
 public class SimpleCssSelectorsTests
 {
-    [Fact]
-    public void ShouldGenerateCssSelectorForAllElements()
+    [InlineData(new[] { "p" }, "p")]
+    [InlineData(new[] { "h1", "h2", "h3" }, "h1, h2, h3")]
+    [Theory]
+    public void ShouldGenerateCssSelectorByTagNames(string[] tageNames, string expectedSelector)
     {
         // Act
-        var selector = By.All();
+        var selector = By.TagNames(tageNames);
 
         // Assert
-        Assert.Equal("*", selector);
-    }
-
-    [Fact]
-    public void ShouldGenerateCssSelectorByTagName()
-    {
-        // Act
-        var selector = By.TagName("p");
-
-        // Assert
-        Assert.Equal("p", selector);
-    }
-
-    [Fact]
-    public void ShouldGenerateCssSelectorByTagNames()
-    {
-        // Act
-        var selector = By.TagName("h1", "h2", "h3");
-
-        // Assert
-        Assert.Equal("h1, h2, h3", selector);
+        Assert.Equal(expectedSelector, selector);
     }
 
     [Fact]
@@ -42,23 +24,15 @@ public class SimpleCssSelectorsTests
         Assert.Equal("#btnSend", selector);
     }
 
-    [Fact]
-    public void ShouldGenerateCssSelectorByClassName()
+    [InlineData("red", null, ".red")]
+    [InlineData("red", "p", "p.red")]
+    [Theory]
+    public void ShouldGenerateCssSelectorByClassName(string className, string tagName, string exprectedSelector)
     {
         // Act
-        var selector = By.ClassName("red");
+        var selector = By.ClassName(className, tagName);
 
         // Assert
-        Assert.Equal(".red", selector);
-    }
-
-    [Fact]
-    public void ShouldGenerateCssSelectorByElementAndClassName()
-    {
-        // Act
-        var selector = By.ClassName("p", "red");
-
-        // Assert
-        Assert.Equal("p.red", selector);
+        Assert.Equal(exprectedSelector, selector);
     }
 }

@@ -97,6 +97,7 @@ public static partial class By
     /// p[class^"re"]] {
     ///     color: red;
     /// }
+    /// </code>
     /// </summary>
     /// <param name="name">The attribute name.</param>
     /// <param name="value">The attribute value.</param>
@@ -121,6 +122,7 @@ public static partial class By
     /// p[class$="ed"]] {
     ///     color: red;
     /// }
+    /// </code>
     /// </summary>
     /// <param name="name">The attribute name.</param>
     /// <param name="value">The attribute value.</param>

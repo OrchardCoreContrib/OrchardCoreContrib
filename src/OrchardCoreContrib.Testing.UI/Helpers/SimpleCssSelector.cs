@@ -9,11 +9,23 @@ public static partial class By
 {
     /// <summary>
     /// Generates a CSS selector to select all the elements.
+    /// These is an example:
+    /// <code>
+    /// * {
+    ///     color: red;
+    /// }
+    /// </code>
     /// </summary>
     public static string All() => "*";
 
     /// <summary>
     /// Generates a CSS selector for an element with the specified id.
+    /// These is an example:
+    /// <code>
+    /// #red {
+    ///     color: red;
+    /// }
+    /// </code>
     /// </summary>
     /// <param name="id">The element identifier.</param>
     public static string Id(string id)
@@ -24,34 +36,43 @@ public static partial class By
     }
 
     /// <summary>
-    /// Generates a CSS selector for an element with the specified class name.
+    /// Generates a CSS selector for specified class and tag names.
+    /// These are some examples:
+    /// <code>
+    /// .red {
+    ///     color: red;
+    /// }
+    /// p.red {
+    ///     color: red;
+    /// }
+    /// </code>
     /// </summary>
-    /// <param name="name">The element class name.</param>
-    public static string ClassName(string name)
-    {
-        Guard.ArgumentNotNullOrEmpty(name, nameof(name));
-
-        return $".{name}";
-    }
-
-    /// <summary>
-    /// Generates a CSS selector for specified element and class names.
-    /// </summary>
-    /// <param name="elementName">The element name.</param>
     /// <param name="name">The CSS class name.</param>
-    /// <returns></returns>
-    public static string ClassName(string elementName, string name)
+    /// <param name="tagName">The optional tag name.</param>
+    public static string ClassName(string name, string tagName = null)
     {
-        Guard.ArgumentNotNullOrEmpty(elementName, nameof(elementName));
         Guard.ArgumentNotNullOrEmpty(name, nameof(name));
 
-        return $"{elementName}.{name}";
+        var selector = $".{name}";
+
+        if (tagName is not null)
+        {
+            selector = tagName + selector;
+        }
+
+        return selector;
     }
 
     /// <summary>
-    /// Generates a CSS selector for an element with the specified tag name.
+    /// Generates a CSS selector for element by tag name.
+    /// These is a example:
+    /// <code>
+    /// p {
+    ///     color: red;
+    /// }
+    /// </code>
     /// </summary>
-    /// <param name="name">The tag name.</param>
+    /// <param name="names">The tag name.</param>
     public static string TagName(string name)
     {
         Guard.ArgumentNotNullOrEmpty(name, nameof(name));
@@ -60,14 +81,21 @@ public static partial class By
     }
 
     /// <summary>
-    /// Generates a CSS selector for set of element by tag names aka grouping selector.
+    /// Generates a CSS selector for elements by tag names aka grouping selector.
+    /// These is an example:
+    /// <code>
+    /// h1, h2, h3 {
+    ///     color: red;
+    /// }
+    /// </code>
     /// </summary>
-    /// <param name="tagNames">The tag names.</param>
-    /// <returns></returns>
-    public static string TagName(params string[] tagNames)
+    /// <param name="names">The tag names.</param>
+    public static string TagNames(params string[] names)
     {
-        Guard.ArgumentNotNullOrEmpty(tagNames, nameof(tagNames));
+        Guard.ArgumentNotNullOrEmpty(names, nameof(names));
 
-        return string.Join(", ", tagNames);
+        return names.Length == 1
+            ? TagName(names[0])
+            : string.Join(", ", names);
     }
 }

@@ -9,42 +9,25 @@ public static partial class By
 {
     /// <summary>
     /// Generates a CSS selector for all elements that are descendants of a specified element.
-    /// </summary>
-    /// <param name="descendantElementName">The descendant element name.</param>
-    /// <param name="elementName">The element name.</param>
-    /// <remarks>
+    /// Therse are some examples:
     /// <code>
     /// div p {
     ///     background-color: yellow;
     /// }
-    /// </code>
-    /// </remarks>
-    public static string Descendant(string descendantElementName, string elementName)
-    {
-        Guard.ArgumentNotNullOrEmpty(descendantElementName, nameof(descendantElementName));
-        Guard.ArgumentNotNullOrEmpty(elementName, nameof(elementName));
-
-        return $"{descendantElementName} {elementName}";
-    }
-
-    /// <summary>
-    /// Generates a CSS selector for all elements that are the children of a specified element.
-    /// </summary>
-    /// <param name="parentElementName">The parent element name.</param>
-    /// <param name="elementName">The element name.</param>
-    /// <remarks>
-    /// <code>
     /// div > p {
     ///     background-color: yellow;
     /// }
     /// </code>
-    /// </remarks>
-    public static string Child(string parentElementName, string elementName)
+    /// </summary>
+    /// <param name="descendantElement">The descendant element name.</param>
+    /// <param name="childElement">The child element name.</param>
+    /// <param name="direct">Whether the element is direct descendant. Defaults <c>true</c>.</param>
+    public static string Descendant(string descendantElement, string childElement, bool direct = false)
     {
-        Guard.ArgumentNotNullOrEmpty(parentElementName, nameof(parentElementName));
-        Guard.ArgumentNotNullOrEmpty(elementName, nameof(elementName));
+        Guard.ArgumentNotNullOrEmpty(descendantElement, nameof(descendantElement));
+        Guard.ArgumentNotNullOrEmpty(childElement, nameof(childElement));
 
-        return $"{parentElementName} > {elementName}";
+        return string.Concat(descendantElement, direct ? " > " : " ", childElement);
     }
 
     /// <summary>
@@ -52,7 +35,7 @@ public static partial class By
     /// </summary>
     /// <param name="siblingElementName">The sibling element name.</param>
     /// <param name="elementName">The element name.</param>
-    /// <param name="adjacent">Whether the element immediately following or not.</param>
+    /// <param name="adjacent">Whether the element immediately following or not. Defaults <c>false</c>.</param>
     /// <remarks>
     /// <code>
     /// div + p {
@@ -65,13 +48,11 @@ public static partial class By
     /// }
     /// </code>
     /// </remarks>
-    public static string Sibling(string siblingElementName, string elementName, bool adjacent)
+    public static string Sibling(string siblingElementName, string elementName, bool adjacent = false)
     {
         Guard.ArgumentNotNullOrEmpty(siblingElementName, nameof(siblingElementName));
         Guard.ArgumentNotNullOrEmpty(elementName, nameof(elementName));
 
-        return adjacent
-            ? $"{siblingElementName} + {elementName}"
-            : $"{siblingElementName} ~ {elementName}";
+        return string.Concat(siblingElementName, adjacent ? " + " : " ~ " , elementName);
     }
 }

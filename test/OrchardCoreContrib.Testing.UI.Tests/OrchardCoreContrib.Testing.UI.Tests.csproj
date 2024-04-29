@@ -30,6 +30,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Update="Pages\selectors.html">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
 	  <None Update="Pages\index.html">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>

@@ -2,24 +2,16 @@
 
 public class CombinatorsCssSelectorsTests
 {
-    [Fact]
-    public void ShouldGenerateCssSelectorByDescendant()
+    [InlineData("div", "p", false, "div p")]
+    [InlineData("div", "p", true, "div > p")]
+    [Theory]
+    public void ShouldGenerateCssSelectorByDescendant(string descendantElement, string childElement, bool direct, string expectedSelector)
     {
         // Act
-        var selector = By.Descendant("div", "p");
+        var selector = By.Descendant(descendantElement, childElement, direct);
 
         // Assert
-        Assert.Equal("div p", selector);
-    }
-
-    [Fact]
-    public void ShouldGenerateCssSelectorByChild()
-    {
-        // Act
-        var selector = By.Child("div", "p");
-
-        // Assert
-        Assert.Equal("div > p", selector);
+        Assert.Equal(expectedSelector, selector);
     }
 
     [InlineData("div", "p", true, "div + p")]

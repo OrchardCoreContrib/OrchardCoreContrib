@@ -15,17 +15,18 @@ public class PseudoClassCssSelectorsTests
         Assert.Equal($":{pseudoClass}", result);
     }
 
-    [InlineData("a", "active", "a:active")]
-    [InlineData("p", "lang(it)", "p:lang(it)")]
-    [InlineData("#news", "target", "#news:target")]
-    [InlineData("a.highlight", "hover", "a.highlight:hover")]
-    [InlineData("div", "hover", "div:hover")]
-    [InlineData("p i", "first-child", "p i:first-child")]
+    [InlineData("root", null, ":root")]
+    [InlineData("active", "a", "a:active")]
+    [InlineData("lang(it)", "p", "p:lang(it)")]
+    [InlineData("target", "#news", "#news:target")]
+    [InlineData("hover", "a.highlight", "a.highlight:hover")]
+    [InlineData("hover", "div", "div:hover")]
+    [InlineData("first-child", "p i", "p i:first-child")]
     [Theory]
-    public void ShouldGenerateCssSelectorByPseudoClass(string selector, string pseudoClass, string expectedSelector)
+    public void ShouldGenerateCssSelectorByPseudoClass(string pseudoClass, string selector, string expectedSelector)
     {
         // Act
-        var result = By.PseudoClass(selector, pseudoClass);
+        var result = By.PseudoClass(pseudoClass, selector);
 
         // Assert
         Assert.Equal(expectedSelector, result);
