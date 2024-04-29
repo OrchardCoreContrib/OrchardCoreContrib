@@ -11,17 +11,14 @@ namespace OrchardCoreContrib.Testing.UI;
 /// <param name="playwrightPageAccessor">The <see cref="IPlaywrightPageAccessor"/>.</param>
 public class Page(IPlaywrightPageAccessor playwrightPageAccessor) : IPage
 {
-    private readonly Lazy<string> _title = new(() => playwrightPageAccessor.PlaywrightPage.TitleAsync().GetAwaiter().GetResult());
-    private readonly Lazy<string> _content = new(() => playwrightPageAccessor.PlaywrightPage.ContentAsync().GetAwaiter().GetResult());
-
     /// <inheritdoc/>
     public Microsoft.Playwright.IPage InnerPage => playwrightPageAccessor.PlaywrightPage;
 
     /// <inheritdoc/>
-    public string Title => _title.Value;
+    public string Title => InnerPage.TitleAsync().GetAwaiter().GetResult();
 
     /// <inheritdoc/>
-    public string Content => _content.Value;
+    public string Content => InnerPage.ContentAsync().GetAwaiter().GetResult();
 
     /// <inheritdoc/>
     public async Task GoToAsync(string url) => await InnerPage.GotoAsync(url);

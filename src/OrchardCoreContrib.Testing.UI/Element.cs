@@ -9,22 +9,17 @@ namespace OrchardCoreContrib.Testing.UI;
 /// <param name="locator">The <see cref="ILocator"/>.</param>
 public class Element(ILocator locator) : IElement
 {
-    private readonly Lazy<string> _innerText = new(() => locator.InnerTextAsync().GetAwaiter().GetResult());
-    private readonly Lazy<string> _innerHTML = new(() => locator.InnerHTMLAsync().GetAwaiter().GetResult());
-    private readonly Lazy<bool> _enabled = new(() => locator.IsEnabledAsync().GetAwaiter().GetResult());
-    private readonly Lazy<bool> _visible = new(() => locator.IsVisibleAsync().GetAwaiter().GetResult());
+    /// <inheritdoc/>
+    public string InnerText => locator.InnerTextAsync().GetAwaiter().GetResult();
 
     /// <inheritdoc/>
-    public string InnerText => _innerText.Value;
+    public string InnerHtml => locator.InnerHTMLAsync().GetAwaiter().GetResult();
 
     /// <inheritdoc/>
-    public string InnerHtml => _innerHTML.Value;
+    public bool Enabled => locator.IsEnabledAsync().GetAwaiter().GetResult();
 
     /// <inheritdoc/>
-    public bool Enabled => _enabled.Value;
-
-    /// <inheritdoc/>
-    public bool Visible => _visible.Value;
+    public bool Visible => locator.IsVisibleAsync().GetAwaiter().GetResult();
 
     /// <inheritdoc/>
     public async Task ClickAsync() => await locator.ClickAsync();
