@@ -19,6 +19,7 @@
 		<PackageVersion Include="OrchardCore.AuditTrail.Abstractions" Version="2.1.6" />
 		<PackageVersion Include="OrchardCore.Autoroute" Version="2.1.6" />
 		<PackageVersion Include="OrchardCore.ContentLocalization.Abstractions" Version="2.1.6" />
+		<PackageVersion Include="OrchardCore.ContentManagement.Abstractions" Version="2.1.6" />
 		<PackageVersion Include="OrchardCore.ContentManagement" Version="2.1.6" />
 		<PackageVersion Include="OrchardCore.Data" Version="2.1.6" />
 		<PackageVersion Include="OrchardCore.Deployment" Version="2.1.6" />
