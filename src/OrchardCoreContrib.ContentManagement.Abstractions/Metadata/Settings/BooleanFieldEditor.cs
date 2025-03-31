@@ -1,4 +1,4 @@
-﻿namespace OrchardCore.ContentManagement.Metadata.Settings;
+﻿namespace OrchardCoreContrib.ContentManagement.Metadata.Settings;
 
 public sealed class BooleanFieldEditor
 {

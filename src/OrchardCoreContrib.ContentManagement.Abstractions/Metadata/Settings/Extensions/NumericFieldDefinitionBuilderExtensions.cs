@@ -1,4 +1,5 @@
 ﻿using OrchardCore.ContentManagement.Metadata.Builders;
+using OrchardCoreContrib.ContentManagement.Metadata.Settings;
 
 namespace OrchardCore.ContentManagement.Metadata.Settings;
 

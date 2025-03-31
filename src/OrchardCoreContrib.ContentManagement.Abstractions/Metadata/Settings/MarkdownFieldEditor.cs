@@ -1,4 +1,4 @@
-﻿namespace OrchardCore.ContentManagement.Metadata.Settings;
+﻿namespace OrchardCoreContrib.ContentManagement.Metadata.Settings;
 
 /// <summary>
 /// Contains a list of the Markdown Field editors.
