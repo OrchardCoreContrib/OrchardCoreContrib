@@ -3,12 +3,8 @@
 /// <summary>
 /// Contains a list of the MultiText Field editors.
 /// </summary>
-public sealed class MultiTextFieldEditor
+public sealed class MultiTextFieldEditor : FieldEditor
 {
-    /// <summary>
-    /// The standard multi text field editor.
-    /// </summary>
-    public const string Standard = "";
     /// <summary>
     /// The checkbox list multi text field editor.
     /// </summary>

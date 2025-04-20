@@ -3,12 +3,8 @@
 /// <summary>
 /// Contains a list of the Text Field editors.
 /// </summary>
-public sealed class TextFieldEditor
+public sealed class TextFieldEditor : FieldEditor
 {
-    /// <summary>
-    /// The standard text field editor.
-    /// </summary>
-    public const string Standard = "";
     /// <summary>
     /// The CodeMirror text field editor.
     /// </summary>

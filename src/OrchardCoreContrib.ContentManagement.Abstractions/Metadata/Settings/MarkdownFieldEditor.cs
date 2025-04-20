@@ -3,12 +3,8 @@
 /// <summary>
 /// Contains a list of the Markdown Field editors.
 /// </summary>
-public sealed class MarkdownFieldEditor
+public sealed class MarkdownFieldEditor : FieldEditor
 {
-    /// <summary>
-    /// The standard Markdown file editor.
-    /// </summary>
-    public const string Standard = "";
     /// <summary>
     /// The Wysiwyg Markdown file editor.
     /// </summary>

@@ -3,12 +3,8 @@
 /// <summary>
 /// Contains a list of the Numeric Field editors.
 /// </summary>
-public sealed class NumericFieldEditor
+public sealed class NumericFieldEditor : FieldEditor
 {
-    /// <summary>
-    /// The standard numeric field editor.
-    /// </summary>
-    public const string Standard = "";
     /// <summary>
     /// The range numeric field editor.
     /// </summary>

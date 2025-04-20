@@ -3,12 +3,8 @@
 /// <summary>
 /// Contains a list of the Date Field editors.
 /// </summary>
-public sealed class DateFieldEditor
+public sealed class DateFieldEditor : FieldEditor
 {
-    /// <summary>
-    /// The standard date field editor.
-    /// </summary>
-    public const string Standard = "";
     /// <summary>
     /// The localized date field editor.
     /// </summary>

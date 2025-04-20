@@ -3,10 +3,4 @@
 /// <summary>
 /// Represents a Content Picker Field editor.
 /// </summary>
-public sealed class ContentPickerFieldEditor
-{
-    /// <summary>
-    /// The standard content picker field editor.
-    /// </summary>
-    public const string Standard = "";
-}
+public sealed class ContentPickerFieldEditor : FieldEditor;

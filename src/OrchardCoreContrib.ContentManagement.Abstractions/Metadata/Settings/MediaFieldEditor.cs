@@ -3,12 +3,8 @@
 /// <summary>
 /// Contains a list of the Media Field editors.
 /// </summary>
-public sealed class MediaFieldEditor
+public sealed class MediaFieldEditor : FieldEditor
 {
-    /// <summary>
-    /// The standard media field editor.
-    /// </summary>
-    public const string Standard = "";
     /// <summary>
     /// The attached media field editor.
     /// </summary>

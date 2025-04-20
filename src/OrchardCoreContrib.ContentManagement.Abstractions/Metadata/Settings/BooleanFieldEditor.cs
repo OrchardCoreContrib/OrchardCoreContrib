@@ -1,11 +1,7 @@
 ﻿namespace OrchardCoreContrib.ContentManagement.Metadata.Settings;
 
-public sealed class BooleanFieldEditor
+public sealed class BooleanFieldEditor : FieldEditor
 {
-    /// <summary>
-    /// The standard boolean field editor.
-    /// </summary>
-    public const string Standard = "";
     /// <summary>
     /// The switch boolean field editor.
     /// </summary>

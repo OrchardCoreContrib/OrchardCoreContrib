@@ -3,12 +3,8 @@
 /// <summary>
 /// Contains a list of the HTML Field editors.
 /// </summary>
-public sealed class HtmlFieldEditor
+public sealed class HtmlFieldEditor : FieldEditor
 {
-    /// <summary>
-    /// The standard HTML field editor.
-    /// </summary>
-    public const string Standard = "";
     /// <summary>
     /// The Wysiwyg HTML field editor.
     /// </summary>

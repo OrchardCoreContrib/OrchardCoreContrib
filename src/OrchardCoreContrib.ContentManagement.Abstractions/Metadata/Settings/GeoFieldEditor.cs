@@ -3,12 +3,8 @@
 /// <summary>
 /// Represents a Geographic Field editor.
 /// </summary>
-public sealed class GeoFieldEditor
+public sealed class GeoFieldEditor : FieldEditor
 {
-    /// <summary>
-    /// The standard geographic field editor.
-    /// </summary>
-    public const string Standard = "";
     /// <summary>
     /// The leaflet geographic field editor.
     /// </summary>

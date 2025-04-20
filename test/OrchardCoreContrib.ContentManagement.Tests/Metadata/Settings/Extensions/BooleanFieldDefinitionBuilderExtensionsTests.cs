@@ -1,6 +1,7 @@
 ﻿using OrchardCore.ContentManagement.Metadata.Builders;
 using OrchardCore.ContentManagement.Metadata.Models;
 using OrchardCoreContrib.ContentManagement.Helpers.Tests;
+using OrchardCoreContrib.ContentManagement.Metadata.Settings;
 using Xunit;
 
 namespace OrchardCore.ContentManagement.Metadata.Settings.Tests;
@@ -18,7 +19,7 @@ public class BooleanFieldDefinitionBuilderExtensionsTests
         var partFieldDefinition = partFieldDefinitionBuilder.Build();
 
         // Assert
-        Assert.Equal(string.Empty, partFieldDefinition.Editor());
+        Assert.Equal(FieldEditor.Standard, partFieldDefinition.Editor());
     }
 
     [Fact]
