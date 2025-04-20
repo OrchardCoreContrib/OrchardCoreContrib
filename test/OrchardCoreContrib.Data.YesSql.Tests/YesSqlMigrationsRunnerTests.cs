@@ -14,7 +14,7 @@ public class YesSqlMigrationsRunnerTests
 {
     [Theory]
     [InlineData("OrchardCoreContrib.Module1", 3)]
-    [InlineData("OrchardCoreContrib.Module2", 1)]
+    [InlineData("OrchardCoreContrib.Module2", 2)]
     public async Task ShouldRunAllModuleMigrations(string moduleId, int expectedAppliedMigrations)
     {
         // Arrange
@@ -43,6 +43,7 @@ public class YesSqlMigrationsRunnerTests
         services.AddScoped<IMigration, Migration3>();
         services.AddScoped<IMigration, Migration4>();
         services.AddScoped<IMigration, Migration5>();
+        services.AddScoped<IMigration, Migration6>();
         services.AddScoped<IMigrationLoader, MigrationLoader>();
 
         var serviceProvider = services.BuildServiceProvider();

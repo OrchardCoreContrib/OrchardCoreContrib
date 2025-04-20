@@ -46,7 +46,7 @@ public class YesSqlMigrationRunner(
                 await migrationEventHandlers.InvokeAsync((handler, migration)
                     => handler.MigratingAsync(migration), migrationRecord.Migration, logger);
 
-                migrationRecord.Migration.Up();
+                await migrationRecord.Migration.UpAsync();
 
                 await migrationEventHandlers.InvokeAsync((handler, migration)
                     => handler.MigratedAsync(migration), migrationRecord.Migration, logger);
