@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using OrchardCoreContrib.Module1.Migrations;
 using OrchardCoreContrib.Module2.Migrations;
 
@@ -17,7 +18,7 @@ public class MigrationLoaderTests
 
         // Assert
         Assert.NotNull(migrationsDictionary);
-        Assert.Equal(4, migrationsDictionary.Count());
+        Assert.Equal(5, migrationsDictionary.Count());
         Assert.Contains(migrationsDictionary, r => r.Migration.GetType().Name == "Migration1");
         Assert.Contains(migrationsDictionary, r => r.Migration.GetType().Name == "Migration2");
         Assert.Contains(migrationsDictionary, r => r.Migration.GetType().Name == "Migration3");
@@ -25,7 +26,7 @@ public class MigrationLoaderTests
 
     [Theory]
     [InlineData("OrchardCoreContrib.Module1", 3)]
-    [InlineData("OrchardCoreContrib.Module2", 1)]
+    [InlineData("OrchardCoreContrib.Module2", 2)]
     public void LoaderShouldRetrieveMigrationsPerModuleId(string moduleId, int expectedMigrationsCount)
     {
         // Arrange
@@ -46,6 +47,7 @@ public class MigrationLoaderTests
         services.AddScoped<IMigration, Migration2>();
         services.AddScoped<IMigration, Migration3>();
         services.AddScoped<IMigration, Migration4>();
+        services.AddScoped<IMigration, Migration5>();
         services.AddScoped<IMigrationLoader, MigrationLoader>();
 
         var serviceProvider = services.BuildServiceProvider();

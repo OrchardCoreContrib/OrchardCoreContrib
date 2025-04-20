@@ -11,7 +11,17 @@ public interface IMigration
     void Up();
 
     /// <summary>
+    /// Apply the migration asynchronously.
+    /// </summary>
+    Task UpAsync();
+
+    /// <summary>
     /// Rollback the migration.
     /// </summary>
     void Down();
+
+    /// <summary>
+    /// Rollback the migration asynchronously.
+    /// </summary>
+    Task DownAsync();
 }

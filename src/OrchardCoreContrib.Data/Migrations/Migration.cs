@@ -10,6 +10,22 @@ public abstract class Migration : IMigration
     {
     }
 
+    public virtual Task DownAsync()
+    {
+        Down();
+
+        return Task.CompletedTask;
+    }
+
     /// <inheritdoc/>
-    public abstract void Up();
+    public virtual void Up()
+    {
+    }
+
+    public virtual Task UpAsync()
+    {
+        Up();
+
+        return Task.CompletedTask;
+    }
 }
