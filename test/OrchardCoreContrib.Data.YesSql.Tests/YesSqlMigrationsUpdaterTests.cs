@@ -15,7 +15,7 @@ public class YesSqlMigrationsUpdaterTests
         var migration = new Migration1();
         var session = new Mock<ISession>();
         session
-            .Setup(s => s.BeginTransactionAsync(CancellationToken.None))
+            .Setup(s => s.BeginTransactionAsync())
             .Returns(() => Task.FromResult(Mock.Of<DbTransaction>()));
 
         var store = new Mock<IStore>();

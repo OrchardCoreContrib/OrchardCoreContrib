@@ -56,15 +56,15 @@ public class YesSqlMigrationsRunnerTests
         var records = new List<object>();
         var session = new Mock<ISession>();
         session
-            .Setup(s => s.SaveAsync(It.IsAny<object>(), It.IsAny<bool>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
-            .Callback<object, bool, string, CancellationToken>((obj, _, _, _) =>
+            .Setup(s => s.SaveAsync(It.IsAny<object>()))
+            .Callback<object>((obj) =>
             {
                 records.RemoveAll(r => r.GetType() == obj.GetType());
                 records.Add(obj);
             });
         session
-            .Setup(s => s.GetAsync<DataMigrationRecord>(It.IsAny<long[]>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
-            .Returns<long[], string, CancellationToken>((ids, _, _) => Task.FromResult(records.OfType<DataMigrationRecord>()));
+            .Setup(s => s.GetAsync<DataMigrationRecord>(It.IsAny<long[]>()))
+            .Returns<long[]>(_ => Task.FromResult(records.OfType<DataMigrationRecord>()));
         session
             .Setup(s => s.Query(It.IsAny<string>()))
             .Returns<string>(_ =>
@@ -76,8 +76,8 @@ public class YesSqlMigrationsRunnerTests
                     {
                         var queryOfT = new Mock<IQuery<DataMigrationRecord>>();
                         queryOfT
-                            .Setup(q => q.FirstOrDefaultAsync(CancellationToken.None))
-                            .Returns<CancellationToken>(_ => Task.FromResult(default(DataMigrationRecord)));
+                            .Setup(q => q.FirstOrDefaultAsync())
+                            .Returns(Task.FromResult(default(DataMigrationRecord)));
 
                         return queryOfT.Object;
                     });
@@ -92,9 +92,6 @@ public class YesSqlMigrationsRunnerTests
 
                 await Task.CompletedTask.ConfigureAwait(false);
             });
-        session
-            .Setup(s => s.BeginTransactionAsync(CancellationToken.None))
-            .Returns<DbTransaction>(_ => Task.FromResult(Mock.Of<DbTransaction>()));
 
         return session.Object;
     }
