@@ -4,6 +4,6 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>disable</Nullable>
 		<AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
-		<NoWarn>$(NoWarn);NU1507</NoWarn>
+		<NoWarn>NU1507</NoWarn>
 	</PropertyGroup>
 </Project>
