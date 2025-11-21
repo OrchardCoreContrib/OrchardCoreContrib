@@ -6,6 +6,7 @@ This project provides an implementation APIs for supporting XLIFF localization.
 
 | Name                                                                                                                  | Version |
 |-----------------------------------------------------------------------------------------------------------------------|---------|
+| [`OrchardCoreContrib.Localization.Xliff`](https://www.nuget.org/packages/OrchardCoreContrib.Localization.Xliff/1.4.0) | 1.4.0   |
 | [`OrchardCoreContrib.Localization.Xliff`](https://www.nuget.org/packages/OrchardCoreContrib.Localization.Xliff/1.3.0) | 1.3.0   |
 | [`OrchardCoreContrib.Localization.Xliff`](https://www.nuget.org/packages/OrchardCoreContrib.Localization.Xliff/1.2.1) | 1.2.1   |
 | [`OrchardCoreContrib.Localization.Xliff`](https://www.nuget.org/packages/OrchardCoreContrib.Localization.Xliff/1.2.0) | 1.2.0   |
