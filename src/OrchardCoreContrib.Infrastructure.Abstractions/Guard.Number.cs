@@ -50,7 +50,7 @@ public static partial class Guard
         => ArgumentOutOfRangeException.ThrowIfLessThan(argumentValue, otherValue, argumentName);
 
     /// <summary>
-    /// Throws <see cref="ArgumentNullOrEmptyException"/> if the given value is equals another given value.
+    /// Throws <see cref="ArgumentOutOfRangeException"/> if the given value is less than or equal to another given value.
     /// </summary>
     /// <param name="argumentValue">The numeric value to be tested.</param>
     /// <param name="otherValue">The numeric value to compare with.</param>
