@@ -40,6 +40,8 @@
 		<PackageReference Include="OrchardCore.OpenId.Core" />
 		<PackageReference Include="OrchardCore.ContentManagement" />
 		<PackageReference Include="OrchardCore.ContentLocalization.Abstractions" />
+		<PackageReference Include="OrchardCore.Notifications.Core" />
+		<PackageReference Include="OrchardCore.ArchiveLater" />
 		<PackageReference Include="linq2db" />
 	</ItemGroup>
 

@@ -1,6 +1,7 @@
 ﻿using LinqToDB;
 using OrchardCore.AdminDashboard.Indexes;
 using OrchardCore.Alias.Indexes;
+using OrchardCore.ArchiveLater.Indexes;
 using OrchardCore.AuditTrail.Indexes;
 using OrchardCore.Autoroute.Core.Indexes;
 using OrchardCore.ContentLocalization.Records;
@@ -8,6 +9,7 @@ using OrchardCore.ContentManagement.Records;
 using OrchardCore.Deployment.Indexes;
 using OrchardCore.Layers.Indexes;
 using OrchardCore.Lists.Indexes;
+using OrchardCore.Notifications.Indexes;
 using OrchardCore.OpenId.YesSql.Indexes;
 using OrchardCore.PublishLater.Indexes;
 using OrchardCore.Taxonomies.Indexing;
@@ -144,6 +146,37 @@ public class OrchardCoreDataContext : DataContextBase, IDisposable
     /// Gets a list of localized content items.
     /// </summary>
     public ITable<LocalizedContentItemIndex> LocalizedContentItems => GetTable<LocalizedContentItemIndex>();
+
+
+    /// <summary>
+    /// Gets a list of notification content items.
+    /// </summary>
+    public ITable<NotificationIndex> NotificationIndex => GetTable<NotificationIndex>();
+
+    /// <summary>
+    /// Gets a list of achived content items.
+    /// </summary>
+    public ITable<ArchiveLaterPartIndex> ArchiveLaterPartIndex => GetTable<ArchiveLaterPartIndex>();
+
+    /// <summary>
+    /// Gets a list of users count by role name.
+    /// </summary>
+    public ITable<UserByRoleNameIndex> UserByRoleNameIndex => GetTable<UserByRoleNameIndex>();
+
+    /// <summary>
+    /// Gets a list of OpenID scopes count by resource.
+    /// </summary>
+    public ITable<OpenIdScopeByResourceIndex> OpenIdScopeByResourceIndex => GetTable<OpenIdScopeByResourceIndex>();
+
+    /// <summary>
+    /// Gets a list of OpenID apps count by redirect Uris.
+    /// </summary>
+    public ITable<OpenIdAppByRedirectUriIndex> OpenIdAppByRedirectUriIndex => GetTable<OpenIdAppByRedirectUriIndex>();
+
+    /// <summary>
+    /// Gets a list of OpenID apps count by logout Uris.
+    /// </summary>
+    public ITable<OpenIdAppByLogoutUriIndex> OpenIdAppByLogoutUriIndex => GetTable<OpenIdAppByLogoutUriIndex>();
 
     /// <inheritdoc/>
     public void Dispose() => _store.Dispose();

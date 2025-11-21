@@ -16,6 +16,7 @@
     <PackageVersion Include="OrchardCore.Abstractions" Version="2.2.0" />
     <PackageVersion Include="OrchardCore.AdminDashboard" Version="2.2.0" />
     <PackageVersion Include="OrchardCore.Alias" Version="2.2.0" />
+    <PackageVersion Include="OrchardCore.ArchiveLater" Version="2.2.0" />
     <PackageVersion Include="OrchardCore.AuditTrail.Abstractions" Version="2.2.0" />
     <PackageVersion Include="OrchardCore.Autoroute" Version="2.2.0" />
     <PackageVersion Include="OrchardCore.ContentLocalization.Abstractions" Version="2.2.0" />
@@ -30,6 +31,7 @@
     <PackageVersion Include="OrchardCore.Lists" Version="2.2.0" />
     <PackageVersion Include="OrchardCore.Localization.Abstractions" Version="2.2.0" />
     <PackageVersion Include="OrchardCore.Navigation.Core" Version="2.2.0" />
+    <PackageVersion Include="OrchardCore.Notifications.Core" Version="2.2.0" />
     <PackageVersion Include="OrchardCore.OpenId.Core" Version="2.2.0" />
     <PackageVersion Include="OrchardCore.PublishLater" Version="2.2.0" />
     <PackageVersion Include="OrchardCore.Taxonomies" Version="2.2.0" />
