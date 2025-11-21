@@ -1,6 +1,6 @@
 ﻿using Microsoft.OpenApi.Models;
 
-namespace OrchardCoreContrib.OpenApi.Abstractions;
+namespace OrchardCoreContrib.OpenApi;
 
 /// <summary>
 /// Represents a contract for defining OpenAPI object.
