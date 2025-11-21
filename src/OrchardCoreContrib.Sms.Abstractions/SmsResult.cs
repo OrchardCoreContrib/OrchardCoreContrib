@@ -10,7 +10,7 @@ public class SmsResult
     /// <summary>
     /// Returns an <see cref="SmsResult"/>indicating a successful SMS operation.
     /// </summary>
-    public static SmsResult Success { get; } = new SmsResult { Succeeded = true };
+    public static SmsResult Success { get; } = new() { Succeeded = true };
 
     /// <summary>
     /// An <see cref="IEnumerable{LocalizedString}"/> containing an errors that occurred during the SMS operation.
@@ -26,5 +26,5 @@ public class SmsResult
     /// Creates an <see cref="SmsResult"/> indicating a failed SMS operation, with a list of errors if applicable.
     /// </summary>
     /// <param name="errors">An optional array of <see cref="LocalizedString"/> which caused the operation to fail.</param>
-    public static SmsResult Failed(params LocalizedString[] errors) => new SmsResult { Succeeded = false, Errors = errors };
+    public static SmsResult Failed(params LocalizedString[] errors) => new() { Succeeded = false, Errors = errors };
 }
