@@ -3,12 +3,7 @@ using YesSql;
 
 namespace OrchardCoreContrib.Linq.Tests;
 
-public class CustomOrchardCoreDataContext : OrchardCoreDataContext
+public class CustomOrchardCoreDataContext(IStore store) : OrchardCoreDataContext(store)
 {
-    public CustomOrchardCoreDataContext(IStore store) : base(store)
-    {
-
-    }
-
     public ITable<Document> Document => GetTable<Document>();
 }
