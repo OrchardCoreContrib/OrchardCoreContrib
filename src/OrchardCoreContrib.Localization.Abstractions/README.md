@@ -6,6 +6,7 @@ This project provides localization abstractions APIs.
 
 | Name                                                                                                                                      | Version     |
 |-------------------------------------------------------------------------------------------------------------------------------------------|-------------|
+| [`OrchardCoreContrib.Localization.Abstractions`](https://www.nuget.org/packages/OrchardCoreContrib.Localization.Abstractions/1.5.0)       | 1.5.0       |
 | [`OrchardCoreContrib.Localization.Abstractions`](https://www.nuget.org/packages/OrchardCoreContrib.Localization.Abstractions/1.4.0)       | 1.4.0       |
 | [`OrchardCoreContrib.Localization.Abstractions`](https://www.nuget.org/packages/OrchardCoreContrib.Localization.Abstractions/1.3.1)       | 1.3.1       |
 | [`OrchardCoreContrib.Localization.Abstractions`](https://www.nuget.org/packages/OrchardCoreContrib.Localization.Abstractions/1.3.0)       | 1.3.0       |
