@@ -56,6 +56,7 @@ public class ShortcodeAttribute : IHtmlContent
     /// <inheritdoc />
     public override int GetHashCode() => HashCode.Combine(Name, Value);
 
+    /// <inheritdoc />
     public void WriteTo(TextWriter writer, HtmlEncoder encoder)
     {
         writer.Write(Name);
