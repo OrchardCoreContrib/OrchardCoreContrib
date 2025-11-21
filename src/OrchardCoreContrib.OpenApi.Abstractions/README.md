@@ -6,6 +6,7 @@ This project provides an abstractions APIs for OpenAPI specification.
 
 | Name                                                                                                                            | Version     |
 |---------------------------------------------------------------------------------------------------------------------------------|-------------|
+| [`OrchardCoreContrib.OpenApi.Abstractions`](https://www.nuget.org/packages/OrchardCoreContrib.OpenApi.Abstractions/1.5.0)       | 1.5.0       |
 | [`OrchardCoreContrib.OpenApi.Abstractions`](https://www.nuget.org/packages/OrchardCoreContrib.OpenApi.Abstractions/1.4.0)       | 1.4.0       |
 | [`OrchardCoreContrib.OpenApi.Abstractions`](https://www.nuget.org/packages/OrchardCoreContrib.OpenApi.Abstractions/1.3.1)       | 1.3.1       |
 | [`OrchardCoreContrib.OpenApi.Abstractions`](https://www.nuget.org/packages/OrchardCoreContrib.OpenApi.Abstractions/1.3.0)       | 1.3.0       |
