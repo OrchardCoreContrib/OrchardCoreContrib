@@ -221,7 +221,7 @@ public class GuardTests
         // Act & Assert
         var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentIsLessThanOrEqual(value, anotherValue, name));
 
-        Assert.Equal($"value ('{value}') must be greater than to '{anotherValue}'. (Parameter '{name}')\r\nActual value was {value}.", exception.Message);
+        Assert.Equal($"value ('{value}') must be greater than '{anotherValue}'. (Parameter '{name}')\r\nActual value was {value}.", exception.Message);
     }
 
     [Theory]
@@ -279,7 +279,7 @@ public class GuardTests
         // Act & Assert
         var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentIsGreaterThanOrEqual(value, anotherValue, name));
 
-        Assert.Equal($"value ('{value}') must be less than to '{anotherValue}'. (Parameter '{name}')\r\nActual value was {value}.", exception.Message);
+        Assert.Equal($"value ('{value}') must be less than '{anotherValue}'. (Parameter '{name}')\r\nActual value was {value}.", exception.Message);
     }
 
     [Theory]
