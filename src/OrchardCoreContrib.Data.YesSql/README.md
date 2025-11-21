@@ -6,6 +6,7 @@ This project provides an implementation APIs for Data using YesSQL.
 
 | Name                                                                                                          | Version     |
 |---------------------------------------------------------------------------------------------------------------|-------------|
+| [`OrchardCoreContrib.Data.YesSql`](https://www.nuget.org/packages/OrchardCoreContrib.Data.YesSql/1.3.0)       | 1.3.0       |
 | [`OrchardCoreContrib.Data.YesSql`](https://www.nuget.org/packages/OrchardCoreContrib.Data.YesSql/1.2.0)       | 1.2.0       |
 | [`OrchardCoreContrib.Data.YesSql`](https://www.nuget.org/packages/OrchardCoreContrib.Data.YesSql/1.1.2)       | 1.1.2       |
 | [`OrchardCoreContrib.Data.YesSql`](https://www.nuget.org/packages/OrchardCoreContrib.Data.YesSql/1.1.1)       | 1.1.1       |
