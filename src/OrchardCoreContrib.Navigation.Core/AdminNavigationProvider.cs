@@ -9,6 +9,4 @@ public abstract class AdminNavigationProvider : NavigationProvider
 {
     /// <inheritdoc/>
     public override string Name => "Admin";
-
-    public abstract override Task BuildNavigationAsync(NavigationBuilder builder);
 }
