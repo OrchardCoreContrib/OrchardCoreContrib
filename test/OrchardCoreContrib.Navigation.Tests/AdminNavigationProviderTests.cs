@@ -16,12 +16,16 @@ public class AdminNavigationProviderTests
     }
 
     [Fact]
-    public void AdminNavigationProviderShouldExecutesBuildNavigationAsync()
+    public async Task AdminNavigationProviderShouldExecutesBuildNavigationAsync()
     {
         // Arrange
+        var navigationBuilder = new NavigationBuilder();
         var adminMenu = new MyAdminMenu();
 
-        // Act & Assert
+        // Act
+        await adminMenu.BuildNavigationAsync(navigationBuilder);
+
+        // Assert
         Assert.True(adminMenu.Executed);
     }
 
