@@ -10,18 +10,13 @@ public abstract class NavigationProvider : INavigationProvider
     /// <inheritdoc/>
     public abstract string Name { get; }
 
-    /// <inheritdoc/>
+    [Obsolete("This method is deprecated, use BuildNavigationAsync instead.", error: true)]
     public virtual void BuildNavigation(NavigationBuilder builder)
     {
     }
 
     /// <inheritdoc/>
-    public virtual Task BuildNavigationAsync(NavigationBuilder builder)
-    {
-        BuildNavigation(builder);
-
-        return Task.CompletedTask;
-    }
+    public virtual Task BuildNavigationAsync(NavigationBuilder builder) => Task.CompletedTask;
 
     /// <inheritdoc/>
     public async ValueTask BuildNavigationAsync(string name, NavigationBuilder builder)
@@ -33,6 +28,6 @@ public abstract class NavigationProvider : INavigationProvider
         else
         {
             await ValueTask.CompletedTask;
-        }      
+        }
     }
 }
