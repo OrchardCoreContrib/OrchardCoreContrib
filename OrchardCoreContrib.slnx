@@ -1,0 +1,52 @@
+<Solution>
+  <Folder Name="/images/">
+    <File Path="images/icon.png" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/OrchardCoreContrib.Abstractions/OrchardCoreContrib.Abstractions.csproj" />
+    <Project Path="src/OrchardCoreContrib.ContentLocalization.Abstractions/OrchardCoreContrib.ContentLocalization.Abstractions.csproj" />
+    <Project Path="src/OrchardCoreContrib.ContentLocalization.Core/OrchardCoreContrib.ContentLocalization.Core.csproj" />
+    <Project Path="src/OrchardCoreContrib.ContentManagement.Abstractions/OrchardCoreContrib.ContentManagement.Abstractions.csproj" />
+    <Project Path="src/OrchardCoreContrib.Data.Abstractions/OrchardCoreContrib.Data.Abstractions.csproj" />
+    <Project Path="src/OrchardCoreContrib.Data.YesSql/OrchardCoreContrib.Data.YesSql.csproj" />
+    <Project Path="src/OrchardCoreContrib.Data/OrchardCoreContrib.Data.csproj" />
+    <Project Path="src/OrchardCoreContrib.DisplayManagement.Liquid/OrchardCoreContrib.DisplayManagement.Liquid.csproj" />
+    <Project Path="src/OrchardCoreContrib.Email.Abstractions/OrchardCoreContrib.Email.Abstractions.csproj" />
+    <Project Path="src/OrchardCoreContrib.Email/OrchardCoreContrib.Email.csproj" />
+    <Project Path="src/OrchardCoreContrib.Garnet.Abstractions/OrchardCoreContrib.Garnet.Abstractions.csproj" />
+    <Project Path="src/OrchardCoreContrib.HealthChecks.Abstractions/OrchardCoreContrib.HealthChecks.Abstractions.csproj" />
+    <Project Path="src/OrchardCoreContrib.Infrastructure.Abstractions/OrchardCoreContrib.Infrastructure.Abstractions.csproj" />
+    <Project Path="src/OrchardCoreContrib.Infrastructure/OrchardCoreContrib.Infrastructure.csproj" />
+    <Project Path="src/OrchardCoreContrib.Linq/OrchardCoreContrib.Linq.csproj" />
+    <Project Path="src/OrchardCoreContrib.Localization.Abstractions/OrchardCoreContrib.Localization.Abstractions.csproj" />
+    <Project Path="src/OrchardCoreContrib.Localization.Json/OrchardCoreContrib.Localization.Json.csproj" />
+    <Project Path="src/OrchardCoreContrib.Localization.Xliff/OrchardCoreContrib.Localization.Xliff.csproj" />
+    <Project Path="src/OrchardCoreContrib.Localization/OrchardCoreContrib.Localization.csproj" />
+    <Project Path="src/OrchardCoreContrib.Navigation.Abstractions/OrchardCoreContrib.Navigation.Abstractions.csproj" />
+    <Project Path="src/OrchardCoreContrib.Navigation.Core/OrchardCoreContrib.Navigation.Core.csproj" />
+    <Project Path="src/OrchardCoreContrib.OpenApi.Abstractions/OrchardCoreContrib.OpenApi.Abstractions.csproj" />
+    <Project Path="src/OrchardCoreContrib.Shortcodes.Abstractions/OrchardCoreContrib.Shortcodes.Abstractions.csproj" />
+    <Project Path="src/OrchardCoreContrib.Shortcodes.Core/OrchardCoreContrib.Shortcodes.Core.csproj" />
+    <Project Path="src/OrchardCoreContrib.Sms.Abstractions/OrchardCoreContrib.Sms.Abstractions.csproj" />
+    <Project Path="src/OrchardCoreContrib/OrchardCoreContrib.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/OrchardCoreContrib.ContentLocalization.Tests/OrchardCoreContrib.ContentLocalization.Tests.csproj" />
+    <Project Path="test/OrchardCoreContrib.ContentManagement.Tests/OrchardCoreContrib.ContentManagement.Tests.csproj" />
+    <Project Path="test/OrchardCoreContrib.Data.Tests/OrchardCoreContrib.Data.Tests.csproj" />
+    <Project Path="test/OrchardCoreContrib.Data.YesSql.Tests/OrchardCoreContrib.Data.YesSql.Tests.csproj" />
+    <Project Path="test/OrchardCoreContrib.DisplayManagement.Liquid.Tests/OrchardCoreContrib.DisplayManagement.Liquid.Tests.csproj" />
+    <Project Path="test/OrchardCoreContrib.Email.Tests/OrchardCoreContrib.Email.Tests.csproj" />
+    <Project Path="test/OrchardCoreContrib.Infrastructure.Tests/OrchardCoreContrib.Infrastructure.Tests.csproj" />
+    <Project Path="test/OrchardCoreContrib.Linq.Tests/OrchardCoreContrib.Linq.Tests.csproj" />
+    <Project Path="test/OrchardCoreContrib.Localization.Json.Tests/OrchardCoreContrib.Localization.Json.Tests.csproj" />
+    <Project Path="test/OrchardCoreContrib.Localization.Tests/OrchardCoreContrib.Localization.Tests.csproj" />
+    <Project Path="test/OrchardCoreContrib.Localization.Xliff.Tests/OrchardCoreContrib.Localization.Xliff.Tests.csproj" />
+    <Project Path="test/OrchardCoreContrib.Navigation.Tests/OrchardCoreContrib.Navigation.Tests.csproj" />
+    <Project Path="test/OrchardCoreContrib.Shortcodes.Tests/OrchardCoreContrib.Shortcodes.Tests.csproj" />
+  </Folder>
+</Solution>
