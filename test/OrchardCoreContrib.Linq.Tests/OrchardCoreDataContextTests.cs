@@ -1,7 +1,4 @@
 ﻿using LinqToDB;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using Xunit;
 using YesSql;
 using YesSql.Provider.Sqlite;
@@ -25,7 +22,7 @@ public class OrchardCoreDataContextTests
         var dbContext = new OrchardCoreDataContext(_store);
 
         // Act
-        var result = dbContext.Aliases
+        var result = dbContext.AliasPartIndex
             .OrderBy(index => index.Alias)
             .First();
 
@@ -37,8 +34,8 @@ public class OrchardCoreDataContextTests
     public void ComplexQuery()
     {
         using var dbContext = new OrchardCoreDataContext(_store);
-        var result = from ci in dbContext.ContentItems
-                     join r in dbContext.Routes on ci.ContentItemId equals r.ContentItemId
+        var result = from ci in dbContext.ContentItemIndex
+                     join r in dbContext.AutoroutePartIndex on ci.ContentItemId equals r.ContentItemId
                      where r.Path.StartsWith("tags/", StringComparison.OrdinalIgnoreCase)
                      select ci.DisplayText;
 
@@ -52,7 +49,7 @@ public class OrchardCoreDataContextTests
         var dbContext = new OrchardCoreDataContext(_store);
 
         // Act
-        var result = await dbContext.Aliases.ToListAsync();
+        var result = await dbContext.AliasPartIndex.ToListAsync();
 
         // Assert
         Assert.Equal(3, result.Count);
