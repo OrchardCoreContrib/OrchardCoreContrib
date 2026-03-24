@@ -24,7 +24,7 @@ public class HostingEnvironmentValue(IHostEnvironment hostEnvironment) : FluidVa
             return false;
         }
 
-        return ToStringValue(null) == other.ToStringValue(null);
+        return ToStringValue(default) == other.ToStringValue(default);
     }
 
     /// <inheritdoc/>
@@ -56,7 +56,12 @@ public class HostingEnvironmentValue(IHostEnvironment hostEnvironment) : FluidVa
     public override string ToStringValue(TemplateContext context) => hostEnvironment.EnvironmentName;
 
     /// <inheritdoc/>
-    public override ValueTask WriteToAsync(IFluidOutput output, TextEncoder encoder, CultureInfo cultureInfo) => default;
+    public override ValueTask WriteToAsync(IFluidOutput output, TextEncoder encoder, CultureInfo cultureInfo)
+    {
+        output.Write(ToStringValue(default));
+
+        return ValueTask.CompletedTask;
+    }
 
     /// <inheritdoc/>
     public override ValueTask<FluidValue> GetValueAsync(string name, TemplateContext context) => name switch
