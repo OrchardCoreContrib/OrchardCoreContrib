@@ -1,7 +1,5 @@
 ﻿using LinqToDB;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+using LinqToDB.Async;
 using Xunit;
 using YesSql;
 using YesSql.Provider.Sqlite;
