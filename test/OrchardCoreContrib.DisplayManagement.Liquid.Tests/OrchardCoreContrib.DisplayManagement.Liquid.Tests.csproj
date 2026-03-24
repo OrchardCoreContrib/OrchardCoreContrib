@@ -1,8 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-	<PropertyGroup>
-		<IsPackable>false</IsPackable>
-	</PropertyGroup>
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" />
@@ -19,7 +15,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\OrchardCoreContrib.ContentManagement.Abstractions\OrchardCoreContrib.ContentManagement.Abstractions.csproj" />
+		<ProjectReference Include="..\..\src\OrchardCoreContrib.DisplayManagement.Liquid\OrchardCoreContrib.DisplayManagement.Liquid.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -7,14 +7,14 @@ namespace OrchardCoreContrib.Tests.Navigation;
 public class NavigationProviderTests
 {
     [Fact]
-    public void ShouldBuildNavigation()
+    public async Task ShouldBuildNavigation()
     {
         // Arrange
         var navigationProvider = new MainMenu();
         var navigationBuilder = new NavigationBuilder();
 
         // Act
-        navigationProvider.BuildNavigation(navigationBuilder);
+        await navigationProvider.BuildNavigationAsync(navigationBuilder);
 
         // Assert
         var menuItems = navigationBuilder.Build();
@@ -28,11 +28,13 @@ public class NavigationProviderTests
     {
         public override string Name => "Main Menu";
 
-        public override void BuildNavigation(NavigationBuilder builder)
+        public override Task BuildNavigationAsync(NavigationBuilder builder)
         {
             builder.Add(new LocalizedString("Home", "Home"));
             builder.Add(new LocalizedString("About", "About"));
             builder.Add(new LocalizedString("Contact", "Contact"));
+
+            return Task.CompletedTask;
         }
     }
 }

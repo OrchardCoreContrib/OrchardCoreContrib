@@ -1,4 +1,6 @@
-﻿namespace OrchardCoreContrib.Navigation;
+﻿using OrchardCore.Navigation;
+
+namespace OrchardCoreContrib.Navigation;
 
 /// <summary>
 /// Represents a base class for an admin menu.
