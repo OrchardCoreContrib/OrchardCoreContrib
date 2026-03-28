@@ -1,6 +1,6 @@
 ﻿namespace OrchardCoreContrib;
 
-public static class OrchardCoreConstants
+public static class OrchardCoreContribConstants
 {
     public static class Stereotype
     {
@@ -13,5 +13,16 @@ public static class OrchardCoreConstants
         public const string MenuItem = "MenuItem";
 
         public const string Widget = "Widget";
+    }
+
+    public static class DisplayType
+    {
+        public const string Detail = "Detail";
+
+        public const string Summary = "Summary";
+
+        public const string DetailAdmin = "DetailAdmin";
+
+        public const string SummaryAdmin = "SummaryAdmin";
     }
 }
