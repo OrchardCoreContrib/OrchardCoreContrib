@@ -33,4 +33,16 @@ public class MediaFieldDefinitionBuilderExtensionsTests
         // Assert
         Assert.Equal("Attached", partFieldDefinition.Editor());
     }
+
+    [Fact]
+    public void WithMediaFieldGalleryEditor_ShouldReturnsAttached()
+    {
+        // Act
+        var partFieldDefinitionBuilder = _partFieldDefinitionBuilder
+            .WithMediaFieldGalleryEditor();
+        var partFieldDefinition = partFieldDefinitionBuilder.Build();
+
+        // Assert
+        Assert.Equal("Gallery", partFieldDefinition.Editor());
+    }
 }

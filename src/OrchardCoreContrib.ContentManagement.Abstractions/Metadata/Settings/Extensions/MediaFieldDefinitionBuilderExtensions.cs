@@ -21,4 +21,11 @@ public static class MediaFieldDefinitionBuilderExtensions
     /// <param name="builder"><see cref="ContentPartFieldDefinitionBuilder"/>.</param>
     public static ContentPartFieldDefinitionBuilder WithMediaFieldAttachedEditor(this ContentPartFieldDefinitionBuilder builder)
         => builder.MergeSettings<ContentPartFieldSettings>(x => x.Editor = MediaFieldEditor.Attached);
+
+    /// <summary>
+    /// Configures the Media Field to use the gallery editor.
+    /// </summary>
+    /// <param name="builder"><see cref="ContentPartFieldDefinitionBuilder"/>.</param>
+    public static ContentPartFieldDefinitionBuilder WithMediaFieldGalleryEditor(this ContentPartFieldDefinitionBuilder builder)
+        => builder.MergeSettings<ContentPartFieldSettings>(x => x.Editor = MediaFieldEditor.Gallery);
 }
