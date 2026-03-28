@@ -9,4 +9,9 @@ public sealed class MediaFieldEditor : FieldEditor
     /// The attached media field editor.
     /// </summary>
     public const string Attached = "Attached";
+
+    /// <summary>
+    /// The gallery media field editor.
+    /// </summary>
+    public const string Gallery = "Gallery";
 }
