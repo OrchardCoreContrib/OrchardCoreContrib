@@ -4,12 +4,11 @@ using OrchardCore.Environment.Shell;
 using OrchardCore.Environment.Shell.Builders;
 using OrchardCore.Environment.Shell.Scope;
 using OrchardCore.Settings;
-using OrchardCoreContrib.Settings;
 using Xunit;
 
-namespace OrchardCoreContrib.Infrastructure.Tests.Validation;
+namespace OrchardCoreContrib.Settings.Tests;
 
-public class GlobalSettingsAccessorTests
+public partial class GlobalSettingsAccessorTests
 {
     private static readonly IShellHost _shellHost = GetShellHost();
 
@@ -89,10 +88,5 @@ public class GlobalSettingsAccessorTests
             .Returns(obj);
 
         return mockSite.Object;
-    }
-
-    public class TestSettings
-    {
-        public string Name { get; set; }
     }
 }
