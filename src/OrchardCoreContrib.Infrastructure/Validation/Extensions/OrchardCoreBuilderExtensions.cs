@@ -1,7 +1,6 @@
-﻿using OrchardCoreContrib.Settings;
-using OrchardCoreContrib.Validation;
+﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace OrchardCoreContrib.Validation;
 
 /// <summary>
 /// Provides an extension methods for <see cref="OrchardCoreBuilder"/>.
@@ -16,18 +15,6 @@ public static class OrchardCoreBuilderExtensions
     {
         builder.ConfigureServices(services =>
             services.AddTransient<IPhoneNumberValidator, PhoneNumberValidator>());
-
-        return builder;
-    }
-
-    /// <summary>
-    /// Adds global settings accessor service.
-    /// </summary>
-    /// <param name="builder">The <see cref="OrchardCoreBuilder"/>.</param>
-    public static OrchardCoreBuilder AddGlobalSettingsAccessor(this OrchardCoreBuilder builder)
-    {
-        builder.ConfigureServices(services =>
-            services.AddTransient<IGlobalSettingsAccessor, GlobalSettingsAccessor>());
 
         return builder;
     }
