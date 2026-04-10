@@ -6,6 +6,7 @@ This project provides an abstractions APIs for Orchard Core Contrib infrastractu
 
 | Name                                                                                                                                          | Version     |
 |-----------------------------------------------------------------------------------------------------------------------------------------------|-------------|
+| [`OrchardCoreContrib.Infrastructure.Abstractions`](https://www.nuget.org/packages/OrchardCoreContrib.Infrastructure.Abstractions/2.6.1)       | 2.6.1       |
 | [`OrchardCoreContrib.Infrastructure.Abstractions`](https://www.nuget.org/packages/OrchardCoreContrib.Infrastructure.Abstractions/2.6.0)       | 2.6.0       |
 | [`OrchardCoreContrib.Infrastructure.Abstractions`](https://www.nuget.org/packages/OrchardCoreContrib.Infrastructure.Abstractions/2.5.0)       | 2.5.0       |
 | [`OrchardCoreContrib.Infrastructure.Abstractions`](https://www.nuget.org/packages/OrchardCoreContrib.Infrastructure.Abstractions/2.4.0)       | 2.4.0       |

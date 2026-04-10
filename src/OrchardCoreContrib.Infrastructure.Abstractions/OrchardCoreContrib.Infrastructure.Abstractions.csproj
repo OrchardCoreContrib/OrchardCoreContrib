@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>net8.0;net10.0</TargetFrameworks>
 		<RootNamespace>OrchardCoreContrib.Infrastructure</RootNamespace>
-		<VersionPrefix>2.6.0</VersionPrefix>
+		<VersionPrefix>2.6.1</VersionPrefix>
 		<Authors>The Orchard Core Contrib Team</Authors>
 		<Company />
 		<Description>Provides an abstractions APIs for Orchard Core Contrib infrastructure, that may used accross different modules.</Description>
