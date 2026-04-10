@@ -21,12 +21,12 @@ public static class NavigationItemBuilderExtensions
     {
         ArgumentException.ThrowIfNullOrEmpty(tenantName);
 
-        if (!tenantName.Equals(CurrentTenant, StringComparison.OrdinalIgnoreCase))
+        if (tenantName.Equals(CurrentTenant, StringComparison.OrdinalIgnoreCase))
         {
-            builder.Url(string.Empty);
+            return builder;
         }
 
-        return builder;
+        return builder.ResetMenuItemUrl();
     }
 
     /// <summary>
@@ -43,12 +43,12 @@ public static class NavigationItemBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(tenantPredicate);
 
-        if (!tenantPredicate(CurrentTenant))
+        if (tenantPredicate(CurrentTenant))
         {
-            builder.Url(string.Empty);
+            return builder;
         }
 
-        return builder;
+        return builder.ResetMenuItemUrl();
     }
 
     /// <summary>
@@ -61,11 +61,24 @@ public static class NavigationItemBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(tenantNames);
 
-        if (!tenantNames.Contains(CurrentTenant, StringComparer.OrdinalIgnoreCase))
+        if (tenantNames.Contains(CurrentTenant, StringComparer.OrdinalIgnoreCase))
         {
-            builder.Url(string.Empty);
+            return builder;
         }
 
-        return builder;
+        return builder.ResetMenuItemUrl();
+    }
+
+    // This will hide the menu item by clearing its URL and route values, effectively making it inaccessible in the navigation.
+    private static NavigationItemBuilder ResetMenuItemUrl(this NavigationItemBuilder builder)
+    {
+        var item = builder.Build()
+            .First();
+
+        item.Url = string.Empty;
+
+        item.RouteValues.Clear();
+
+        return new NavigationItemBuilder(item);
     }
 }
