@@ -107,7 +107,7 @@ public abstract class SiteContextBase<TEntryPoint> : ISiteContext<TEntryPoint> w
             RequestUrlPrefix = tenantName
         };
 
-        var result = await PostTenantsApiAsync(DefaultTenantClient, "api/tenants/create", model);
+        var result = await DefaultTenantClient.PostAsJsonAsync("api/tenants/create", model);
 
         result.EnsureSuccessStatusCode();
 
@@ -129,7 +129,7 @@ public abstract class SiteContextBase<TEntryPoint> : ISiteContext<TEntryPoint> w
             Email = Options.Email
         };
 
-        var result = await PostTenantsApiAsync(DefaultTenantClient, "api/tenants/setup", model);
+        var result = await DefaultTenantClient.PostAsJsonAsync("api/tenants/setup", model);
 
         result.EnsureSuccessStatusCode();
     }
@@ -143,22 +143,5 @@ public abstract class SiteContextBase<TEntryPoint> : ISiteContext<TEntryPoint> w
         await shellScope.UsingAsync(execute, activateShell);
 
         HttpContextAccessor.HttpContext = null;
-    }
-
-    private static async Task<HttpResponseMessage> PostTenantsApiAsync<T>(HttpClient client, string relativePath, T model)
-    {
-        // Prefer admin-prefixed endpoint (common in Orchard Core), fallback to non-admin for older setups.
-        var adminPath = $"Admin/{relativePath.TrimStart('/')}";
-        var plainPath = relativePath.TrimStart('/');
-
-        var response = await client.PostAsJsonAsync(adminPath, model);
-
-        if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-        {
-            response.Dispose();
-            response = await client.PostAsJsonAsync(plainPath, model);
-        }
-
-        return response;
     }
 }
