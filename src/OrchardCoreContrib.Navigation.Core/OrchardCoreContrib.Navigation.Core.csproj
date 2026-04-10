@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>net8.0;net10.0</TargetFrameworks>
 		<RootNamespace>OrchardCoreContrib.Navigation</RootNamespace>
-		<VersionPrefix>1.6.0</VersionPrefix>
+		<VersionPrefix>1.6.1</VersionPrefix>
 		<Authors>The Orchard Core Contrib Team</Authors>
 		<Company />
 		<Description>Provides a core implementations APIs for Navigation.</Description>
