@@ -32,6 +32,7 @@
     <Project Path="src/OrchardCoreContrib.Shortcodes.Abstractions/OrchardCoreContrib.Shortcodes.Abstractions.csproj" />
     <Project Path="src/OrchardCoreContrib.Shortcodes.Core/OrchardCoreContrib.Shortcodes.Core.csproj" />
     <Project Path="src/OrchardCoreContrib.Sms.Abstractions/OrchardCoreContrib.Sms.Abstractions.csproj" />
+    <Project Path="src/OrchardCoreContrib.Web/OrchardCoreContrib.Web.csproj" Id="ab888908-781f-4660-909b-26cbded123c3" />
     <Project Path="src/OrchardCoreContrib/OrchardCoreContrib.csproj" />
   </Folder>
   <Folder Name="/test/">
@@ -48,5 +49,6 @@
     <Project Path="test/OrchardCoreContrib.Localization.Xliff.Tests/OrchardCoreContrib.Localization.Xliff.Tests.csproj" />
     <Project Path="test/OrchardCoreContrib.Navigation.Tests/OrchardCoreContrib.Navigation.Tests.csproj" />
     <Project Path="test/OrchardCoreContrib.Shortcodes.Tests/OrchardCoreContrib.Shortcodes.Tests.csproj" />
+    <Project Path="test/OrchardCoreContrib.Testing/OrchardCoreContrib.Testing.csproj" Id="d06a97bf-aa5d-414d-a536-748faeebcab5" />
   </Folder>
 </Solution>
