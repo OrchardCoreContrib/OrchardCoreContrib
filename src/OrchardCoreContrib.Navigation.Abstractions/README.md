@@ -6,6 +6,7 @@ This project provides Navigation abstractions APIs.
 
 | Name                                                                                                                             | Version |
 |----------------------------------------------------------------------------------------------------------------------------------|---------|
+| [`OrchardCoreContrib.Navigation.Abstractions`](https://www.nuget.org/packages/OrchardCoreContrib.Navigation.Abstractions/1.6.0)  | 1.6.0   |
 | [`OrchardCoreContrib.Navigation.Abstractions`](https://www.nuget.org/packages/OrchardCoreContrib.Navigation.Abstractions/1.5.0)  | 1.5.0   |
 | [`OrchardCoreContrib.Navigation.Abstractions`](https://www.nuget.org/packages/OrchardCoreContrib.Navigation.Abstractions/1.4.0)  | 1.4.0   |
 | [`OrchardCoreContrib.Navigation.Abstractions`](https://www.nuget.org/packages/OrchardCoreContrib.Navigation.Abstractions/1.3.1)  | 1.3.1   |
