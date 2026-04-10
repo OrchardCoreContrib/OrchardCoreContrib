@@ -53,8 +53,30 @@ public abstract class SiteContextBase<TEntryPoint> : ISiteContext<TEntryPoint> w
 
         lock (Site)
         {
-            var url = new Uri(content.Trim('"'));
-            url = new Uri(url.Scheme + "://" + url.Authority + url.LocalPath + "/");
+            Uri url = null;
+
+            var rawUrl = content?.Trim().Trim('"');
+
+            if (!string.IsNullOrWhiteSpace(rawUrl))
+            {
+                if (!Uri.TryCreate(rawUrl, UriKind.Absolute, out url))
+                {
+                    throw new InvalidOperationException($"Tenant create API returned an invalid URL: '{rawUrl}'.");
+                }
+            }
+            else if (response.Headers.Location is { } location)
+            {
+                url = location.IsAbsoluteUri
+                    ? location
+                    : new Uri(DefaultTenantClient.BaseAddress ?? new Uri("http://localhost/"), location);
+            }
+            else
+            {
+                // Fallback for API responses with empty body and no Location header.
+                url = new Uri(DefaultTenantClient.BaseAddress ?? new Uri("http://localhost/"), $"{tenantName}/");
+            }
+
+            url = new Uri($"{url.Scheme}://{url.Authority}{url.LocalPath.TrimEnd('/')}/");
 
             Client = Site.CreateDefaultClient(url);
 
