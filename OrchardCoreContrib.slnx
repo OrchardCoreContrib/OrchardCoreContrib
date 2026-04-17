@@ -49,6 +49,5 @@
     <Project Path="test/OrchardCoreContrib.Localization.Xliff.Tests/OrchardCoreContrib.Localization.Xliff.Tests.csproj" />
     <Project Path="test/OrchardCoreContrib.Navigation.Tests/OrchardCoreContrib.Navigation.Tests.csproj" />
     <Project Path="test/OrchardCoreContrib.Shortcodes.Tests/OrchardCoreContrib.Shortcodes.Tests.csproj" />
-    <Project Path="test/OrchardCoreContrib.Testing/OrchardCoreContrib.Testing.csproj" Id="d06a97bf-aa5d-414d-a536-748faeebcab5" />
   </Folder>
 </Solution>
