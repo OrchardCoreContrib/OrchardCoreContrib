@@ -3,6 +3,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" />
 		<PackageReference Include="Moq" />
+		<PackageReference Include="OrchardCoreContrib.Testing" />
 		<PackageReference Include="xunit" />
 		<PackageReference Include="xunit.analyzers">
 		  <PrivateAssets>all</PrivateAssets>
@@ -21,7 +22,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\OrchardCoreContrib.Navigation.Core\OrchardCoreContrib.Navigation.Core.csproj" />
 		<ProjectReference Include="..\..\src\OrchardCoreContrib.Web\OrchardCoreContrib.Web.csproj" />
-		<ProjectReference Include="..\OrchardCoreContrib.Testing\OrchardCoreContrib.Testing.csproj" />
 	</ItemGroup>
 
 </Project>
