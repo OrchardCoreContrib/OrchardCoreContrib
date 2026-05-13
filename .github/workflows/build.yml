@@ -26,6 +26,7 @@ jobs:
           10.0.*
 
     - name: Install Dependencies
+      run: dotnet restore --configfile ./NuGet.config
       run: dotnet restore OrchardCoreContrib.slnx
       
     - name: Build OCC.Testing Submodule
