@@ -12,14 +12,14 @@ using Xunit;
 
 namespace OrchardCoreContrib.Email.Mocks.Tests;
 
-public class SmtpServiceMock : SmtpService
+public class SmtpServiceMock : SmtpEmailService
 {
     private readonly SmtpSettings _options;
 
     public SmtpServiceMock(
         IOptions<SmtpSettings> options,
-        ILogger<SmtpService> logger,
-        IStringLocalizer<SmtpService> stringLocalizer) : base(options, logger, stringLocalizer)
+        ILogger<SmtpEmailService> logger,
+        IStringLocalizer<SmtpEmailService> stringLocalizer) : base(options, logger, stringLocalizer)
     {
         _options = options.Value;
     }
