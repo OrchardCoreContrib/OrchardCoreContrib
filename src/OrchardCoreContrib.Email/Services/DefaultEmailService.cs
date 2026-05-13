@@ -16,15 +16,15 @@ namespace OrchardCoreContrib.Email.Services;
 /// Represents a SMTP service that allows to send emails.
 /// </summary>
 /// <remarks>
-/// Initializes a new instance of a <see cref="SmtpEmailService"/>.
+/// Initializes a new instance of a <see cref="DefaultEmailService"/>.
 /// </remarks>
 /// <param name="options">The <see cref="IOptions{SmtpSettings}"/>.</param>
 /// <param name="logger">The <see cref="ILogger{SmtpService}"/>.</param>
 /// <param name="stringLocalizer">The <see cref="IStringLocalizer{SmtpService}"/>.</param>
-public class SmtpEmailService(
+public class DefaultEmailService(
     IOptions<SmtpSettings> options,
-    ILogger<SmtpEmailService> logger,
-    IStringLocalizer<SmtpEmailService> stringLocalizer) : IEmailService
+    ILogger<DefaultEmailService> logger,
+    IStringLocalizer<DefaultEmailService> stringLocalizer) : IEmailService
 {
     private const string EmailExtension = ".eml";
 
