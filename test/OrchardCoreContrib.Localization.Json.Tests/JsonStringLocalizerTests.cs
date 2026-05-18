@@ -1,10 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
-using Moq;
+﻿using Moq;
 using OrchardCore.Localization;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using Xunit;
 
 namespace OrchardCoreContrib.Localization.Json.Tests;
@@ -13,14 +9,7 @@ public class JsonStringLocalizerTests
 {
     private static readonly PluralizationRuleDelegate _defaultPluralizationRule = n => n != 1 ? 1 : 0;
 
-    private readonly Mock<ILocalizationManager> _localizationManager;
-    private readonly Mock<ILogger> _logger;
-
-    public JsonStringLocalizerTests()
-    {
-        _localizationManager = new Mock<ILocalizationManager>();
-        _logger = new Mock<ILogger>();
-    }
+    private readonly Mock<ILocalizationManager> _localizationManager = new();
 
     [Fact]
     public void JsonStringLocalizer_ReturnsTranslationFromProvidedDictionary()
@@ -32,7 +21,7 @@ public class JsonStringLocalizerTests
             new CultureDictionaryRecordWrapper("Hello", "Bonjour")
         });
 
-        var localizer = new JsonStringLocalizer(_localizationManager.Object, true, _logger.Object);
+        var localizer = new JsonStringLocalizer(_localizationManager.Object, true);
 
         CultureInfo.CurrentUICulture = new CultureInfo(culture);
 
@@ -53,7 +42,7 @@ public class JsonStringLocalizerTests
             new CultureDictionaryRecordWrapper("Hello", "Bonjour")
         });
 
-        var localizer = new JsonStringLocalizer(_localizationManager.Object, true, _logger.Object);
+        var localizer = new JsonStringLocalizer(_localizationManager.Object, true);
 
         CultureInfo.CurrentUICulture = new CultureInfo(culture);
 
@@ -71,7 +60,7 @@ public class JsonStringLocalizerTests
         var culture = "fr-FR";
         SetupDictionary(culture, Array.Empty<CultureDictionaryRecord>());
 
-        var localizer = new JsonStringLocalizer(_localizationManager.Object, true, _logger.Object);
+        var localizer = new JsonStringLocalizer(_localizationManager.Object, true);
 
         CultureInfo.CurrentUICulture = new CultureInfo(culture);
 
@@ -94,7 +83,7 @@ public class JsonStringLocalizerTests
             new CultureDictionaryRecordWrapper("Bye", "au revoir")
         });
 
-        var localizer = new JsonStringLocalizer(_localizationManager.Object, true, _logger.Object);
+        var localizer = new JsonStringLocalizer(_localizationManager.Object, true);
 
         CultureInfo.CurrentUICulture = new CultureInfo(culture);
 
@@ -118,7 +107,7 @@ public class JsonStringLocalizerTests
         {
             new CultureDictionaryRecordWrapper("Hello", "Bonjour (fr-FR)")
         });
-        var localizer = new JsonStringLocalizer(_localizationManager.Object, true, _logger.Object);
+        var localizer = new JsonStringLocalizer(_localizationManager.Object, true);
 
         CultureInfo.CurrentUICulture = new CultureInfo(culture);
 
@@ -140,7 +129,7 @@ public class JsonStringLocalizerTests
             new CultureDictionaryRecordWrapper("Hello", "مرحبا" )
         });
         SetupDictionary(culture, Array.Empty<CultureDictionaryRecord>());
-        var localizer = new JsonStringLocalizer(_localizationManager.Object, fallBackToParentCulture, _logger.Object);
+        var localizer = new JsonStringLocalizer(_localizationManager.Object, fallBackToParentCulture);
         CultureInfo.CurrentUICulture = new CultureInfo(culture);
 
         // Act
@@ -170,7 +159,7 @@ public class JsonStringLocalizerTests
             new CultureDictionaryRecordWrapper("Product", "منتج" )
         });
 
-        var localizer = new JsonStringLocalizer(_localizationManager.Object, false, _logger.Object);
+        var localizer = new JsonStringLocalizer(_localizationManager.Object, false);
         CultureInfo.CurrentUICulture = new CultureInfo(culture);
 
         // Act

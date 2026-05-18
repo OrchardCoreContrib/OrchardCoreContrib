@@ -150,16 +150,11 @@ public class DefaultEmailService(
 
         mimeMessage.Subject = message.Subject;
 
-        var body = new BodyBuilder();
-
-        if (message.IsHtmlBody)
+        var body = new BodyBuilder
         {
-            body.HtmlBody = message.Body;
-        }
-        else
-        {
-            body.TextBody = message.Body;
-        }
+            HtmlBody = message.HtmlBody,
+            TextBody = message.TextBody
+        };
 
         foreach (var attachment in message.Attachments)
         {
