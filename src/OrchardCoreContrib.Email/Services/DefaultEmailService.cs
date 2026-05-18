@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using OrchardCore.Email;
+using OrchardCore.Infrastructure;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 
@@ -15,15 +16,15 @@ namespace OrchardCoreContrib.Email.Services;
 /// Represents a SMTP service that allows to send emails.
 /// </summary>
 /// <remarks>
-/// Initializes a new instance of a <see cref="SmtpService"/>.
+/// Initializes a new instance of a <see cref="DefaultEmailService"/>.
 /// </remarks>
 /// <param name="options">The <see cref="IOptions{SmtpSettings}"/>.</param>
 /// <param name="logger">The <see cref="ILogger{SmtpService}"/>.</param>
 /// <param name="stringLocalizer">The <see cref="IStringLocalizer{SmtpService}"/>.</param>
-public class SmtpService(
+public class DefaultEmailService(
     IOptions<SmtpSettings> options,
-    ILogger<SmtpService> logger,
-    IStringLocalizer<SmtpService> stringLocalizer) : ISmtpService
+    ILogger<DefaultEmailService> logger,
+    IStringLocalizer<DefaultEmailService> stringLocalizer) : IEmailService
 {
     private const string EmailExtension = ".eml";
 
@@ -37,16 +38,16 @@ public class SmtpService(
     /// Sends the specified message to an SMTP server for delivery.
     /// </summary>
     /// <param name="message">The message to be sent.</param>
-    /// <returns>A <see cref="SmtpResult"/> that holds information about the sent message, for instance if it has sent successfully or if it has failed.</returns>
+    /// <returns>A <see cref="Result"/> that holds information about the sent message, for instance if it has sent successfully or if it has failed.</returns>
     /// <remarks>This method allows to send an email without setting <see cref="MailMessage.To"/> if <see cref="MailMessage.Cc"/> or <see cref="MailMessage.Bcc"/> is provided.</remarks>
-    public async Task<SmtpResult> SendAsync(MailMessage message)
+    public async Task<Result> SendAsync(MailMessage message)
     {
         if (_options == null)
         {
-            return SmtpResult.Failed(S["SMTP settings must be configured before an email can be sent."]);
+            return Result.Failed(S["SMTP settings must be configured before an email can be sent."]);
         }
 
-        SmtpResult result;
+        Result result;
         try
         {
             var senderAddress = String.IsNullOrWhiteSpace(message.From)
@@ -62,7 +63,7 @@ public class SmtpService(
 
             if (mimeMessage.From.Count == 0 && mimeMessage.Cc.Count == 0 && mimeMessage.Bcc.Count == 0)
             {
-                return SmtpResult.Failed(S["The mail message should have at least one of these headers: To, Cc or Bcc."]);
+                return Result.Failed(S["The mail message should have at least one of these headers: To, Cc or Bcc."]);
             }
 
             switch (_options.DeliveryMethod)
@@ -77,11 +78,11 @@ public class SmtpService(
                     throw new NotSupportedException($"The '{_options.DeliveryMethod}' delivery method is not supported.");
             }
 
-            result = SmtpResult.Success;
+            result = Result.Success();
         }
         catch (Exception ex)
         {
-            result = SmtpResult.Failed(S["An error occurred while sending an email: '{0}'", ex.Message]);
+            result = Result.Failed(S["An error occurred while sending an email: '{0}'", ex.Message]);
         }
 
         return result;
@@ -149,16 +150,11 @@ public class SmtpService(
 
         mimeMessage.Subject = message.Subject;
 
-        var body = new BodyBuilder();
-
-        if (message.IsHtmlBody)
+        var body = new BodyBuilder
         {
-            body.HtmlBody = message.Body;
-        }
-        else
-        {
-            body.TextBody = message.Body;
-        }
+            HtmlBody = message.HtmlBody,
+            TextBody = message.TextBody
+        };
 
         foreach (var attachment in message.Attachments)
         {

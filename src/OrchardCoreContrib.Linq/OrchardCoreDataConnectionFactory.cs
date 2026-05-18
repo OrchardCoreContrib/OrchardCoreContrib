@@ -8,11 +8,10 @@ internal class OrchardCoreDataConnectionFactory
 {
     public static DataConnection Create(IStore store)
     {
-        var connection = store.Configuration.ConnectionFactory.CreateConnection();
+        using var connection = store.Configuration.ConnectionFactory.CreateConnection();
         var providerName = GetDatabaseProviderName(store.Configuration.SqlDialect.Name);
-        var dataProvider = DataConnection.GetDataProvider(providerName, connection.ConnectionString);
 
-        return new DataConnection(dataProvider, connection.ConnectionString);
+        return new DataConnection(new DataOptions().UseConnectionString(providerName, connection.ConnectionString));
     }
 
     private static string GetDatabaseProviderName(string dialectName) =>
