@@ -11,11 +11,11 @@ internal class OrchardCoreDataConnectionFactory
     {
         Guard.ArgumentNotNull(store);
 
-        var connection = store.Configuration.ConnectionFactory.CreateConnection();
-        var providerName = GetDatabaseProviderName(store.Configuration.SqlDialect.Name);
-        var dataProvider = DataConnection.GetDataProvider(providerName, connection.ConnectionString);
+        using var connection = store.Configuration.ConnectionFactory.CreateConnection();
 
-        return new DataConnection(new DataOptions().UseDataProvider(dataProvider));
+        var providerName = GetDatabaseProviderName(store.Configuration.SqlDialect.Name);
+
+        return new DataConnection(new DataOptions().UseConnectionString(providerName, connection.ConnectionString));
     }
 
     private static string GetDatabaseProviderName(string dialectName) =>
