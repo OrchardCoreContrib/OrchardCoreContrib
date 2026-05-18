@@ -3,7 +3,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" />
 		<PackageReference Include="Moq" />
-		<PackageReference Include="OrchardCoreContrib.Testing" />
+		<PackageReference Include="OrchardCoreContrib.Testing" Condition="'$(IsLocalProject)' != 'true'" />
 		<PackageReference Include="xunit" />
 		<PackageReference Include="xunit.analyzers">
 		  <PrivateAssets>all</PrivateAssets>
@@ -17,6 +17,11 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="$(OrchardCoreContribTestingPath)\OrchardCoreContrib.Testing\OrchardCoreContrib.Testing.csproj"
+						  Condition="'$(IsLocalProject)' == 'true'" />
 	</ItemGroup>
 
 	<ItemGroup>
