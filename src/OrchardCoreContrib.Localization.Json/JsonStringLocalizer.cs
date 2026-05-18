@@ -17,8 +17,7 @@ namespace OrchardCoreContrib.Localization.Json;
 /// <param name="logger">The <see cref="ILogger"/>.</param>
 public class JsonStringLocalizer(
     ILocalizationManager localizationManager,
-    bool fallBackToParentCulture,
-    ILogger logger) : IStringLocalizer
+    bool fallBackToParentCulture) : IStringLocalizer
 {
 
     /// <inheritdocs />

@@ -15,7 +15,7 @@ internal class OrchardCoreDataConnectionFactory
         var providerName = GetDatabaseProviderName(store.Configuration.SqlDialect.Name);
         var dataProvider = DataConnection.GetDataProvider(providerName, connection.ConnectionString);
 
-        return new DataConnection(dataProvider, connection.ConnectionString);
+        return new DataConnection(new DataOptions().UseDataProvider(dataProvider));
     }
 
     private static string GetDatabaseProviderName(string dialectName) =>
