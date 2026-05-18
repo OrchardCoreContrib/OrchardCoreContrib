@@ -11,6 +11,8 @@ namespace OrchardCoreContrib.DisplayManagement.Liquid.Values.Tests;
 
 public class HostingEnvironmentValueTests
 {
+    private readonly TemplateContext _templateContext = new();
+
     [Fact]
     public void Type_IsObject()
     {
@@ -29,10 +31,10 @@ public class HostingEnvironmentValueTests
         var hostEnvironmentValue = GetHostEnvironmentValue(environmentName, out IHostEnvironment hostEnvironment);
 
         // Act & Assert
-        Assert.Equal(environmentName, hostEnvironmentValue.ToStringValue());
-        Assert.Same(hostEnvironment, hostEnvironmentValue.ToObjectValue());
-        Assert.True(hostEnvironmentValue.ToBooleanValue());
-        Assert.Equal(0m, hostEnvironmentValue.ToNumberValue());
+        Assert.Equal(environmentName, hostEnvironmentValue.ToStringValue(_templateContext));
+        Assert.Same(hostEnvironment, hostEnvironmentValue.ToObjectValue(_templateContext));
+        Assert.True(hostEnvironmentValue.ToBooleanValue(_templateContext));
+        Assert.Equal(0m, hostEnvironmentValue.ToNumberValue(_templateContext));
     }
 
     [Fact]
@@ -81,10 +83,10 @@ public class HostingEnvironmentValueTests
         var unknownValue = await hostEnvironmentValue.GetValueAsync("DoesNotExist", new TemplateContext());
 
         // Assert
-        Assert.Equal(isDevelopment, ((BooleanValue)isDevelopmentValue).ToBooleanValue());
-        Assert.Equal(isStaging, ((BooleanValue)isStagingValue).ToBooleanValue());
-        Assert.Equal(isProduction, ((BooleanValue)isProductionValue).ToBooleanValue());
-        Assert.Equal(environmentName, ((StringValue)environmentNameValue).ToStringValue());
+        Assert.Equal(isDevelopment, ((BooleanValue)isDevelopmentValue).ToBooleanValue(_templateContext));
+        Assert.Equal(isStaging, ((BooleanValue)isStagingValue).ToBooleanValue(_templateContext));
+        Assert.Equal(isProduction, ((BooleanValue)isProductionValue).ToBooleanValue(_templateContext));
+        Assert.Equal(environmentName, ((StringValue)environmentNameValue).ToStringValue(_templateContext));
         Assert.Same(NilValue.Instance, unknownValue);
     }
 
