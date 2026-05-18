@@ -10,6 +10,9 @@
 		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 		<NoWarn>NU1507</NoWarn>
 
+		<SolutionParentDir>$([System.IO.Path]::GetFullPath('$(SolutionDir)..\'))</SolutionParentDir>
 		<OrchardCoreVersion>2.2.1</OrchardCoreVersion>
+		<OrchardCoreContribTestingPath>$(SolutionParentDir)OrchardCoreContrib.Testing\src</OrchardCoreContribTestingPath>
+		<IsLocalProject>true</IsLocalProject>
 	</PropertyGroup>
 </Project>
