@@ -22,12 +22,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="../../images/icon.png" Pack="true" PackagePath="icon.png" />
-		<None Include="README.md" Pack="true" PackagePath="\" />
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\OrchardCoreContrib.Abstractions\OrchardCoreContrib.Abstractions.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="../../images/icon.png" Pack="true" PackagePath="icon.png" />
+		<None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 </Project>
