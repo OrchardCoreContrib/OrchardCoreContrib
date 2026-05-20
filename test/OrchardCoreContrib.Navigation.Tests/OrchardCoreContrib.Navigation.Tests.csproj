@@ -20,12 +20,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="$(OrchardCoreContribTestingPath)\OrchardCoreContrib.Testing\OrchardCoreContrib.Testing.csproj"
-						  Condition="'$(IsLocalProject)' == 'true'" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\..\src\OrchardCoreContrib.Navigation.Core\OrchardCoreContrib.Navigation.Core.csproj" />
+		<ProjectReference Include="..\..\OrchardCoreContrib.Testing\src\OrchardCoreContrib.Testing.csproj" />
 		<ProjectReference Include="..\..\src\OrchardCoreContrib.Web\OrchardCoreContrib.Web.csproj" />
 	</ItemGroup>
 
