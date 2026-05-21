@@ -1,9 +1,9 @@
 ﻿namespace OrchardCoreContrib.Avatars;
 
 /// <summary>
-/// Contract for providing avatar representations based on user information.
+/// Contract for services that generate avatar representations based on user information.
 /// </summary>
-public interface IAvatarProvider
+public interface IAvatarService
 {
     /// <summary>
     /// Returns a string representing the avatar.
