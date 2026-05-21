@@ -8,8 +8,7 @@
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/OrchardCoreContrib.Abstractions/OrchardCoreContrib.Abstractions.csproj" />
-    <Project Path="src/OrchardCoreContrib.Avatars.Abstractions/OrchardCoreContrib.Avatars.Abstractions.csproj" Id="a1fb7e61-a562-4c63-91dd-667bd9ce5d36" />
-    <Project Path="src/OrchardCoreContrib.Avatars.Core/OrchardCoreContrib.Avatars.Core.csproj" Id="82024953-cb5a-4d16-b37f-c28a6ccd36c6" />
+    <Project Path="src/OrchardCoreContrib.Avatars.Abstractions/OrchardCoreContrib.Avatars.Abstractions.csproj"/>
     <Project Path="src/OrchardCoreContrib.ContentLocalization.Abstractions/OrchardCoreContrib.ContentLocalization.Abstractions.csproj" />
     <Project Path="src/OrchardCoreContrib.ContentLocalization.Core/OrchardCoreContrib.ContentLocalization.Core.csproj" />
     <Project Path="src/OrchardCoreContrib.ContentManagement.Abstractions/OrchardCoreContrib.ContentManagement.Abstractions.csproj" />
@@ -38,7 +37,7 @@
     <Project Path="src/OrchardCoreContrib/OrchardCoreContrib.csproj" />
   </Folder>
   <Folder Name="/test/">
-    <Project Path="test/OrchardCoreContrib.Avatars.Core.Tests/OrchardCoreContrib.Avatars.Core.Tests.csproj" Id="6dad3553-5b27-49b7-b22b-ac66ecf60794" />
+    <Project Path="test/OrchardCoreContrib.Tests/OrchardCoreContrib.Tests.csproj" />
     <Project Path="test/OrchardCoreContrib.ContentLocalization.Tests/OrchardCoreContrib.ContentLocalization.Tests.csproj" />
     <Project Path="test/OrchardCoreContrib.ContentManagement.Tests/OrchardCoreContrib.ContentManagement.Tests.csproj" />
     <Project Path="test/OrchardCoreContrib.Data.Tests/OrchardCoreContrib.Data.Tests.csproj" />
