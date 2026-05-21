@@ -1,12 +1,12 @@
 ﻿namespace OrchardCoreContrib.Avatars.Tests;
 
-public class NullAvatarProviderTests
+public class NullAvatarServiceTests
 {
     [Fact]
     public void GetAvatar_ShouldReturnEmptyString_WhenContextIsProvided()
     {
         // Arrange
-        var provider = new NullAvatarProvider();
+        var provider = new NullAvatarService();
         var context = new AvatarContext { DisplayName = "Jane Doe" };
 
         // Act
@@ -20,7 +20,7 @@ public class NullAvatarProviderTests
     public void GetAvatar_ShouldReturnEmptyString_WhenContextIsNull()
     {
         // Arrange
-        var provider = new NullAvatarProvider();
+        var provider = new NullAvatarService();
 
         // Act
         var result = provider.GetAvatar(null!, 80);
