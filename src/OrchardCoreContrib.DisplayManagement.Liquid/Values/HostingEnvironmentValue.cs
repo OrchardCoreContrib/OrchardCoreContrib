@@ -24,41 +24,25 @@ public class HostingEnvironmentValue(IHostEnvironment hostEnvironment) : FluidVa
             return false;
         }
 
-        return ToStringValue(default) == other.ToStringValue(default);
+        return ToStringValue() == other.ToStringValue();
     }
 
     /// <inheritdoc/>
-    [Obsolete]
     public override bool ToBooleanValue() => true;
 
     /// <inheritdoc/>
-    public override bool ToBooleanValue(TemplateContext context) => true;
-
-    /// <inheritdoc/>
-    [Obsolete]
     public override decimal ToNumberValue() => 0;
 
     /// <inheritdoc/>
-    public override decimal ToNumberValue(TemplateContext context) => 0;
-
-    /// <inheritdoc/>
-    [Obsolete]
     public override object ToObjectValue() => hostEnvironment;
 
     /// <inheritdoc/>
-    public override object ToObjectValue(TemplateContext context) => hostEnvironment;
-
-    /// <inheritdoc/>
-    [Obsolete]
     public override string ToStringValue() => hostEnvironment.EnvironmentName;
 
     /// <inheritdoc/>
-    public override string ToStringValue(TemplateContext context) => hostEnvironment.EnvironmentName;
-
-    /// <inheritdoc/>
-    public override ValueTask WriteToAsync(IFluidOutput output, TextEncoder encoder, CultureInfo cultureInfo)
+    public override ValueTask WriteToAsync(TextWriter writer, TextEncoder encoder, CultureInfo cultureInfo)
     {
-        output.Write(ToStringValue(default));
+        writer.Write(hostEnvironment.EnvironmentName);
 
         return ValueTask.CompletedTask;
     }
