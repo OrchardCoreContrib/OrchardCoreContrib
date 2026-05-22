@@ -1,4 +1,4 @@
-﻿name: Update OrchardCoreContrib.Modules Submodule
+﻿name: Orchard Core Contrib - Submodule
 
 on:
   push:
@@ -10,6 +10,9 @@ jobs:
   update-submodules:
     needs: build
     runs-on: windows-latest
+    env:
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
 
     steps:
       - name: Checkout OrchardCoreContrib.Modules
