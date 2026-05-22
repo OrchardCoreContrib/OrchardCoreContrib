@@ -7,13 +7,7 @@ on:
     - 'README.md'
 
 jobs:
-  no-op:
-    runs-on: windows-latest
-    steps:
-      - name: No-op
-        run: echo "This job exists to trigger the workflow on push to main. The actual work is done in the 'update-submodules' job that depends on the build job."
   update-submodules:
-    needs: build
     runs-on: windows-latest
     env:
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
