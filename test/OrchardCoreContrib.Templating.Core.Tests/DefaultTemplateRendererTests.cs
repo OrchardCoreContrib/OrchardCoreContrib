@@ -10,7 +10,7 @@ public class DefaultTemplateRendererTests
         // Arrange
         var templateEngineFactoryMock = new Mock<ITemplateEngineFactory>();
         var templateEngineMock = new Mock<ITemplateEngine>();
-        var templateContextMock = new Mock<ITemplateContext>();
+        var templateContext = new TemplateContext();
 
         const string template = "Hello {{ name }}";
         const string engineName = "liquid";
@@ -21,13 +21,13 @@ public class DefaultTemplateRendererTests
             .Returns(templateEngineMock.Object);
 
         templateEngineMock
-            .Setup(x => x.RenderAsync(template, templateContextMock.Object))
+            .Setup(x => x.RenderAsync(template, templateContext))
             .ReturnsAsync(expected);
 
         var sut = new DefaultTemplateRenderer(templateEngineFactoryMock.Object);
 
         // Act
-        var result = await sut.RenderAsync(template, engineName, templateContextMock.Object);
+        var result = await sut.RenderAsync(template, engineName, templateContext);
 
         // Assert
         Assert.Equal(expected, result.Output);
@@ -38,7 +38,7 @@ public class DefaultTemplateRendererTests
     {
         // Arrange
         var templateEngineFactoryMock = new Mock<ITemplateEngineFactory>();
-        var templateContextMock = new Mock<ITemplateContext>();
+        var templateContext = new TemplateContext();
 
         const string template = "Hello";
         const string engineName = "missing-engine";
@@ -50,7 +50,7 @@ public class DefaultTemplateRendererTests
         var sut = new DefaultTemplateRenderer(templateEngineFactoryMock.Object);
 
         // Act & Assert
-        await Assert.ThrowsAsync<TemplateNotFoundException>(() => sut.RenderAsync(template, engineName, templateContextMock.Object));
+        await Assert.ThrowsAsync<TemplateNotFoundException>(() => sut.RenderAsync(template, engineName, templateContext));
     }
 
     [Fact]
@@ -59,7 +59,7 @@ public class DefaultTemplateRendererTests
         // Arrange
         var templateEngineFactoryMock = new Mock<ITemplateEngineFactory>();
         var templateEngineMock = new Mock<ITemplateEngine>();
-        var templateContextMock = new Mock<ITemplateContext>();
+        var templateContext = new TemplateContext();
 
         const string template = "Hello";
         const string engineName = "liquid";
@@ -70,13 +70,13 @@ public class DefaultTemplateRendererTests
             .Returns(templateEngineMock.Object);
 
         templateEngineMock
-            .Setup(x => x.RenderAsync(template, templateContextMock.Object))
+            .Setup(x => x.RenderAsync(template, templateContext))
             .ThrowsAsync(inner);
 
         var templateRenderer = new DefaultTemplateRenderer(templateEngineFactoryMock.Object);
 
         // Act
-        var result = await templateRenderer.RenderAsync(template, engineName, templateContextMock.Object);
+        var result = await templateRenderer.RenderAsync(template, engineName, templateContext);
 
         // Assert
         Assert.False(result.Success);
