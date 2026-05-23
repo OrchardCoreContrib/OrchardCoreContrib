@@ -10,7 +10,7 @@ public interface ITemplateRenderer
     /// </summary>
     /// <param name="template">The template string to be rendered.</param>
     /// <param name="engineName">The name of the template engine to use.</param>
-    /// <param name="context">The <see cref="ITemplateContext"/>.</param>
+    /// <param name="context">The <see cref="TemplateContext"/>.</param>
     /// <returns>A <see cref="TemplateResult"/> containing the rendered output and any errors.</returns>
-    Task<TemplateResult> RenderAsync(string template, string engineName, ITemplateContext context);
+    Task<TemplateResult> RenderAsync(string template, string engineName, TemplateContext context);
 }

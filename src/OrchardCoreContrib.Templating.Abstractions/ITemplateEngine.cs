@@ -1,7 +1,7 @@
 ﻿namespace OrchardCoreContrib.Templating;
 
 /// <summary>
-/// Represents a template engine such asLiquid, Razor, HTML, etc.
+/// Represents a template engine such as Liquid, Razor, HTML, etc.
 /// </summary>
 public interface ITemplateEngine
 {
@@ -13,5 +13,8 @@ public interface ITemplateEngine
     /// <summary>
     /// Renders a template string with the given context.
     /// </summary>
-    Task<string> RenderAsync(string template, ITemplateContext context);
+    /// <param name="template">The template string to be rendered.</param>
+    /// <param name="context">The context containing the data model and any additional information needed for rendering.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the rendered template string.</returns>
+    Task<string> RenderAsync(string template, TemplateContext context);
 }

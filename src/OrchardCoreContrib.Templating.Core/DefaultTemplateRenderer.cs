@@ -9,7 +9,7 @@ namespace OrchardCoreContrib.Templating;
 public class DefaultTemplateRenderer(ITemplateEngineFactory factory) : ITemplateRenderer
 {
     /// <inheritdoc/>
-    public async Task<TemplateResult> RenderAsync(string template, string engineName, ITemplateContext context)
+    public async Task<TemplateResult> RenderAsync(string template, string engineName, TemplateContext context)
     {
         Guard.ArgumentNotNullOrEmpty(template, nameof(template));
         Guard.ArgumentNotNullOrEmpty(engineName, nameof(engineName));

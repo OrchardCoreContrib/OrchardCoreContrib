@@ -8,5 +8,5 @@ public sealed class TestTemplateEngine(string name) : ITemplateEngine
 
     public string Name { get; } = name;
 
-    public Task<string> RenderAsync(string template, ITemplateContext context) => Task.FromResult(string.Empty);
+    public Task<string> RenderAsync(string template, TemplateContext context) => Task.FromResult(string.Empty);
 }
