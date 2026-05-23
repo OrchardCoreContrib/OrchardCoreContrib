@@ -1,0 +1,3 @@
+[submodule "OrchardCoreContrib.Testing"]
+	path = OrchardCoreContrib.Testing
+	url = https://github.com/OrchardCoreContrib/OrchardCoreContrib.Testing.git
