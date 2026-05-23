@@ -26,7 +26,7 @@ jobs:
           10.0.*
 
     - name: Install Dependencies
-      run: dotnet restore
+      run: dotnet restore OrchardCoreContrib.slnx
       
     - name: Build OCC.Testing Submodule
       run: dotnet build OrchardCoreContrib.Testing --configuration Release

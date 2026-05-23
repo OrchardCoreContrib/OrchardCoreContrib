@@ -28,7 +28,7 @@ jobs:
           10.0.*
 
     - name: Install Dependencies
-      run: dotnet restore
+      run: dotnet restore OrchardCoreContrib.slnx
 
     - name: Build
       run: dotnet build --configuration Release --no-restore
