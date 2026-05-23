@@ -1,10 +1,12 @@
-name: Orchard Core Contrib - Build
+name: Orchard Core Contrib - Pull Request
 
 on:
-  push:
+  pull_request:
     branches: [ main ]
     paths-ignore:
     - 'README.md'
+
+  workflow_dispatch:
 
 jobs:
   build:
@@ -27,9 +29,6 @@ jobs:
 
     - name: Install Dependencies
       run: dotnet restore OrchardCoreContrib.slnx
-      
-    - name: Build OCC.Testing Submodule
-      run: dotnet build OrchardCoreContrib.Testing --configuration Release
 
     - name: Build
       run: dotnet build --configuration Release --no-restore
