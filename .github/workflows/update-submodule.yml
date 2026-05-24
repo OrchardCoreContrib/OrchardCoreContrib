@@ -74,6 +74,8 @@ jobs:
         with:
           token: ${{ secrets.OCC_TOKEN }}
           commit-message: Update submodule to latest version
+          committer: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
+          author: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
           title: Update OrchardCoreContrib Submodule Version
           body: |
             Updated [${{ steps.submodule-new.outputs.repoName }}](${{ steps.submodule-new.outputs.repoUrl }}) from ${{ steps.submodule-new.outputs.oldShort }} to ${{ steps.submodule-new.outputs.newShort }}.
