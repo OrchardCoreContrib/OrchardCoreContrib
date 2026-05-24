@@ -8,7 +8,7 @@
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/OrchardCoreContrib.Abstractions/OrchardCoreContrib.Abstractions.csproj" />
-    <Project Path="src/OrchardCoreContrib.Avatars.Abstractions/OrchardCoreContrib.Avatars.Abstractions.csproj"/>
+    <Project Path="src/OrchardCoreContrib.Avatars.Abstractions/OrchardCoreContrib.Avatars.Abstractions.csproj" />
     <Project Path="src/OrchardCoreContrib.ContentLocalization.Abstractions/OrchardCoreContrib.ContentLocalization.Abstractions.csproj" />
     <Project Path="src/OrchardCoreContrib.ContentLocalization.Core/OrchardCoreContrib.ContentLocalization.Core.csproj" />
     <Project Path="src/OrchardCoreContrib.ContentManagement.Abstractions/OrchardCoreContrib.ContentManagement.Abstractions.csproj" />
@@ -35,11 +35,11 @@
     <Project Path="src/OrchardCoreContrib.Sms.Abstractions/OrchardCoreContrib.Sms.Abstractions.csproj" />
     <Project Path="src/OrchardCoreContrib.Templating.Abstractions/OrchardCoreContrib.Templating.Abstractions.csproj" />
     <Project Path="src/OrchardCoreContrib.Templating.Core/OrchardCoreContrib.Templating.Core.csproj" />
+    <Project Path="src/OrchardCoreContrib.Templating.Liquid/OrchardCoreContrib.Templating.Liquid.csproj" Id="39925d58-d6c2-4409-bad2-391f0b1471e8" />
     <Project Path="src/OrchardCoreContrib.Web/OrchardCoreContrib.Web.csproj" Id="ab888908-781f-4660-909b-26cbded123c3" />
     <Project Path="src/OrchardCoreContrib/OrchardCoreContrib.csproj" />
   </Folder>
   <Folder Name="/test/">
-    <Project Path="test/OrchardCoreContrib.Tests/OrchardCoreContrib.Tests.csproj" />
     <Project Path="test/OrchardCoreContrib.ContentLocalization.Tests/OrchardCoreContrib.ContentLocalization.Tests.csproj" />
     <Project Path="test/OrchardCoreContrib.ContentManagement.Tests/OrchardCoreContrib.ContentManagement.Tests.csproj" />
     <Project Path="test/OrchardCoreContrib.Data.Tests/OrchardCoreContrib.Data.Tests.csproj" />
@@ -54,5 +54,7 @@
     <Project Path="test/OrchardCoreContrib.Navigation.Tests/OrchardCoreContrib.Navigation.Tests.csproj" />
     <Project Path="test/OrchardCoreContrib.Shortcodes.Tests/OrchardCoreContrib.Shortcodes.Tests.csproj" />
     <Project Path="test/OrchardCoreContrib.Templating.Core.Tests/OrchardCoreContrib.Templating.Core.Tests.csproj" Id="c589637b-8056-4a8c-84a4-532790e4700a" />
+    <Project Path="test/OrchardCoreContrib.Templating.Liquid.Tests/OrchardCoreContrib.Templating.Liquid.Tests.csproj" Id="4bfe3e23-c25c-4f05-94de-af4e17e0e1d2" />
+    <Project Path="test/OrchardCoreContrib.Tests/OrchardCoreContrib.Tests.csproj" />
   </Folder>
 </Solution>
