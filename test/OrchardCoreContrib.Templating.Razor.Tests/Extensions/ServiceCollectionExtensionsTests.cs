@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace OrchardCoreContrib.Templating.Razor.Services.Tests;
+namespace OrchardCoreContrib.Templating.Razor.Extensions.Tests;
 
 public class ServiceCollectionExtensionsTests
 {
