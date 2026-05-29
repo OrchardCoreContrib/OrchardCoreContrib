@@ -33,9 +33,9 @@ public class LiquidTemplateEngineTests
         var context = new TemplateContext();
 
         // Act
-        var ex = await Assert.ThrowsAsync<TemplateRenderException>(() => _templateEngine.RenderAsync(template, context));
+        var exception = await Assert.ThrowsAsync<TemplateRenderException>(() => _templateEngine.RenderAsync(template, context));
 
         // Assert
-        Assert.StartsWith("Liquid parsing failed:", ex.Message);
+        Assert.StartsWith("Liquid parsing failed:", exception.Message);
     }
 }
