@@ -29,6 +29,26 @@ public partial class GlobalSettingsAccessorTests
         Assert.Equal("Default Tenant", settings.Name);
     }
 
+    [Fact]
+    public async Task GetSettingsAsync_Throws_When_Default_Tenant_Not_Found()
+    {
+        // Arrange
+        var shellHost = new Mock<IShellHost>();
+
+        shellHost
+            .Setup(h => h.TryGetSettings(ShellSettings.DefaultShellName, out It.Ref<ShellSettings>.IsAny))
+            .Returns(false);
+
+        var globalSettingsAccessor = new GlobalSettingsAccessor(shellHost.Object);
+
+        // Act & Assert
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await globalSettingsAccessor.GetSettingsAsync<TestSettings>());
+
+        Assert.Equal("Default tenant not found.", exception.Message);
+
+        shellHost.Verify(h => h.GetScopeAsync(It.IsAny<ShellSettings>()), Times.Never);
+    }
+
     private static IShellHost GetShellHost()
     {
         var shellHost = new Mock<IShellHost>();
