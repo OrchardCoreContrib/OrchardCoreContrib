@@ -16,9 +16,9 @@ public static class SmsServiceExtensions
     /// <returns>A <see cref="SmtpResult"/> that holds information about the sent message, for instance if it has sent successfully or if it has failed.</returns>
     public async static Task<SmsResult> SendAsync(this ISmsService smsService, string phoneNumber, string text)
     {
-        Guard.ArgumentNotNull(smsService, nameof(smsService));
-        Guard.ArgumentNotNullOrEmpty(phoneNumber, nameof(phoneNumber));
-        Guard.ArgumentNotNullOrEmpty(text, nameof(text));
+        Guard.ArgumentNotNull(smsService);
+        Guard.ArgumentNotNullOrEmpty(phoneNumber);
+        Guard.ArgumentNotNullOrEmpty(text);
 
         var message = new SmsMessage
         {

@@ -15,7 +15,7 @@ public class JsonReader
     /// <param name="stream">The <see cref="Stream"/> to be parsed.</param>
     public async Task<IEnumerable<CultureDictionaryRecord>> ParseAsync(Stream stream)
     {
-        Guard.ArgumentNotNull(stream, nameof(stream));
+        Guard.ArgumentNotNull(stream);
 
         var document = await JsonDocument.ParseAsync(stream);
         var cultureRecords = new List<CultureDictionaryRecord>();

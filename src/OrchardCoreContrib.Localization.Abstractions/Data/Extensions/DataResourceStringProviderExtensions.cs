@@ -24,8 +24,8 @@ public static class DataResourceStringProviderExtensions
     /// <param name="context">The resource context.</param>
     public static async Task<IEnumerable<CultureDictionaryRecordKey>> GetAllResourceStringsAsync(this IDataResourceStringProvider resourceStringProvider, string context)
     {
-        Guard.ArgumentNotNull(resourceStringProvider, nameof(resourceStringProvider));
-        Guard.ArgumentNotNullOrEmpty(context, nameof(context));
+        Guard.ArgumentNotNull(resourceStringProvider);
+        Guard.ArgumentNotNullOrEmpty(context);
 
         var resourceStrings = await resourceStringProvider.GetAllResourceStringsAsync();
 

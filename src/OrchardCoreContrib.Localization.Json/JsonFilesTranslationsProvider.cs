@@ -18,8 +18,8 @@ public class JsonFilesTranslationsProvider(ILocalizationFileLocationProvider loc
     /// <inheritdocs />
     public void LoadTranslations(string cultureName, CultureDictionary dictionary)
     {
-        Guard.ArgumentNotNullOrEmpty(cultureName, nameof(cultureName));
-        Guard.ArgumentNotNull(dictionary, nameof(dictionary));
+        Guard.ArgumentNotNullOrEmpty(cultureName);
+        Guard.ArgumentNotNull(dictionary);
         
         foreach (var fileInfo in localizationFileLocationProvider.GetLocations(cultureName))
         {

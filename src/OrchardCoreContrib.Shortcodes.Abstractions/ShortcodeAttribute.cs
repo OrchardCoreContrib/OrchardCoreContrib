@@ -24,7 +24,7 @@ public class ShortcodeAttribute : IHtmlContent
     /// <param name="value">The attribute value.</param>
     public ShortcodeAttribute(string name, string value)
     {
-        Guard.ArgumentNotNullOrEmpty(name, nameof(name));
+        Guard.ArgumentNotNullOrEmpty(name);
 
         Name = name;
         Value = value;

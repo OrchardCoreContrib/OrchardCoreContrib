@@ -11,9 +11,9 @@ public class DefaultTemplateRenderer(ITemplateEngineFactory factory) : ITemplate
     /// <inheritdoc/>
     public async Task<TemplateResult> RenderAsync(string template, string engineName, TemplateContext context)
     {
-        Guard.ArgumentNotNullOrEmpty(template, nameof(template));
-        Guard.ArgumentNotNullOrEmpty(engineName, nameof(engineName));
-        Guard.ArgumentNotNull(context, nameof(context));
+        Guard.ArgumentNotNullOrEmpty(template);
+        Guard.ArgumentNotNullOrEmpty(engineName);
+        Guard.ArgumentNotNull(context);
 
         var engine = factory.GetEngine(engineName) ?? throw new TemplateNotFoundException(engineName);
 

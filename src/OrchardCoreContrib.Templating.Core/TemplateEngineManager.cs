@@ -15,7 +15,7 @@ public class TemplateEngineManager : ITemplateEngineFactory
     /// <param name="engine">The <see cref="ITemplateEngine"/> to register.</param>
     public void RegisterEngine(ITemplateEngine engine)
     {
-        Guard.ArgumentNotNull(engine, nameof(engine));
+        Guard.ArgumentNotNull(engine);
 
         _engines[engine.Name] = engine;
     }
@@ -23,7 +23,7 @@ public class TemplateEngineManager : ITemplateEngineFactory
     /// <inheritdoc/>
     public ITemplateEngine GetEngine(string name)
     {
-        Guard.ArgumentNotNullOrEmpty(name, nameof(name));
+        Guard.ArgumentNotNullOrEmpty(name);
 
         _engines.TryGetValue(name, out var engine);
 

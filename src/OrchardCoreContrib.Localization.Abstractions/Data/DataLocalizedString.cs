@@ -27,9 +27,9 @@ public class DataLocalizedString
     /// <param name="resourceNotFound">Whether the resource is found or not.</param>
     public DataLocalizedString(string name, string context, string value, bool resourceNotFound)
     {
-        Guard.ArgumentNotNull(name, nameof(name));
-        Guard.ArgumentNotNull(context, nameof(context));
-        Guard.ArgumentNotNull(value, nameof(value));
+        Guard.ArgumentNotNull(name);
+        Guard.ArgumentNotNull(context);
+        Guard.ArgumentNotNull(value);
 
         Name = name;
         Context = context;

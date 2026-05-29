@@ -26,7 +26,7 @@ public class JsonStringLocalizer(
     {
         get
         {
-            Guard.ArgumentNotNull(name, nameof(name));
+            Guard.ArgumentNotNull(name);
 
             var translation = GetTranslation(name, CultureInfo.CurrentUICulture);
 

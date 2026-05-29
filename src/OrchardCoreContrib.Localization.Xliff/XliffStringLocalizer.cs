@@ -23,7 +23,7 @@ public class XliffStringLocalizer(
     {
         get
         {
-            Guard.ArgumentNotNull(name, nameof(name));
+            Guard.ArgumentNotNull(name);
 
             var translation = GetTranslation(name, CultureInfo.CurrentUICulture);
 

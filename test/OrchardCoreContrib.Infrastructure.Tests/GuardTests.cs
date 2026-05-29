@@ -289,37 +289,4 @@ public class GuardTests
         // Act
         Guard.ArgumentIsGreaterThanOrEqual(value, anotherValue, name);
     }
-
-    [Theory]
-    [InlineData(0)]
-    [InlineData(-1)]
-    public void NumberGuards_ThrowPaths_AllowNullArgumentName_ForSingleValueMethods(int value)
-    {
-        Assert.Null(Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentIsZero(0)).ParamName);
-        Assert.Null(Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentIsNegative(-1)).ParamName);
-        Assert.Null(Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentIsNegativeOrZero(value)).ParamName);
-    }
-
-    [Fact]
-    public void NumberGuards_ThrowPaths_AllowNullArgumentName_ForComparisonMethods()
-    {
-        Assert.Null(Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentIsEqual(1, 1)).ParamName);
-        Assert.Null(Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentIsLessThan(1, 2)).ParamName);
-        Assert.Null(Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentIsLessThanOrEqual(1, 2)).ParamName);
-        Assert.Null(Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentIsGreaterThan(2, 1)).ParamName);
-        Assert.Null(Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentIsGreaterThanOrEqual(2, 1)).ParamName);
-    }
-
-    [Fact]
-    public void NumberGuards_NonThrowPaths_AllowNullArgumentName()
-    {
-        Guard.ArgumentIsZero(1);
-        Guard.ArgumentIsNegative(0);
-        Guard.ArgumentIsNegativeOrZero(1);
-        Guard.ArgumentIsEqual(1, 2);
-        Guard.ArgumentIsLessThan(2, 1);
-        Guard.ArgumentIsLessThanOrEqual(2, 1);
-        Guard.ArgumentIsGreaterThan(1, 2);
-        Guard.ArgumentIsGreaterThanOrEqual(1, 2);
-    }
 }

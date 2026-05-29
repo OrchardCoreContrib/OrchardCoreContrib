@@ -20,7 +20,7 @@ public class ShortcodeAttributes : IList<ShortcodeAttribute>
     /// </summary>
     public ShortcodeAttributes(IEnumerable<ShortcodeAttribute> attributes)
     {
-        Guard.ArgumentNotNull(attributes, nameof(attributes));
+        Guard.ArgumentNotNull(attributes);
 
         _shortcodeAttributes = [.. attributes];
     }
@@ -30,7 +30,7 @@ public class ShortcodeAttributes : IList<ShortcodeAttribute>
     /// </summary>
     public ShortcodeAttributes(IEnumerable<KeyValuePair<string, string>> attributes)
     {
-        Guard.ArgumentNotNull(attributes, nameof(attributes));
+        Guard.ArgumentNotNull(attributes);
 
         _shortcodeAttributes = [];
 
@@ -131,7 +131,7 @@ public class ShortcodeAttributes : IList<ShortcodeAttribute>
     /// <param name="attribute">The <see cref="ShortcodeAttribute"/> to be set.</param>
     public void Set(ShortcodeAttribute attribute)
     {
-        Guard.ArgumentNotNull(attribute, nameof(attribute));
+        Guard.ArgumentNotNull(attribute);
 
         var index = IndexOf(attribute);
         if (index > -1)
