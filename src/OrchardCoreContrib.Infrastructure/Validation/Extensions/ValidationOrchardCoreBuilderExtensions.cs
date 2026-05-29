@@ -1,11 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using OrchardCoreContrib.Validation;
 
-namespace OrchardCoreContrib.Validation;
+namespace Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
 /// Provides an extension methods for <see cref="OrchardCoreBuilder"/>.
 /// </summary>
-public static class OrchardCoreBuilderExtensions
+public static class ValidationOrchardCoreBuilderExtensions
 {
     /// <summary>
     /// Adds phone number validator service.
@@ -13,8 +13,7 @@ public static class OrchardCoreBuilderExtensions
     /// <param name="builder">The <see cref="OrchardCoreBuilder"/>.</param>
     public static OrchardCoreBuilder AddPhoneNumberValidator(this OrchardCoreBuilder builder)
     {
-        builder.ConfigureServices(services =>
-            services.AddTransient<IPhoneNumberValidator, PhoneNumberValidator>());
+        builder.ApplicationServices.AddTransient<IPhoneNumberValidator, PhoneNumberValidator>();
 
         return builder;
     }

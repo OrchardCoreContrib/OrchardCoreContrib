@@ -13,12 +13,12 @@ public class GlobalSettingsAccessor(IShellHost shellHost) : IGlobalSettingsAcces
     /// <inheritdoc/>
     public async Task<TSettings> GetSettingsAsync<TSettings>() where TSettings : new()
     {
-        if (shellHost.GetSettings(ShellSettings.DefaultShellName) is null)
+        if (!shellHost.TryGetSettings(ShellSettings.DefaultShellName, out var settings) || settings is null)
         {
             throw new InvalidOperationException("Default tenant not found.");
         }
 
-        var shellScope = await shellHost.GetScopeAsync(ShellSettings.DefaultShellName);
+        var shellScope = await shellHost.GetScopeAsync(settings);
 
         var siteService = shellScope.ServiceProvider.GetRequiredService<ISiteService>();
 
