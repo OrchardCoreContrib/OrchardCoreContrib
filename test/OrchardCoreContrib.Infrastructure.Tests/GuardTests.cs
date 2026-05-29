@@ -180,7 +180,7 @@ public class GuardTests
     public void ArgumentIsNegativeOrZero_NegativeOrZeroValue_ThrowsArgumentOutOfRangeException<TNumber>(TNumber value, string name) where TNumber : INumberBase<TNumber>
     {
         // Act & Assert
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentPositive(value, name));
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentIsPositive(value, name));
 
         Assert.Equal($"value ('{value}') must be a non-negative and non-zero value. (Parameter '{name}')\r\nActual value was {value}.", exception.Message);
     }
@@ -193,7 +193,7 @@ public class GuardTests
         var value = 100;
 
         // Act
-        Guard.ArgumentPositive(value, name);
+        Guard.ArgumentIsPositive(value, name);
     }
 
     [Theory]
@@ -277,7 +277,7 @@ public class GuardTests
     public void ArgumentIsGreaterThanOrEqual_FirstValueLessThanAnotherOne_ThrowsArgumentOutOfRangeException<TNumber>(TNumber value, TNumber anotherValue, string name) where TNumber : IComparable<TNumber>
     {
         // Act & Assert
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentLessThan(value, anotherValue, name));
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentIsLessThan(value, anotherValue, name));
 
         Assert.Equal($"value ('{value}') must be less than '{anotherValue}'. (Parameter '{name}')\r\nActual value was {value}.", exception.Message);
     }
@@ -287,6 +287,6 @@ public class GuardTests
     public void ArgumentIsGreaterThanOrEqual_FirstValueGreaterThanOrEqualAnotherOne_ThrowsArgumentOutOfRangeException<TNumber>(TNumber value, TNumber anotherValue, string name) where TNumber : IComparable<TNumber>
     {
         // Act
-        Guard.ArgumentLessThan(value, anotherValue, name);
+        Guard.ArgumentIsLessThan(value, anotherValue, name);
     }
 }
