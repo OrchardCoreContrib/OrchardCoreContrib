@@ -44,12 +44,14 @@ public class RazorTemplateEngineTests
     }
 
     [Fact]
-    public async Task RenderAsync_ShouldThrow_WhenTemplateIsInvalid()
+    public async Task RenderAsync_ThrowTemplateRenderException_WhenTemplateIsInvalid()
     {
         // Arrange
         var context = new TemplateContext(new { Name = "World" });
 
         // Act & Assert
-        await Assert.ThrowsAnyAsync<Exception>(() => _templateEngine.RenderAsync("@{ var x = ; }", context));
+        var exception = await Assert.ThrowsAnyAsync<TemplateRenderException>(() => _templateEngine.RenderAsync("@{ var x = ; }", context));
+
+        Assert.Equal("Razor rendering failed.", exception.Message);
     }
 }

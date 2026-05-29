@@ -24,14 +24,14 @@ public class RazorTemplateEngine : ITemplateEngine
     public string Name => "Razor";
 
     /// <inheritdoc/>
-    public Task<string> RenderAsync(string template, TemplateContext context)
+    public async Task<string> RenderAsync(string template, TemplateContext context)
     {
         Guard.ArgumentNotNullOrEmpty(template, nameof(template));
         Guard.ArgumentNotNull(context, nameof(context));
 
         try
         {
-            return _engine.CompileRenderStringAsync(Guid.NewGuid().ToString(), template, context.Model);
+            return await _engine.CompileRenderStringAsync(Guid.NewGuid().ToString(), template, context.Model);
         }
         catch (Exception ex)
         {
