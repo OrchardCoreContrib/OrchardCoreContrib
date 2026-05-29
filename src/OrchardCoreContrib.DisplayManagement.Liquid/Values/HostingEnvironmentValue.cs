@@ -1,6 +1,7 @@
 ﻿using Fluid;
 using Fluid.Values;
 using Microsoft.Extensions.Hosting;
+using OrchardCoreContrib.Infrastructure;
 using System.Globalization;
 using System.Text.Encodings.Web;
 
@@ -48,12 +49,18 @@ public class HostingEnvironmentValue(IHostEnvironment hostEnvironment) : FluidVa
     }
 
     /// <inheritdoc/>
-    public override ValueTask<FluidValue> GetValueAsync(string name, TemplateContext context) => name switch
+    public override ValueTask<FluidValue> GetValueAsync(string name, TemplateContext context)
     {
-        "IsDevelopment" => BooleanValue.Create(hostEnvironment.IsDevelopment()),
-        "IsStaging" => BooleanValue.Create(hostEnvironment.IsStaging()),
-        "IsProduction" => BooleanValue.Create(hostEnvironment.IsProduction()),
-        "Name" => StringValue.Create(hostEnvironment.EnvironmentName),
-        _ => NilValue.Instance
-    };
+        Guard.ArgumentNotNull(name);
+        Guard.ArgumentNotNull(context);
+
+        return name switch
+        {
+            "IsDevelopment" => BooleanValue.Create(hostEnvironment.IsDevelopment()),
+            "IsStaging" => BooleanValue.Create(hostEnvironment.IsStaging()),
+            "IsProduction" => BooleanValue.Create(hostEnvironment.IsProduction()),
+            "Name" => StringValue.Create(hostEnvironment.EnvironmentName),
+            _ => NilValue.Instance
+        };
+    }
 }

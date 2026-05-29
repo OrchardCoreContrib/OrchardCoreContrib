@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using OrchardCore.Environment.Shell;
 using OrchardCore.Environment.Shell.Scope;
+using OrchardCoreContrib.Infrastructure;
 
 namespace OrchardCore.Navigation;
 
@@ -19,7 +20,7 @@ public static class NavigationItemBuilderExtensions
     /// <returns>The same instance of <see cref="NavigationItemBuilder"/> to allow for method chaining.</returns>
     public static NavigationItemBuilder Tenant(this NavigationItemBuilder builder, string tenantName)
     {
-        ArgumentException.ThrowIfNullOrEmpty(tenantName);
+        Guard.ArgumentNotNullOrEmpty(tenantName);
 
         if (tenantName.Equals(CurrentTenant, StringComparison.OrdinalIgnoreCase))
         {
@@ -41,7 +42,7 @@ public static class NavigationItemBuilderExtensions
     /// <returns>The same <see cref="NavigationItemBuilder"/> instance, to allow for method chaining.</returns>
     public static NavigationItemBuilder Tenant(this NavigationItemBuilder builder, Func<string, bool> tenantPredicate)
     {
-        ArgumentNullException.ThrowIfNull(tenantPredicate);
+        Guard.ArgumentNotNull(tenantPredicate);
 
         if (tenantPredicate(CurrentTenant))
         {
@@ -59,7 +60,7 @@ public static class NavigationItemBuilderExtensions
     /// <returns>The configured navigation item builder.</returns>
     public static NavigationItemBuilder Tenants(this NavigationItemBuilder builder, IEnumerable<string> tenantNames)
     {
-        ArgumentNullException.ThrowIfNull(tenantNames);
+        Guard.ArgumentNotNullOrEmpty(tenantNames);
 
         if (tenantNames.Contains(CurrentTenant, StringComparer.OrdinalIgnoreCase))
         {

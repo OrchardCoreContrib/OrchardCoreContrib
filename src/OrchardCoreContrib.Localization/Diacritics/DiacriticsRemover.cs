@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using OrchardCoreContrib.Infrastructure;
+using System.Globalization;
 using System.Text;
 
 namespace OrchardCoreContrib.Localization.Diacritics;
@@ -12,10 +13,11 @@ namespace OrchardCoreContrib.Localization.Diacritics;
 /// <param name="diacriticsLookup">The <see cref="IDiacriticsRemover"/>.</param>
 public class DiacriticsRemover(IDiacriticsLookup diacriticsLookup) : IDiacriticsRemover
 {
-
     /// <inheritdoc/>
     public string Remove(string source)
     {
+        Guard.ArgumentNotNullOrEmpty(source);
+
         var normalizedText = source.Normalize(NormalizationForm.FormKD);
         var result = new StringBuilder();
 

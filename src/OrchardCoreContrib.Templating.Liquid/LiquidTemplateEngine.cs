@@ -1,6 +1,5 @@
 ﻿using Fluid;
-using Fluid.Values;
-using System.Text.Encodings.Web;
+using OrchardCoreContrib.Infrastructure;
 
 namespace OrchardCoreContrib.Templating.Liquid;
 
@@ -9,7 +8,7 @@ namespace OrchardCoreContrib.Templating.Liquid;
 /// </summary>
 public class LiquidTemplateEngine : ITemplateEngine
 {
-    private readonly FluidParser _fluidParser = new FluidParser();
+    private readonly FluidParser _fluidParser = new();
 
     /// <inheritdoc/>
     public string Name => "Liquid";
@@ -17,6 +16,9 @@ public class LiquidTemplateEngine : ITemplateEngine
     /// <inheritdoc/>
     public async Task<string> RenderAsync(string template, TemplateContext context)
     {
+        Guard.ArgumentNotNullOrEmpty(template);
+        Guard.ArgumentNotNull(context);
+
         if (!_fluidParser.TryParse(template, out var parsedTemplate, out var errors))
         {
             throw new TemplateRenderException($"Liquid parsing failed: {string.Join(", ", errors)}");

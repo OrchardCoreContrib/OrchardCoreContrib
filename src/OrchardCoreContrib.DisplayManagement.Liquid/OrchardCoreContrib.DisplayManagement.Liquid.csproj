@@ -23,7 +23,7 @@
 
 	<ItemGroup>
 		<None Include="../../images/icon.png" Pack="true" PackagePath="\" />
-		<None Include="README.md" Pack="true" PackagePath="\"/>
+		<None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -32,6 +32,10 @@
 
 	<ItemGroup>
 		<PackageReference Include="OrchardCore.DisplayManagement.Liquid" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\OrchardCoreContrib.Infrastructure.Abstractions\OrchardCoreContrib.Infrastructure.Abstractions.csproj" />
 	</ItemGroup>
 
 </Project>
