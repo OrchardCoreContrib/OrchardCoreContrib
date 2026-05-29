@@ -12,7 +12,7 @@ public partial class PhoneNumberValidator : IPhoneNumberValidator
     /// <inheritdoc />
     public bool IsValid(string phoneNumber)
     {
-        Guard.ArgumentNotNull(phoneNumber, nameof(phoneNumber));
+        Guard.ArgumentNotNull(phoneNumber);
         
         return PhoneNumberRegex().IsMatch(phoneNumber);
     }

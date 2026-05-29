@@ -13,7 +13,7 @@ public static class MigrationExtensions
     /// <param name="migration">The <see cref="IMigration"/>.</param>
     public static MigrationAttribute GetMigrationInfo(this IMigration migration)
     {
-        Guard.ArgumentNotNull(migration, nameof(migration));
+        Guard.ArgumentNotNull(migration);
 
         var migrationAttribute = (MigrationAttribute)(migration.GetType()
             .GetCustomAttributes(typeof(MigrationAttribute), false))
@@ -28,7 +28,7 @@ public static class MigrationExtensions
     /// <param name="migration">The <see cref="IMigration"/>.</param>
     public static string GetMigrationClass(this IMigration migration)
     {
-        Guard.ArgumentNotNull(migration, nameof(migration));
+        Guard.ArgumentNotNull(migration);
 
         return migration.GetType().FullName;
     }
@@ -39,7 +39,7 @@ public static class MigrationExtensions
     /// <param name="migration">The <see cref="IMigration"/>.</param>
     public static string GetMigrationModuleId(this IMigration migration)
     {
-        Guard.ArgumentNotNull(migration, nameof(migration));
+        Guard.ArgumentNotNull(migration);
 
         var migrationClass = migration.GetMigrationClass();
 

@@ -15,7 +15,7 @@ public class ShortcodeOutput : IHtmlContent
     /// <param name="attributes">The shortcode attributes.</param>
     public ShortcodeOutput(ShortcodeAttributes attributes)
     {
-        Guard.ArgumentNotNull(attributes, nameof(attributes));
+        Guard.ArgumentNotNull(attributes);
 
         Attributes = attributes;
     }
@@ -52,8 +52,8 @@ public class ShortcodeOutput : IHtmlContent
     /// <inheritdoc/>
     public void WriteTo(TextWriter writer, HtmlEncoder encoder)
     {
-        Guard.ArgumentNotNull(writer, nameof(writer));
-        Guard.ArgumentNotNull(encoder, nameof(encoder));
+        Guard.ArgumentNotNull(writer);
+        Guard.ArgumentNotNull(encoder);
 
         var isTagNameNullOrWhitespace = string.IsNullOrWhiteSpace(TagName);
         if (!isTagNameNullOrWhitespace)

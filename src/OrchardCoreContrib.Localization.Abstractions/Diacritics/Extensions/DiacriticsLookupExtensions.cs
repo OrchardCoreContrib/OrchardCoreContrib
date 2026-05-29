@@ -15,8 +15,8 @@ public static class DiacriticsLookupExtensions
     /// <returns>An accent dictionary for a given culture.</returns>
     public static AccentDictionary Get(this IDiacriticsLookup diacriticsLookup, string culture)
     {
-        Guard.ArgumentNotNull(diacriticsLookup, nameof(diacriticsLookup));
-        Guard.ArgumentNotNullOrEmpty(culture, nameof(culture));
+        Guard.ArgumentNotNull(diacriticsLookup);
+        Guard.ArgumentNotNullOrEmpty(culture);
 
         var result = new AccentDictionary(culture);
 

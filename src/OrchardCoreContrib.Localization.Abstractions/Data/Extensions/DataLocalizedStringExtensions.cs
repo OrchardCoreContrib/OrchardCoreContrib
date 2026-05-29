@@ -15,9 +15,9 @@ public static class DataLocalizedStringExtensions
     /// <param name="name">The context of the string resource.</param>
     public static DataLocalizedString GetString(this IDataLocalizer dataLocalizer, string name, string context)
     {
-        Guard.ArgumentNotNull(dataLocalizer, nameof(dataLocalizer));
-        Guard.ArgumentNotNullOrEmpty(name, nameof(name));
-        Guard.ArgumentNotNullOrEmpty(context, nameof(context));
+        Guard.ArgumentNotNull(dataLocalizer);
+        Guard.ArgumentNotNullOrEmpty(name);
+        Guard.ArgumentNotNullOrEmpty(context);
 
         return dataLocalizer[name, context];
     }
@@ -31,9 +31,9 @@ public static class DataLocalizedStringExtensions
     /// <param name="arguments">The values to format the string with.</param>
     public static DataLocalizedString GetString(this IDataLocalizer dataLocalizer, string name, string context, params object[] arguments)
     {
-        Guard.ArgumentNotNull(dataLocalizer, nameof(dataLocalizer));
-        Guard.ArgumentNotNullOrEmpty(name, nameof(name));
-        Guard.ArgumentNotNullOrEmpty(context, nameof(context));
+        Guard.ArgumentNotNull(dataLocalizer);
+        Guard.ArgumentNotNullOrEmpty(name);
+        Guard.ArgumentNotNullOrEmpty(context);
 
         return dataLocalizer[name, context, arguments];
     }
@@ -46,8 +46,8 @@ public static class DataLocalizedStringExtensions
     /// <returns>The string resources.</returns>
     public static IEnumerable<DataLocalizedString> GetAllStrings(this IDataLocalizer dataLocalizer, string context)
     {
-        Guard.ArgumentNotNull(dataLocalizer, nameof(dataLocalizer));
-        Guard.ArgumentNotNullOrEmpty(context, nameof(context));
+        Guard.ArgumentNotNull(dataLocalizer);
+        Guard.ArgumentNotNullOrEmpty(context);
 
         return dataLocalizer.GetAllStrings(context, includeParentCultures: true);
     }

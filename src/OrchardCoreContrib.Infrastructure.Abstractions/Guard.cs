@@ -1,4 +1,6 @@
-﻿namespace OrchardCoreContrib.Infrastructure;
+﻿using System.Runtime.CompilerServices;
+
+namespace OrchardCoreContrib.Infrastructure;
 
 /// <summary>
 /// Represents an argument checker.
@@ -8,13 +10,13 @@ public static partial class Guard
     /// <summary>
     /// Throws <see cref="ArgumentNullException"/> if the given value is <see langword="null" />.
     /// </summary>
-    /// <param name="argumentValue">The value to be tested.</param>
-    /// <param name="argumentName">The name of the tested value.</param>
-    public static void ArgumentNotNull(object argumentValue, string argumentName)
+    /// <param name="value">The value to be tested.</param>
+    /// <param name="name">The name of the tested value.</param>
+    public static void ArgumentNotNull(object value, [CallerArgumentExpression(nameof(value))] string name = null)
     {
-        if (argumentValue is null)
+        if (value is null)
         {
-            throw new ArgumentNullException(argumentName);
+            ArgumentNullException.ThrowIfNull(value, name);
         }
     }
 }

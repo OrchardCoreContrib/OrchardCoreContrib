@@ -22,8 +22,8 @@ public class DataLocalizer(DataResourceManager dataResourceManager, bool fallBac
     {
         get
         {
-            Guard.ArgumentNotNullOrEmpty(name, nameof(name));
-            Guard.ArgumentNotNullOrEmpty(context, nameof(context));
+            Guard.ArgumentNotNullOrEmpty(name);
+            Guard.ArgumentNotNullOrEmpty(context);
 
             var translation = GetTranslation(name, context, CultureInfo.CurrentUICulture);
 

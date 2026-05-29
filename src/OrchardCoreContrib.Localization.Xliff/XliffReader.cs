@@ -16,7 +16,7 @@ public class XliffReader
     /// <exception cref="XliffException"></exception>
     public static async Task<IEnumerable<CultureDictionaryRecord>> ParseAsync(Stream stream)
     {
-        Guard.ArgumentNotNull(stream, nameof(stream));
+        Guard.ArgumentNotNull(stream);
 
         try
         {

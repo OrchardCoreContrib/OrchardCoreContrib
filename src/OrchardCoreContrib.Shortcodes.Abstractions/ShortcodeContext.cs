@@ -14,8 +14,8 @@ public class ShortcodeContext
     /// <param name="attributes">The shortcode attributes.</param>
     public ShortcodeContext(string shortcodeName, ShortcodeAttributes attributes)
     {
-        Guard.ArgumentNotNullOrEmpty(shortcodeName, nameof(shortcodeName));
-        Guard.ArgumentNotNull(attributes, nameof(attributes));
+        Guard.ArgumentNotNullOrEmpty(shortcodeName);
+        Guard.ArgumentNotNull(attributes);
 
         ShortcodeName = shortcodeName;
         Attributes = attributes;

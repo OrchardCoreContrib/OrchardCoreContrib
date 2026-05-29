@@ -26,8 +26,8 @@ public class RazorTemplateEngine : ITemplateEngine
     /// <inheritdoc/>
     public async Task<string> RenderAsync(string template, TemplateContext context)
     {
-        Guard.ArgumentNotNullOrEmpty(template, nameof(template));
-        Guard.ArgumentNotNull(context, nameof(context));
+        Guard.ArgumentNotNullOrEmpty(template);
+        Guard.ArgumentNotNull(context);
 
         try
         {
