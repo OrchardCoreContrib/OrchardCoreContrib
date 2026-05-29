@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using OrchardCore.Modules;
 using OrchardCoreContrib.Data.Migrations;
+using OrchardCoreContrib.Infrastructure;
 using YesSql;
 
 namespace OrchardCoreContrib.Data.YesSql.Migrations;
@@ -20,6 +21,9 @@ public class YesSqlMigrationRunner(
     /// <inheritdoc/>
     public async Task MigrateAsync(string moduleId, long targetMigrationId = 0)
     {
+        Guard.ArgumentNotNullOrEmpty(moduleId);
+        Guard.ArgumentNotNegative(targetMigrationId);
+
         var pendingMigrations = await GetPendingMigrationsAsync();
 
         foreach (var migrationRecord in pendingMigrations[moduleId])
@@ -70,6 +74,9 @@ public class YesSqlMigrationRunner(
     /// <inheritdoc/>
     public async Task RollbackAsync(string moduleId, long targetMigrationId = 0)
     {
+        Guard.ArgumentNotNullOrEmpty(moduleId);
+        Guard.ArgumentNotNegative(targetMigrationId);
+
         var appliedMigrations = (await migrationsHistory.GetAppliedMigrationsAsync())
             .Where(m => m.DataMigrationClass.StartsWith(moduleId))
             .Reverse();

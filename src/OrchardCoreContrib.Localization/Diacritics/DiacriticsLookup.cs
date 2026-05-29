@@ -1,4 +1,6 @@
-﻿namespace OrchardCoreContrib.Localization.Diacritics;
+﻿using OrchardCoreContrib.Infrastructure;
+
+namespace OrchardCoreContrib.Localization.Diacritics;
 
 /// <summary>
 /// Represents a diacritics lookup table.
@@ -28,5 +30,10 @@ public class DiacriticsLookup : IDiacriticsLookup
     public int Count => _accentsDiacriticsMapper.Count;
 
     /// <inheritdoc/>
-    public bool Contains(string culture) => _accentsDiacriticsMapper.ContainsKey(culture);
+    public bool Contains(string culture)
+    {
+        Guard.ArgumentNotNullOrEmpty(culture);
+
+        return _accentsDiacriticsMapper.ContainsKey(culture);
+    }
 }

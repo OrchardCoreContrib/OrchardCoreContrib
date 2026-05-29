@@ -33,14 +33,7 @@ public class DefaultTransliterateRuleProvider : ITransliterateRuleProvider
 
     /// <inheritdoc/>
     public bool TryGetRule(TransliterateScript script, out TransliterationRuleDelegate rule)
-    {
-        if (_rules.TryGetValue(script, out rule))
-        {
-            return true;
-        }
-
-        return false;
-    }
+        => _rules.TryGetValue(script, out rule);
 
     private static void AddRule(TransliterateScript script, TransliterationRuleDelegate rule)
         => _rules.Add(script, rule);

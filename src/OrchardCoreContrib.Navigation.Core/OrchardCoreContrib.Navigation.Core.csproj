@@ -27,6 +27,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\OrchardCoreContrib.Infrastructure.Abstractions\OrchardCoreContrib.Infrastructure.Abstractions.csproj" />
 		<ProjectReference Include="..\OrchardCoreContrib.Navigation.Abstractions\OrchardCoreContrib.Navigation.Abstractions.csproj" />
 	</ItemGroup>
 

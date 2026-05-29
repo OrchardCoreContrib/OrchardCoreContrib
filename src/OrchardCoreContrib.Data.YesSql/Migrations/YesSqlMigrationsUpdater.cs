@@ -1,4 +1,5 @@
 ﻿using OrchardCoreContrib.Data.Migrations;
+using OrchardCoreContrib.Infrastructure;
 using YesSql;
 using YesSql.Sql;
 
@@ -13,13 +14,23 @@ public class YesSqlMigrationsUpdater(ISession session, IStore store) : IMigratio
     public Task MigratedAsync(IMigration migration) => Task.CompletedTask;
 
     /// <inheritdoc/>
-    public async Task MigratingAsync(IMigration migration) => await SetSchemaBuilderAsync(migration);
+    public async Task MigratingAsync(IMigration migration)
+    {
+        Guard.ArgumentNotNull(migration);
+
+        await SetSchemaBuilderAsync(migration);
+    }
 
     /// <inheritdoc/>
     public Task RollbackedAsync(IMigration migration) => Task.CompletedTask;
 
     /// <inheritdoc/>
-    public async Task RollbackingAsync(IMigration migration) => await SetSchemaBuilderAsync(migration);
+    public async Task RollbackingAsync(IMigration migration)
+    {
+        Guard.ArgumentNotNull(migration);
+
+        await SetSchemaBuilderAsync(migration);
+    }
 
     private async Task SetSchemaBuilderAsync(IMigration migration)
     {

@@ -22,7 +22,7 @@
 
 	<ItemGroup>
 		<None Include="../../images/icon.png" Pack="true" PackagePath="icon.png" />
-		<None Include="README.md" Pack="true" PackagePath="\"/>
+		<None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -43,6 +43,10 @@
 		<PackageReference Include="OrchardCore.Notifications.Core" />
 		<PackageReference Include="OrchardCore.ArchiveLater" />
 		<PackageReference Include="linq2db" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\OrchardCoreContrib.Infrastructure.Abstractions\OrchardCoreContrib.Infrastructure.Abstractions.csproj" />
 	</ItemGroup>
 
 </Project>

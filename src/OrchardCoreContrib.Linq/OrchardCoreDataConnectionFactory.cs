@@ -1,5 +1,6 @@
 ﻿using LinqToDB;
 using LinqToDB.Data;
+using OrchardCoreContrib.Infrastructure;
 using YesSql;
 
 namespace OrchardCoreContrib.Linq;
@@ -8,6 +9,8 @@ internal class OrchardCoreDataConnectionFactory
 {
     public static DataConnection Create(IStore store)
     {
+        Guard.ArgumentNotNull(store);
+
         var connection = store.Configuration.ConnectionFactory.CreateConnection();
         var providerName = GetDatabaseProviderName(store.Configuration.SqlDialect.Name);
         var dataProvider = DataConnection.GetDataProvider(providerName, connection.ConnectionString);
