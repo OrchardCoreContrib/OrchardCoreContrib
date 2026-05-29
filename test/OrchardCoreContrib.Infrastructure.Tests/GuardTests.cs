@@ -219,7 +219,7 @@ public class GuardTests
     public void ArgumentIsLessThanOrEqual_FirstValueGreaterThanAnotherOne_ThrowsArgumentOutOfRangeException<TNumber>(TNumber value, TNumber anotherValue, string name) where TNumber : IComparable<TNumber>
     {
         // Act & Assert
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentGreaterThan(value, anotherValue, name));
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentIsGreaterThan(value, anotherValue, name));
 
         Assert.Equal($"value ('{value}') must be greater than '{anotherValue}'. (Parameter '{name}')\r\nActual value was {value}.", exception.Message);
     }
@@ -229,7 +229,7 @@ public class GuardTests
     public void ArgumentIsLessThanOrEqual_FirstValueLessThanOrEqualAnotherOne_ThrowsArgumentOutOfRangeException<TNumber>(TNumber value, TNumber anotherValue, string name) where TNumber : IComparable<TNumber>
     {
         // Act
-        Guard.ArgumentGreaterThan(value, anotherValue, name);
+        Guard.ArgumentIsGreaterThan(value, anotherValue, name);
     }
 
     [Theory]
