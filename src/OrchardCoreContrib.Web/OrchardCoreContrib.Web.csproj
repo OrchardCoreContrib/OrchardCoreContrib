@@ -22,4 +22,8 @@
 		<PackageReference Include="Microsoft.Identity.Web" Condition="'$(TargetFramework)' == 'net10.0'" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\OrchardCoreContrib\OrchardCoreContrib.csproj" />
+	</ItemGroup>
+
 </Project>

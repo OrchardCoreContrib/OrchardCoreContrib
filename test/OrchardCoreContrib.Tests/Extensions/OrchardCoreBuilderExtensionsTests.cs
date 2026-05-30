@@ -3,16 +3,16 @@ using OrchardCoreContrib.Avatars;
 
 namespace OrchardCoreContrib.Extensions.Tests;
 
-public class ServiceCollectionExtensionsTests
+public class OrchardCoreBuilderExtensionsTests
 {
     [Fact]
     public void AddOrchardCoreContrib_ThrowsArgumentNullException_WhenServicesIsNull()
     {
         // Arrange
-        IServiceCollection services = null;
+        OrchardCoreBuilder builder = null;
 
         // Act & Assert
-        Assert.Throws<ArgumentNullException>(() => services.AddOrchardCoreContrib());
+        Assert.Throws<ArgumentNullException>(() => builder.AddOrchardCoreContrib());
     }
 
     [Fact]
@@ -20,9 +20,10 @@ public class ServiceCollectionExtensionsTests
     {
         // Arrange
         var services = new ServiceCollection();
+        var builder = new OrchardCoreBuilder(services);
 
         // Act
-        var builder = services.AddOrchardCoreContrib();
+        builder = builder.AddOrchardCoreContrib();
 
         // Assert
         Assert.NotNull(builder);

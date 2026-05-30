@@ -7,22 +7,16 @@ namespace Microsoft.Extensions.DependencyInjection;
 /// <summary>
 /// Provides extension methods for adding OrchardCoreContrib services to the dependency injection container.
 /// </summary>
-public static class ServiceCollectionExtensions
+public static class OrchardCoreBuilderExtensions
 {
     /// <summary>
-    /// Adds OrchardCoreContrib services to the specified <see cref="IServiceCollection"/>.
+    /// Adds the default services for OrchardCoreContrib to the dependency injection container.
     /// </summary>
-    /// <param name="services">The <see cref="IServiceCollection"/> to add services to.</param>
+    /// <param name="builder">The <see cref="OrchardCoreBuilder"/> to add services to.</param>
     /// <returns>The <see cref="OrchardCoreBuilder"/> instance.</returns>
-    public static OrchardCoreBuilder AddOrchardCoreContrib(this IServiceCollection services)
+    public static OrchardCoreBuilder AddOrchardCoreContrib(this OrchardCoreBuilder builder)
     {
-        Guard.ArgumentNotNull(services);
-
-        var builder = services
-            .LastOrDefault(d => d.ServiceType == typeof(OrchardCoreBuilder))?
-            .ImplementationInstance as OrchardCoreBuilder;
-
-        builder ??= services.AddOrchardCore();
+        Guard.ArgumentNotNull(builder);
 
         AddDefaultServices(builder);
 
