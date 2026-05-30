@@ -41,6 +41,7 @@
     <Project Path="src/OrchardCoreContrib/OrchardCoreContrib.csproj" />
   </Folder>
   <Folder Name="/test/">
+    <Project Path="test/OrchardCoreContrib.Avatars.Tests/OrchardCoreContrib.Avatars.Tests.csproj" />
     <Project Path="test/OrchardCoreContrib.ContentLocalization.Core.Tests/OrchardCoreContrib.ContentLocalization.Core.Tests.csproj" />
     <Project Path="test/OrchardCoreContrib.ContentManagement.Tests/OrchardCoreContrib.ContentManagement.Tests.csproj" />
     <Project Path="test/OrchardCoreContrib.Data.Tests/OrchardCoreContrib.Data.Tests.csproj" />
