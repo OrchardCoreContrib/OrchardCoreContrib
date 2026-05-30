@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using OrchardCore.Modules;
 using OrchardCoreContrib.Validation;
 using Xunit;
 
@@ -14,7 +15,7 @@ public class ValidationOrchardCoreBuilderExtensionsTests
         var builder = new OrchardCoreBuilder(services);
 
         // Act
-        var result = builder.AddPhoneNumberValidator();
+        var result = ValidationOrchardCoreBuilderExtensions.AddPhoneNumberValidator(builder);
 
         // Assert
         Assert.Same(builder, result);
@@ -28,16 +29,23 @@ public class ValidationOrchardCoreBuilderExtensionsTests
         var builder = new OrchardCoreBuilder(services);
 
         // Act
-        builder.AddPhoneNumberValidator();
+        ValidationOrchardCoreBuilderExtensions.AddPhoneNumberValidator(builder);
+
+        var serviceProvider = services.BuildServiceProvider();
+
+        var startup = serviceProvider.GetService<IStartup>();
+
+        startup.ConfigureServices(services);
 
         // Assert
         var descriptor = Assert.Single(services, d => d.ServiceType == typeof(IPhoneNumberValidator));
         Assert.Equal(ServiceLifetime.Transient, descriptor.Lifetime);
         Assert.Equal(typeof(PhoneNumberValidator), descriptor.ImplementationType);
 
-        using var provider = services.BuildServiceProvider();
-        var first = provider.GetRequiredService<IPhoneNumberValidator>();
-        var second = provider.GetRequiredService<IPhoneNumberValidator>();
+        serviceProvider = services.BuildServiceProvider();
+
+        var first = serviceProvider.GetService<IPhoneNumberValidator>();
+        var second = serviceProvider.GetService<IPhoneNumberValidator>();
 
         Assert.NotSame(first, second);
     }
