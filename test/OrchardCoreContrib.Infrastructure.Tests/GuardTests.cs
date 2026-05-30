@@ -1,292 +1,112 @@
-﻿using OrchardCoreContrib.Infrastructure;
-using System.Numerics;
-using Xunit;
+﻿using Xunit;
 
-namespace OrchardCoreContrib.Tests.Infrastructure;
+namespace OrchardCoreContrib.Infrastructure.Tests;
 
-public class GuardTests
+public partial class GuardTests
 {
-    public static IEnumerable<object[]> ArgumentIsLessThanTestData1 =>
-        [
-        [typeof(int), -2.5, -1.5, "value"],
-        [typeof(int), -2, -1, "value"],
-        [typeof(int), 1, 2, "value"],
-        [typeof(string), 1.5, 2.5, "value"]
-        ];
-
-    public static IEnumerable<object[]> ArgumentIsLessThanTestData2 =>
-        [
-        [typeof(int), -1.5, -2.5, "value"],
-        [typeof(int), -2, -1, "value"],
-        [typeof(int), 0, 0, "value"],
-        [typeof(int), 2, 1, "value"],
-        [typeof(string), 2.5, 1.5, "value"]
-        ];
-
-    public static IEnumerable<object[]> ArgumentIsLessThanOrEqualTestData1 =>
-        [
-        [typeof(int), -1.5, -2.5, "value"],
-        [typeof(int), -1, -2, "value"],
-        [typeof(int), 0, 0, "value"],
-        [typeof(int), 2, 1, "value"],
-        [typeof(string), 2.5, 1.5, "value"]
-    ];
-
-    public static IEnumerable<object[]> ArgumentIsLessThanOrEqualTestData2 =>
-        [
-        [typeof(int), -2.5, -1.5, "value"],
-        [typeof(int), -1, -2, "value"],
-        [typeof(int), 1, 2, "value"],
-        [typeof(string), 1.5, 2.5, "value"]
-    ];
-
-    public static IEnumerable<object[]> ArgumentIsEqualTestData =>
-        [
-        [typeof(int), -1.5, -1.5, "value"],
-        [typeof(int), -1, -1, "value"],
-        [typeof(int), 0, 0, "value"],
-        [typeof(int), 1, 1, "value"],
-        [typeof(string), 1.5, 1.5, "value"]
-    ];
-
-    public static IEnumerable<object[]> ArgumentIsNegativeOrZeroTestData =>
-        [
-        [typeof(int), -1, "value"],
-        [typeof(string), 0, "value"]
-    ];
-
-    public static IEnumerable<object[]> ArgumentIsGreaterThanTestData1 =>
-        [
-        [typeof(int), -1.5, -2.5, "value"],
-        [typeof(int), -1, -2, "value"],
-        [typeof(int), 2, 1, "value"],
-        [typeof(string), 2.5, 1.5, "value"]
-    ];
-
-    public static IEnumerable<object[]> ArgumentIsGreaterThanTestData2 =>
-        [
-        [typeof(int), -2.5, -1.5, "value"],
-        [typeof(int), -2, -1, "value"],
-        [typeof(int), 0, 0, "value"],
-        [typeof(int), 1, 2, "value"],
-        [typeof(string), 1.5, 2.5, "value"]
-        ];
-
-    public static IEnumerable<object[]> ArgumentIsGreaterThanOrEqualTestData1 =>
-        [
-        [typeof(int), -1.5, -2.5, "value"],
-        [typeof(int), -1, -2, "value"],
-        [typeof(int), 0, 0, "value"],
-        [typeof(int), 2, 1, "value"],
-        [typeof(string), 2.5, 1.5, "value"]
-    ];
-
-    public static IEnumerable<object[]> ArgumentIsGreaterThanOrEqualTestData2 =>
-        [
-        [typeof(int), -2.5, -1.5, "value"],
-        [typeof(int), -2, -1, "value"],
-        [typeof(int), 1, 2, "value"],
-        [typeof(string), 1.5, 2.5, "value"]
-    ];
-
     [Fact]
-    public void ArgumentNotNull_NullableValue_ThrowsArgumentNullException()
+    public void ArgumentNotNull_Null_ThrowsArgumentNullException()
     {
-        // Arrange
-        string name = null;
+        object value = null;
 
-        // Act & Assert
-        var exception = Assert.Throws<ArgumentNullException>(() => Guard.ArgumentNotNull(name, nameof(name)));
-        Assert.Null(name);
-        Assert.Equal(nameof(name), exception.ParamName);
-        Assert.Equal($"Value cannot be null. (Parameter '{nameof(name)}')", exception.Message);
-    }
+        var exception = Assert.Throws<ArgumentNullException>(() => Guard.ArgumentNotNull(value));
 
-    [Theory]
-    [InlineData(null, "name")]
-    [InlineData("", "name")]
-    public void ArgumentNotNullOrEmpty_NullableOrEmptyString_ThrowsArgumentNullOrEmptyException(string value, string name)
-    {
-        // Arrange
-
-        // Act & Assert
-        var exception = Assert.Throws<ArgumentNullOrEmptyException>(() => Guard.ArgumentNotNullOrEmpty(value, name));
-        Assert.Equal(name, exception.ParamName);
-        Assert.Equal($"Value cannot be null or empty. (Parameter '{name}')", exception.Message);
-    }
-
-    [Theory]
-    [InlineData(null, "names")]
-    [InlineData(new string[] { }, "names")]
-    public void ArgumentNotNullOrEmpty_NullableOrEmptyCollection_ThrowsArgumentNullOrEmptyException(IEnumerable<string> value, string name)
-    {
-        // Arrange
-
-        // Act & Assert
-        var exception = Assert.Throws<ArgumentNullOrEmptyException>(() => Guard.ArgumentNotNullOrEmpty(value, name));
-        Assert.Equal($"Value cannot be null or empty. (Parameter '{name}')", exception.Message);
+        Assert.Equal(nameof(value), exception.ParamName);
     }
 
     [Fact]
-    public void ArgumentIsZero_ZeroValue_ThrowsArgumentOutOfRangeException()
+    public void ArgumentNotNull_NotNull_DoesNotThrow()
     {
-        // Arrange
-        var name = "value";
-        var value = 0;
+        object value = new object();
 
-        // Act & Assert
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentNotZero(value, name));
-
-        Assert.Equal($"value ('{value}') must be a non-zero value. (Parameter '{name}')\r\nActual value was {value}.", exception.Message);
+        Guard.ArgumentNotNull(value);
     }
 
     [Fact]
-    public void ArgumentIsZero_NonZeroValue_NotThrowsArgumentOutOfRangeException()
+    public void ArgumentIsOfType_Generic_ExactType_DoesNotThrow()
     {
-        // Arrange
-        var name = "value";
-        var value = 100;
+        object value = 123;
 
-        // Act
-        Guard.ArgumentNotZero(value, name);
+        Guard.ArgumentIsOfType<int>(value);
     }
 
     [Fact]
-    public void ArgumentIsNegative_NegativeValue_ThrowsArgumentOutOfRangeException()
+    public void ArgumentIsOfType_Generic_DifferentType_ThrowsArgumentException()
     {
-        // Arrange
-        var name = "value";
-        var value = -1;
+        object value = "abc";
 
-        // Act & Assert
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentNotNegative(value, name));
+        var exception = Assert.Throws<ArgumentException>(() => Guard.ArgumentIsOfType<int>(value));
 
-        Assert.Equal($"value ('{value}') must be a non-negative value. (Parameter '{name}')\r\nActual value was {value}.", exception.Message);
+        Assert.Equal(nameof(value), exception.ParamName);
     }
 
     [Fact]
-    public void ArgumentIsNegative_NonNegativeValue_NotThrowsArgumentOutOfRangeException()
+    public void ArgumentIsNotOfType_Generic_SameType_ThrowsArgumentException()
     {
-        // Arrange
-        var name = "value";
-        var value = 100;
+        object value = 123;
 
-        // Act
-        Guard.ArgumentNotNegative(value, name);
-    }
+        var exception = Assert.Throws<ArgumentException>(() => Guard.ArgumentIsNotOfType<int>(value));
 
-    [Theory]
-    [MemberData(nameof(ArgumentIsNegativeOrZeroTestData))]
-    public void ArgumentIsNegativeOrZero_NegativeOrZeroValue_ThrowsArgumentOutOfRangeException<TNumber>(TNumber value, string name) where TNumber : INumberBase<TNumber>
-    {
-        // Act & Assert
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentIsPositive(value, name));
-
-        Assert.Equal($"value ('{value}') must be a non-negative and non-zero value. (Parameter '{name}')\r\nActual value was {value}.", exception.Message);
+        Assert.Equal(nameof(value), exception.ParamName);
     }
 
     [Fact]
-    public void ArgumentIsNegativeOrZero_PositiveValue_NotThrowsArgumentOutOfRangeException()
+    public void ArgumentIsNotOfType_Generic_DifferentType_DoesNotThrow()
     {
-        // Arrange
-        var name = "value";
-        var value = 100;
+        object value = "abc";
 
-        // Act
-        Guard.ArgumentIsPositive(value, name);
-    }
-
-    [Theory]
-    [MemberData(nameof(ArgumentIsLessThanTestData1))]
-    public void ArgumentIsLessThan_FirstValueGreaterThanOrEqualAnotherOne_ThrowsArgumentOutOfRangeException<TNumber>(TNumber value, TNumber anotherValue, string name) where TNumber : IComparable<TNumber>
-    {
-        // Act & Assert
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentAtLeast(value, anotherValue, name));
-
-        Assert.Equal($"value ('{value}') must be greater than or equal to '{anotherValue}'. (Parameter '{name}')\r\nActual value was {value}.", exception.Message);
-    }
-
-    [Theory]
-    [MemberData(nameof(ArgumentIsLessThanTestData2))]
-    public void ArgumentIsLessThan_FirstValueLessThanAnotherOne_ThrowsArgumentOutOfRangeException<TNumber>(TNumber value, TNumber anotherValue, string name) where TNumber : IComparable<TNumber>
-    {
-        // Act
-        Guard.ArgumentAtLeast(value, anotherValue, name);
-    }
-
-    [Theory]
-    [MemberData(nameof(ArgumentIsLessThanOrEqualTestData1))]
-    public void ArgumentIsLessThanOrEqual_FirstValueGreaterThanAnotherOne_ThrowsArgumentOutOfRangeException<TNumber>(TNumber value, TNumber anotherValue, string name) where TNumber : IComparable<TNumber>
-    {
-        // Act & Assert
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentIsGreaterThan(value, anotherValue, name));
-
-        Assert.Equal($"value ('{value}') must be greater than '{anotherValue}'. (Parameter '{name}')\r\nActual value was {value}.", exception.Message);
-    }
-
-    [Theory]
-    [MemberData(nameof(ArgumentIsLessThanOrEqualTestData2))]
-    public void ArgumentIsLessThanOrEqual_FirstValueLessThanOrEqualAnotherOne_ThrowsArgumentOutOfRangeException<TNumber>(TNumber value, TNumber anotherValue, string name) where TNumber : IComparable<TNumber>
-    {
-        // Act
-        Guard.ArgumentIsGreaterThan(value, anotherValue, name);
-    }
-
-    [Theory]
-    [MemberData(nameof(ArgumentIsEqualTestData))]
-    public void ArgumentIsEqual_SameValues_ThrowsArgumentOutOfRangeException<TNumber>(TNumber value, TNumber anotherValue, string name) where TNumber : IEquatable<TNumber>
-    {
-        // Act & Assert
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentNotEqual(value, anotherValue, name));
-
-        Assert.Equal($"value ('{value}') must not be equal to '{anotherValue}'. (Parameter '{name}')\r\nActual value was {value}.", exception.Message);
+        Guard.ArgumentIsNotOfType<int>(value);
     }
 
     [Fact]
-    public void ArgumentIsEqual_NotSameValues_ThrowsArgumentOutOfRangeException()
+    public void ArgumentIsOfType_Runtime_DifferentType_ThrowsArgumentException()
     {
-        // Arrange
-        var name = "value";
-        var value = 100;
-        var anotherValue = 200;
+        object value = "abc";
 
-        // Act
-        Guard.ArgumentNotEqual(value, anotherValue, name);
+        var exception = Assert.Throws<ArgumentException>(() => Guard.ArgumentIsOfType(value, typeof(int)));
+
+        Assert.Equal(nameof(value), exception.ParamName);
     }
 
-    [Theory]
-    [MemberData(nameof(ArgumentIsGreaterThanTestData1))]
-    public void ArgumentIsGreaterThan_FirstValueLessThanOrEqualAnotherOne_ThrowsArgumentOutOfRangeException<TNumber>(TNumber value, TNumber anotherValue, string name) where TNumber : IComparable<TNumber>
+    [Fact]
+    public void ArgumentIsAssignableToType_Generic_Assignable_DoesNotThrow()
     {
-        // Act & Assert
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentAtMost(value, anotherValue, name));
+        object value = new DerivedType();
 
-        Assert.Equal($"value ('{value}') must be less than or equal to '{anotherValue}'. (Parameter '{name}')\r\nActual value was {value}.", exception.Message);
+        Guard.ArgumentIsAssignableToType<BaseType>(value);
     }
 
-    [Theory]
-    [MemberData(nameof(ArgumentIsGreaterThanTestData2))]
-    public void ArgumentIsGreaterThan_FirstValueGreaterThanAnotherOne_ThrowsArgumentOutOfRangeException<TNumber>(TNumber value, TNumber anotherValue, string name) where TNumber : IComparable<TNumber>
+    [Fact]
+    public void ArgumentIsAssignableToType_Runtime_NotAssignable_ThrowsArgumentException()
     {
-        // Act
-        Guard.ArgumentAtMost(value, anotherValue, name);
+        object value = 123;
+
+        var exception = Assert.Throws<ArgumentException>(() => Guard.ArgumentIsAssignableToType(value, typeof(string)));
+
+        Assert.Equal(nameof(value), exception.ParamName);
     }
 
-    [Theory]
-    [MemberData(nameof(ArgumentIsGreaterThanOrEqualTestData1))]
-    public void ArgumentIsGreaterThanOrEqual_FirstValueLessThanAnotherOne_ThrowsArgumentOutOfRangeException<TNumber>(TNumber value, TNumber anotherValue, string name) where TNumber : IComparable<TNumber>
+    [Fact]
+    public void ArgumentIsNotAssignableToType_Generic_Assignable_ThrowsArgumentException()
     {
-        // Act & Assert
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentIsLessThan(value, anotherValue, name));
+        object value = new DerivedType();
 
-        Assert.Equal($"value ('{value}') must be less than '{anotherValue}'. (Parameter '{name}')\r\nActual value was {value}.", exception.Message);
+        var exception = Assert.Throws<ArgumentException>(() => Guard.ArgumentIsNotAssignableToType<BaseType>(value));
+
+        Assert.Equal(nameof(value), exception.ParamName);
     }
 
-    [Theory]
-    [MemberData(nameof(ArgumentIsGreaterThanOrEqualTestData2))]
-    public void ArgumentIsGreaterThanOrEqual_FirstValueGreaterThanOrEqualAnotherOne_ThrowsArgumentOutOfRangeException<TNumber>(TNumber value, TNumber anotherValue, string name) where TNumber : IComparable<TNumber>
+    [Fact]
+    public void ArgumentIsNotAssignableToType_Runtime_Assignable_ThrowsArgumentException()
     {
-        // Act
-        Guard.ArgumentIsLessThan(value, anotherValue, name);
+        object value = new DerivedType();
+
+        var exception = Assert.Throws<ArgumentException>(() => Guard.ArgumentIsNotAssignableToType(value, typeof(BaseType)));
+
+        Assert.Equal(nameof(value), exception.ParamName);
     }
+
+    private class BaseType;
+
+    private class DerivedType : BaseType;
 }
