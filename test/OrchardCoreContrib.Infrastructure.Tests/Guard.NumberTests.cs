@@ -22,7 +22,7 @@ public partial class GuardTests
     }
 
     [Fact]
-    public void ArgumentIsNegative_NegativeValue_ThrowsArgumentOutOfRangeException()
+    public void ArgumentIsNegative_NegativeValue__DoesNotThrow()
     {
         var value = -1;
 
@@ -30,12 +30,29 @@ public partial class GuardTests
     }
 
     [Fact]
-    public void ArgumentIsNegative_NonNegativeValue_DoesNotThrow()
+    public void ArgumentIsNegative_NonNegativeValue_ThrowsArgumentOutOfRangeException()
     {
         var value = 0;
 
         var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentIsNegative(value));
         Assert.Equal(nameof(value), exception.ParamName);
+    }
+
+    [Fact]
+    public void ArgumentIsPositive_NonPositiveValue_ThrowsArgumentOutOfRangeException()
+    {
+        var value = -1;
+
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.ArgumentIsPositive(value));
+        Assert.Equal(nameof(value), exception.ParamName);
+    }
+
+    [Fact]
+    public void ArgumentIsPositive_PositiveValue_DoesNotThrow()
+    {
+        var value = 1;
+
+        Guard.ArgumentIsPositive(value);
     }
 
     [Theory]
