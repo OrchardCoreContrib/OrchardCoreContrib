@@ -39,6 +39,21 @@ public static partial class Guard
     }
 
     /// <summary>
+    /// Asserts that the input value must be positive.
+    /// </summary>
+    /// <typeparam name="TNumber">The type of the numeric value.</typeparam>
+    /// <param name="value">The numeric value to be tested.</param>
+    /// <param name="name">The name of the tested value. Defaults to <see langword="null" />.</param>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown if the value is not positive.</exception>
+    public static void ArgumentIsPositive<TNumber>(TNumber value, [CallerArgumentExpression(nameof(value))] string name = null) where TNumber : INumberBase<TNumber>
+    {
+        if (!TNumber.IsPositive(value))
+        {
+            throw new ArgumentOutOfRangeException(name, "Value must be positive.");
+        }
+    }
+
+    /// <summary>
     /// Asserts that the input value must be negative or zero.
     /// </summary>
     /// <param name="value">The numeric value to be tested.</param>
