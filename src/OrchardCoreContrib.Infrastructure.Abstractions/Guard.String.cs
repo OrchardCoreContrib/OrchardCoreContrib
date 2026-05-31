@@ -16,9 +16,9 @@ public static partial class Guard
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void ArgumentIsNullOrEmpty(string value, [CallerArgumentExpression(nameof(value))] string name = null)
     {
-        if (string.IsNullOrEmpty(value))
+        if (!string.IsNullOrEmpty(value))
         {
-            throw new ArgumentNullOrEmptyException(name);
+            throw new ArgumentNullOrEmptyException(name, $"Value must be null or empty.");
         }
     }
 
@@ -33,25 +33,37 @@ public static partial class Guard
     {
         if (string.IsNullOrEmpty(value))
         {
-            ArgumentNullException.ThrowIfNullOrEmpty(name);
+            throw new ArgumentNullOrEmptyException(name, $"Value must not be null or empty.");
         }
     }
 
+    /// <summary>
+    /// Asserts that the input value must be <see langword="null" />, <see cref="string.Empty"/>, or consist only of white-space characters.
+    /// </summary>
+    /// <param name="value">The string value to be tested.</param>
+    /// <param name="name">The name of the tested value.</param>
+    /// <exception cref="ArgumentNullException">Thrown if the value is not <see langword="null" />, <see cref="string.Empty"/>, or consist only of white-space characters.</exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void ArgumentIsNullOrWhiteSpace(string value, [CallerArgumentExpression(nameof(value))] string name = null)
     {
         if (!string.IsNullOrWhiteSpace(value))
         {
-            ArgumentNullException.ThrowIfNullOrWhiteSpace(name);
+            throw new ArgumentNullException(name, $"Value must be null, empty, or consist only of white-space characters.");
         }
     }
 
+    /// <summary>
+    /// Asserts that the input value must not be <see langword="null" />, <see cref="string.Empty"/>, or consist only of white-space characters.
+    /// </summary>
+    /// <param name="value">The string value to be tested.</param>
+    /// <param name="name">The name of the tested value.</param>
+    /// <exception cref="ArgumentNullException">Thrown if the value is <see langword="null" />, <see cref="string.Empty"/>, or consist only of white-space characters.</exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void ArgumentIsNotNullOrWhiteSpace(string value, [CallerArgumentExpression(nameof(value))] string name = null)
     {
         if (string.IsNullOrWhiteSpace(value))
         {
-            ArgumentNullException.ThrowIfNullOrWhiteSpace(name);
+            ArgumentNullException.ThrowIfNullOrWhiteSpace(value);
         }
     }
 
@@ -66,7 +78,7 @@ public static partial class Guard
     {
         if (value != string.Empty)
         {
-            throw new ArgumentException($"Value must be empty. (Parameter '{name}')", name);
+            throw new ArgumentException($"Value must be empty.", name);
         }
     }
 
@@ -81,7 +93,7 @@ public static partial class Guard
     {
         if (value == string.Empty)
         {
-            throw new ArgumentException($"Value must not be empty. (Parameter '{name}')", name);
+            throw new ArgumentException($"Value must not be empty.", name);
         }
     }
 
@@ -96,7 +108,7 @@ public static partial class Guard
     {
         if (!string.IsNullOrWhiteSpace(value))
         {
-            throw new ArgumentException($"Value must consist only of white-space characters. (Parameter '{name}')", name);
+            throw new ArgumentException($"Value must consist only of white-space characters.", name);
         }
     }
 
@@ -111,7 +123,7 @@ public static partial class Guard
     {
         if (string.IsNullOrWhiteSpace(value))
         {
-            throw new ArgumentException($"Value must not consist only of white-space characters. (Parameter '{name}')", name);
+            throw new ArgumentException($"Value must not consist only of white-space characters.", name);
         }
     }
 }
