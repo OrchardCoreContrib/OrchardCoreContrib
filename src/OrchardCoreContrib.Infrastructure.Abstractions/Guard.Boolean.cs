@@ -31,7 +31,7 @@ public static partial class Guard
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void ArgumentIsTrue(bool value, [CallerArgumentExpression(nameof(value))] string name = null)
     {
-        if (!value)
+        if (value == false)
         {
             throw new ArgumentException("Value must be true.", name);
         }
