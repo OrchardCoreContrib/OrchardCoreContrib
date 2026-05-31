@@ -32,9 +32,9 @@ public partial class GuardTests
 	[Theory]
 	[InlineData(null)]
 	[InlineData("")]
-	public void ArgumentNotNullOrEmpty_NullOrEmptyValue_ThrowsArgumentNullException(string value)
+	public void ArgumentNotNullOrEmpty_NullOrEmptyValue_ThrowsArgumentNullOrEmptyException(string value)
 	{
-		var exception = Assert.Throws<ArgumentNullException>(() => Guard.ArgumentNotNullOrEmpty(value));
+		var exception = Assert.Throws<ArgumentNullOrEmptyException>(() => Guard.ArgumentNotNullOrEmpty(value));
 		Assert.Equal(nameof(value), exception.ParamName);
 	}
 
@@ -46,41 +46,45 @@ public partial class GuardTests
 		Guard.ArgumentNotNullOrEmpty(value);
 	}
 
-	[Theory]
-	[InlineData(null)]
-	[InlineData("")]
-	[InlineData("   ")]
-	public void ArgumentIsNullOrWhiteSpace_NullOrWhiteSpaceValue_DoesNotThrow(string value)
+	[Fact]
+    public void ArgumentIsNotNullOrWhiteSpace_NullValue_ThrowsArgumentNullException()
+    {
+        string value = null;
+        var exception = Assert.Throws<ArgumentNullException>(() => Guard.ArgumentIsNotNullOrWhiteSpace(value));
+        Assert.Equal(nameof(value), exception.ParamName);
+    }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData("   ")]
+    public void ArgumentIsNotNullOrWhiteSpace_WhiteSpaceValue_ThrowsArgumentNullException(string value)
 	{
-		Guard.ArgumentIsNullOrWhiteSpace(value);
-	}
+        var exception = Assert.Throws<ArgumentException>(() => Guard.ArgumentIsNotNullOrWhiteSpace(value));
+        Assert.Equal(nameof(value), exception.ParamName);
+    }
 
 	[Fact]
-	public void ArgumentIsNullOrWhiteSpace_NotWhiteSpaceValue_ThrowsArgumentNullException()
+    public void ArgumentIsNotNullOrWhiteSpace_NotNullOrWhiteSpaceValue_DoesNotThrow()
 	{
-		var value = "abc";
+        var value = "abc";
+        Guard.ArgumentIsNotNullOrWhiteSpace(value);
+    }
 
-		var exception = Assert.Throws<ArgumentNullException>(() => Guard.ArgumentIsNullOrWhiteSpace(value));
-		Assert.Equal(nameof(value), exception.ParamName);
-	}
-
-	[Theory]
-	[InlineData(null)]
-	[InlineData("")]
-	[InlineData("   ")]
-	public void ArgumentIsNotNullOrWhiteSpace_NullOrWhiteSpaceValue_ThrowsArgumentNullException(string value)
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("   ")]
+    public void ArgumentIsNullOrWhiteSpace_NullOrWhiteSpaceValue_DoesNotThrow(string value)
 	{
-		var exception = Assert.Throws<ArgumentNullException>(() => Guard.ArgumentIsNotNullOrWhiteSpace(value));
-		Assert.Equal(nameof(value), exception.ParamName);
-	}
+        Guard.ArgumentIsNullOrWhiteSpace(value);
+    }
 
-	[Fact]
-	public void ArgumentIsNotNullOrWhiteSpace_NotWhiteSpaceValue_DoesNotThrow()
+    [Fact]
+    public void ArgumentIsNullOrWhiteSpace_NotNullOrWhiteSpaceValue_ThrowsArgumentNullException()
 	{
-		var value = "abc";
-
-		Guard.ArgumentIsNotNullOrWhiteSpace(value);
-	}
+        var value = "abc";
+        var exception = Assert.Throws<ArgumentNullException>(() => Guard.ArgumentIsNullOrWhiteSpace(value));
+    }
 
 	[Fact]
 	public void ArgumentIsEmpty_EmptyValue_DoesNotThrow()

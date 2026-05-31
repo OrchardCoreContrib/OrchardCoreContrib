@@ -12,13 +12,13 @@ public static partial class Guard
     /// </summary>
     /// <param name="value">The collection to be tested.</param>
     /// <param name="name">The name of the tested collection.</param>
-    /// <exception cref="ArgumentNullException">Thrown when the collection is not null.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when the collection is not <see langword="null" />.</exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void ArgumentIsNull<TType>(IEnumerable<TType> value, [CallerArgumentExpression(nameof(value))] string name = null)
     {
         if (value is not null)
         {
-            throw new ArgumentNullException(name);
+            throw new ArgumentNullException(name, "Value must be null.");
         }
     }
 
@@ -27,13 +27,13 @@ public static partial class Guard
     /// </summary>
     /// <param name="value">The collection to be tested.</param>
     /// <param name="name">The name of the tested collection.</param>
-    /// <exception cref="ArgumentNullException">Thrown when the collection is null.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when the collection is <see langword="null" />.</exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void ArgumentNotNull<TType>(IEnumerable<TType> value, [CallerArgumentExpression(nameof(value))] string name = null)
     {
         if (value is null)
         {
-            throw new ArgumentNullException(name);
+            throw new ArgumentNullException(name, "Value must not be null.");
         }
     }
 
@@ -46,7 +46,9 @@ public static partial class Guard
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void ArgumentIsEmpty<TType>(IEnumerable<TType> value, [CallerArgumentExpression(nameof(value))] string name = null)
     {
-        if (value is not null)
+        Guard.ArgumentNotNull(value);
+
+        if (value.Any())
         {
             throw new ArgumentException("Collection must be empty.", name);
         }
@@ -61,6 +63,8 @@ public static partial class Guard
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void ArgumentIsNotEmpty<TType>(IEnumerable<TType> value, [CallerArgumentExpression(nameof(value))] string name = null)
     {
+        Guard.ArgumentNotNull(value);
+
         if (!value.Any())
         {
             throw new ArgumentException("Collection must not be empty.", name);
@@ -72,7 +76,7 @@ public static partial class Guard
     /// </summary>
     /// <param name="value">The collection to be tested.</param>
     /// <param name="name">The name of the tested collection.</param>
-    /// <exception cref="ArgumentNullOrEmptyException">Thrown when the collection is null or empty.</exception>
+    /// <exception cref="ArgumentNullOrEmptyException">Thrown when the collection is <see langword="null" /> or empty.</exception>
     [Obsolete("Use the generic version of this method instead to avoid unnecessary boxing.", true)]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void ArgumentNotNullOrEmpty(IEnumerable<object> value, [CallerArgumentExpression(nameof(value))] string name = null)
@@ -83,14 +87,10 @@ public static partial class Guard
     /// </summary>
     /// <param name="value">The collection to be tested.</param>
     /// <param name="name">The name of the tested collection.</param>
-    /// <exception cref="ArgumentNullOrEmptyException">Thrown when the collection is null or empty.</exception>
+    /// <exception cref="ArgumentNullOrEmptyException">Thrown when the collection is <see langword="null" /> or empty.</exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void ArgumentNotNullOrEmpty<TType>(IEnumerable<TType> value, [CallerArgumentExpression(nameof(value))] string name = null)
     {
-        //if (value is null || !value.Any())
-        //{
-        //    throw new ArgumentNullOrEmptyException(name);
-        //}
         Guard.ArgumentNotNull(value);
 
         if (!value.Any())
@@ -104,7 +104,7 @@ public static partial class Guard
     /// </summary>
     /// <param name="value">The collection to be tested.</param>
     /// <param name="name">The name of the tested collection.</param>
-    /// <exception cref="ArgumentException">Thrown when the collection contains null elements.</exception>
+    /// <exception cref="ArgumentException">Thrown when the collection contains <see langword="null" /> elements.</exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void ArgumentDoesNotContainNullElements<TType>(IEnumerable<TType> value, [CallerArgumentExpression(nameof(value))] string name = null)
     {
@@ -127,10 +127,10 @@ public static partial class Guard
     {
         Guard.ArgumentNotNull(value);
 
-        var seen = new HashSet<TType>();
+        var items = new HashSet<TType>();
         foreach (var item in value)
         {
-            if (!seen.Add(item))
+            if (!items.Add(item))
             {
                 throw new ArgumentException("Collection contains duplicate elements.", name);
             }
