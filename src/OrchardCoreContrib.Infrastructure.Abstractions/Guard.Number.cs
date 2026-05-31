@@ -19,7 +19,7 @@ public static partial class Guard
     {
         if (value != TNumber.Zero)
         {
-            throw new ArgumentOutOfRangeException(name, $"Value must be zero. (Parameter '{name}')");
+            throw new ArgumentOutOfRangeException(name, "Value must be zero.");
         }
     }
 
@@ -34,7 +34,7 @@ public static partial class Guard
     {
         if (!TNumber.IsNegative(value))
         {
-            throw new ArgumentOutOfRangeException(name, $"Value must be negative. (Parameter '{name}')");
+            throw new ArgumentOutOfRangeException(name, "Value must be negative.");
         }
     }
 
@@ -49,7 +49,7 @@ public static partial class Guard
     {
         if (!TNumber.IsNegative(value) && value != TNumber.Zero)
         {
-            throw new ArgumentOutOfRangeException(name, $"Value must be negative or zero. (Parameter '{name}')");
+            throw new ArgumentOutOfRangeException(name, "Value must be negative or zero.");
         }
     }
 
