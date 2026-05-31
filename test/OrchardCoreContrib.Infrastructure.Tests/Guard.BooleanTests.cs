@@ -12,6 +12,7 @@ public partial class GuardTests
 
 		// Act & Assert
 		var exception = Assert.Throws<ArgumentException>(() => Guard.ArgumentIsFalse(value));
+
 		Assert.Equal(nameof(value), exception.ParamName);
 		Assert.Equal($"Value must be false. (Parameter '{nameof(value)}')", exception.Message);
 	}
