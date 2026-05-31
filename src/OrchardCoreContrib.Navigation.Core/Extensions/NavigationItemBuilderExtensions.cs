@@ -78,7 +78,7 @@ public static class NavigationItemBuilderExtensions
 
         item.Url = string.Empty;
 
-        item.RouteValues.Clear();
+        item.RouteValues?.Clear();
 
         return new NavigationItemBuilder(item);
     }
