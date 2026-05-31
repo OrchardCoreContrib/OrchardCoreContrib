@@ -6,7 +6,6 @@ builder.Host.UseNLogHost();
 
 builder.Services
     .AddOrchardCms()
-    .AddOrchardCoreContrib()
     .AddSetupFeatures("OrchardCore.AutoSetup");
 
 var app = builder.Build();
