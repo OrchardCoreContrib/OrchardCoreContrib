@@ -1,4 +1,5 @@
-﻿using OrchardCoreContrib.Infrastructure;
+﻿using Microsoft.Extensions.Localization;
+using OrchardCoreContrib.Infrastructure;
 
 namespace OrchardCoreContrib.Templating;
 
@@ -6,10 +7,10 @@ namespace OrchardCoreContrib.Templating;
 /// Represents the default implementation of the <see cref="ITemplateRenderer"/> interface, which uses an <see cref="ITemplateEngineFactory"/> to retrieve the appropriate template engine for rendering templates.
 /// </summary>
 /// <param name="factory">The <see cref="ITemplateEngineFactory"/>.</param>
-public class DefaultTemplateRenderer(ITemplateEngineFactory factory) : ITemplateRenderer
+public class DefaultTemplateRenderer(ITemplateEngineFactory factory, IStringLocalizer<DefaultTemplateRenderer> S) : ITemplateRenderer
 {
     /// <inheritdoc/>
-    public async Task<TemplateResult> RenderAsync(string template, string engineName, TemplateContext context)
+    public async Task<Result> RenderAsync(string template, string engineName, TemplateContext context)
     {
         Guard.ArgumentNotNullOrEmpty(template);
         Guard.ArgumentNotNullOrEmpty(engineName);
@@ -21,11 +22,11 @@ public class DefaultTemplateRenderer(ITemplateEngineFactory factory) : ITemplate
         {
             var output = await engine.RenderAsync(template, context);
 
-            return TemplateResult.Ok(output);
+            return Result.Success(output);
         }
-        catch (Exception ex)
+        catch
         {
-            return TemplateResult.Fail(new TemplateRenderException($"Error rendering with {engineName}", ex));
+            return Result.Failed(S["Error rendering with {0}.", engineName]);
         }
     }
 }

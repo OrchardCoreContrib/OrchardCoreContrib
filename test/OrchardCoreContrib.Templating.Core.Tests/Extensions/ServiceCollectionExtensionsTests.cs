@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using OrchardCoreContrib.Templating.Tests;
 
@@ -10,7 +11,9 @@ public class ServiceCollectionExtensionsTests
     public void AddTemplating_RegistersCoreServices()
     {
         // Arrange
-        var services = new ServiceCollection();
+        var services = new ServiceCollection()
+            .AddLogging()
+            .AddLocalization();
 
         // Act
         services.AddTemplating();

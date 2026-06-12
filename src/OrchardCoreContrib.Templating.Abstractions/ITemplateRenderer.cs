@@ -1,4 +1,6 @@
-﻿namespace OrchardCoreContrib.Templating;
+﻿using OrchardCoreContrib.Infrastructure;
+
+namespace OrchardCoreContrib.Templating;
 
 /// <summary>
 /// Represents a contract for rendering text templates.
@@ -11,6 +13,6 @@ public interface ITemplateRenderer
     /// <param name="template">The template string to be rendered.</param>
     /// <param name="engineName">The name of the template engine to use.</param>
     /// <param name="context">The <see cref="TemplateContext"/>.</param>
-    /// <returns>A <see cref="TemplateResult"/> containing the rendered output and any errors.</returns>
-    Task<TemplateResult> RenderAsync(string template, string engineName, TemplateContext context);
+    /// <returns>A <see cref="Result"/> containing the rendering status and any errors.</returns>
+    Task<Result> RenderAsync(string template, string engineName, TemplateContext context);
 }

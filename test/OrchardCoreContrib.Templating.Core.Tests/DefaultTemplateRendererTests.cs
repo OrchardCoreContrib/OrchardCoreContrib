@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using Microsoft.Extensions.Localization;
+using Moq;
 
 namespace OrchardCoreContrib.Templating.Tests;
 
@@ -24,13 +25,13 @@ public class DefaultTemplateRendererTests
             .Setup(x => x.RenderAsync(template, templateContext))
             .ReturnsAsync(expected);
 
-        var sut = new DefaultTemplateRenderer(templateEngineFactoryMock.Object);
+        var templateRenderer = new DefaultTemplateRenderer(templateEngineFactoryMock.Object, Mock.Of<IStringLocalizer<DefaultTemplateRenderer>>());
 
         // Act
-        var result = await sut.RenderAsync(template, engineName, templateContext);
+        var result = await templateRenderer.RenderAsync(template, engineName, templateContext);
 
         // Assert
-        Assert.Equal(expected, result.Output);
+        Assert.True(result.Succeeded);
     }
 
     [Fact]
@@ -47,10 +48,10 @@ public class DefaultTemplateRendererTests
             .Setup(x => x.GetEngine(engineName))
             .Returns((ITemplateEngine)null);
 
-        var sut = new DefaultTemplateRenderer(templateEngineFactoryMock.Object);
+        var templateRenderer = new DefaultTemplateRenderer(templateEngineFactoryMock.Object, Mock.Of<IStringLocalizer<DefaultTemplateRenderer>>());
 
         // Act & Assert
-        await Assert.ThrowsAsync<TemplateNotFoundException>(() => sut.RenderAsync(template, engineName, templateContext));
+        await Assert.ThrowsAsync<TemplateNotFoundException>(() => templateRenderer.RenderAsync(template, engineName, templateContext));
     }
 
     [Fact]
@@ -73,15 +74,18 @@ public class DefaultTemplateRendererTests
             .Setup(x => x.RenderAsync(template, templateContext))
             .ThrowsAsync(inner);
 
-        var templateRenderer = new DefaultTemplateRenderer(templateEngineFactoryMock.Object);
+        var stringLocalizer = new Mock<IStringLocalizer<DefaultTemplateRenderer>>();
+
+        stringLocalizer.Setup(l => l[It.IsAny<string>(), It.IsAny<object[]>()])
+            .Returns<string, object[]>((n, a) => new LocalizedString(string.Format(n, a), string.Format(n, a)));
+
+        var templateRenderer = new DefaultTemplateRenderer(templateEngineFactoryMock.Object, stringLocalizer.Object);
 
         // Act
         var result = await templateRenderer.RenderAsync(template, engineName, templateContext);
 
         // Assert
-        Assert.False(result.Success);
-        Assert.True(result.Error is TemplateRenderException);
-        Assert.Equal($"Error rendering with {engineName}", result.Error.Message);
-        Assert.Same(inner, result.Error.InnerException);
+        Assert.False(result.Succeeded);
+        Assert.Equal($"Error rendering with {engineName}.", result.Errors.Single().Message.Value);
     }
 }
