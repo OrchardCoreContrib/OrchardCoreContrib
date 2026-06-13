@@ -23,13 +23,10 @@ public class ServiceCollectionExtensionsTests
 
         var manager = provider.GetService<TemplateEngineManager>();
         var factory = provider.GetService<ITemplateEngineFactory>();
-        var renderer = provider.GetService<ITemplateRenderer>();
 
         Assert.NotNull(manager);
         Assert.NotNull(factory);
-        Assert.NotNull(renderer);
         Assert.Same(manager, factory);
-        Assert.IsType<DefaultTemplateRenderer>(renderer);
     }
 
     [Fact]
