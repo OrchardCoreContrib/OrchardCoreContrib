@@ -4,29 +4,27 @@ using OrchardCoreContrib.Infrastructure;
 namespace OrchardCoreContrib.Templating;
 
 /// <summary>
-/// Represents the default implementation of the <see cref="ITemplateRenderer"/> interface, which uses an <see cref="ITemplateEngineFactory"/> to retrieve the appropriate template engine for rendering templates.
+/// Represents the default implementation of the <see cref="ITemplateRenderer"/> interface, which uses an <see cref="ITemplateEngine"/> to render templates.
 /// </summary>
-/// <param name="factory">The <see cref="ITemplateEngineFactory"/>.</param>
-public class DefaultTemplateRenderer(ITemplateEngineFactory factory, IStringLocalizer<DefaultTemplateRenderer> S) : ITemplateRenderer
+/// <param name="templateEngine">The <see cref="ITemplateEngine"/>.</param>
+public class DefaultTemplateRenderer(ITemplateEngine templateEngine, IStringLocalizer<DefaultTemplateRenderer> S) : ITemplateRenderer
 {
     /// <inheritdoc/>
-    public async Task<Result> RenderAsync(string template, string engineName, TemplateContext context)
+    public async Task<Result> RenderAsync(string template, TemplateContext context)
     {
         Guard.ArgumentNotNullOrEmpty(template);
-        Guard.ArgumentNotNullOrEmpty(engineName);
-        Guard.ArgumentNotNull(context);
 
-        var engine = factory.GetEngine(engineName) ?? throw new TemplateNotFoundException(engineName);
+        Guard.ArgumentNotNull(context);
 
         try
         {
-            var output = await engine.RenderAsync(template, context);
+            var result = await templateEngine.RenderAsync(template, context);
 
-            return Result.Success(output);
+            return Result.Success(result);
         }
         catch
         {
-            return Result.Failed(S["Error rendering with {0}.", engineName]);
+            return Result.Failed(S["Error rendering with {0}.", templateEngine.Name]);
         }
     }
 }

@@ -9,66 +9,54 @@ public class DefaultTemplateRendererTests
     public async Task RenderAsync_ShouldReturnRenderedContent_WhenEngineExists()
     {
         // Arrange
-        var templateEngineFactoryMock = new Mock<ITemplateEngineFactory>();
         var templateEngineMock = new Mock<ITemplateEngine>();
         var templateContext = new TemplateContext();
 
         const string template = "Hello {{ name }}";
-        const string engineName = "liquid";
         const string expected = "Hello John";
-
-        templateEngineFactoryMock
-            .Setup(x => x.GetEngine(engineName))
-            .Returns(templateEngineMock.Object);
 
         templateEngineMock
             .Setup(x => x.RenderAsync(template, templateContext))
             .ReturnsAsync(expected);
 
-        var templateRenderer = new DefaultTemplateRenderer(templateEngineFactoryMock.Object, Mock.Of<IStringLocalizer<DefaultTemplateRenderer>>());
+        var templateRenderer = new DefaultTemplateRenderer(templateEngineMock.Object, Mock.Of<IStringLocalizer<DefaultTemplateRenderer>>());
 
         // Act
-        var result = await templateRenderer.RenderAsync(template, engineName, templateContext);
+        var result = await templateRenderer.RenderAsync(template, templateContext);
 
         // Assert
         Assert.True(result.Succeeded);
     }
 
-    [Fact]
-    public async Task RenderAsync_ShouldThrowTemplateNotFoundException_WhenEngineDoesNotExist()
-    {
-        // Arrange
-        var templateEngineFactoryMock = new Mock<ITemplateEngineFactory>();
-        var templateContext = new TemplateContext();
+    //[Fact]
+    //public async Task RenderAsync_ShouldThrowTemplateNotFoundException_WhenEngineDoesNotExist()
+    //{
+    //    // Arrange
+    //    var templateEngineFactoryMock = new Mock<ITemplateEngineFactory>();
+    //    var templateContext = new TemplateContext();
 
-        const string template = "Hello";
-        const string engineName = "missing-engine";
+    //    const string template = "Hello";
+    //    const string engineName = "missing-engine";
 
-        templateEngineFactoryMock
-            .Setup(x => x.GetEngine(engineName))
-            .Returns((ITemplateEngine)null);
+    //    templateEngineFactoryMock
+    //        .Setup(x => x.GetEngine(engineName))
+    //        .Returns((ITemplateEngine)null);
 
-        var templateRenderer = new DefaultTemplateRenderer(templateEngineFactoryMock.Object, Mock.Of<IStringLocalizer<DefaultTemplateRenderer>>());
+    //    var templateRenderer = new DefaultTemplateRenderer(templateEngineFactoryMock.Object, Mock.Of<IStringLocalizer<DefaultTemplateRenderer>>());
 
-        // Act & Assert
-        await Assert.ThrowsAsync<TemplateNotFoundException>(() => templateRenderer.RenderAsync(template, engineName, templateContext));
-    }
+    //    // Act & Assert
+    //    await Assert.ThrowsAsync<TemplateNotFoundException>(() => templateRenderer.RenderAsync(template, templateContext));
+    //}
 
     [Fact]
     public async Task RenderAsync_ShouldWrapEngineException_InTemplateRenderException()
     {
         // Arrange
-        var templateEngineFactoryMock = new Mock<ITemplateEngineFactory>();
         var templateEngineMock = new Mock<ITemplateEngine>();
         var templateContext = new TemplateContext();
 
         const string template = "Hello";
-        const string engineName = "liquid";
         var inner = new InvalidOperationException("Engine failed");
-
-        templateEngineFactoryMock
-            .Setup(x => x.GetEngine(engineName))
-            .Returns(templateEngineMock.Object);
 
         templateEngineMock
             .Setup(x => x.RenderAsync(template, templateContext))
@@ -79,13 +67,13 @@ public class DefaultTemplateRendererTests
         stringLocalizer.Setup(l => l[It.IsAny<string>(), It.IsAny<object[]>()])
             .Returns<string, object[]>((n, a) => new LocalizedString(string.Format(n, a), string.Format(n, a)));
 
-        var templateRenderer = new DefaultTemplateRenderer(templateEngineFactoryMock.Object, stringLocalizer.Object);
+        var templateRenderer = new DefaultTemplateRenderer(templateEngineMock.Object, stringLocalizer.Object);
 
         // Act
-        var result = await templateRenderer.RenderAsync(template, engineName, templateContext);
+        var result = await templateRenderer.RenderAsync(template, templateContext);
 
         // Assert
         Assert.False(result.Succeeded);
-        Assert.Equal($"Error rendering with {engineName}.", result.Errors.Single().Message.Value);
+        Assert.Equal($"Error rendering with {templateEngineMock.Object.Name}.", result.Errors.Single().Message.Value);
     }
 }

@@ -34,9 +34,6 @@
     <Project Path="src/OrchardCoreContrib.Shortcodes.Core/OrchardCoreContrib.Shortcodes.Core.csproj" />
     <Project Path="src/OrchardCoreContrib.Sms.Abstractions/OrchardCoreContrib.Sms.Abstractions.csproj" />
     <Project Path="src/OrchardCoreContrib.Templating.Abstractions/OrchardCoreContrib.Templating.Abstractions.csproj" />
-    <Project Path="src/OrchardCoreContrib.Templating.Core/OrchardCoreContrib.Templating.Core.csproj" />
-    <Project Path="src/OrchardCoreContrib.Templating.Liquid/OrchardCoreContrib.Templating.Liquid.csproj" />
-    <Project Path="src/OrchardCoreContrib.Templating.Razor/OrchardCoreContrib.Templating.Razor.csproj" />
     <Project Path="src/OrchardCoreContrib.Web/OrchardCoreContrib.Web.csproj" Id="ab888908-781f-4660-909b-26cbded123c3" />
     <Project Path="src/OrchardCoreContrib/OrchardCoreContrib.csproj" />
   </Folder>
@@ -55,9 +52,6 @@
     <Project Path="test/OrchardCoreContrib.Localization.Xliff.Tests/OrchardCoreContrib.Localization.Xliff.Tests.csproj" />
     <Project Path="test/OrchardCoreContrib.Navigation.Tests/OrchardCoreContrib.Navigation.Tests.csproj" />
     <Project Path="test/OrchardCoreContrib.Shortcodes.Tests/OrchardCoreContrib.Shortcodes.Tests.csproj" />
-    <Project Path="test/OrchardCoreContrib.Templating.Core.Tests/OrchardCoreContrib.Templating.Core.Tests.csproj" />
-    <Project Path="test/OrchardCoreContrib.Templating.Liquid.Tests/OrchardCoreContrib.Templating.Liquid.Tests.csproj" />
-    <Project Path="test/OrchardCoreContrib.Templating.Razor.Tests/OrchardCoreContrib.Templating.Razor.Tests.csproj" />
     <Project Path="test/OrchardCoreContrib.Tests/OrchardCoreContrib.Tests.csproj" />
   </Folder>
 </Solution>

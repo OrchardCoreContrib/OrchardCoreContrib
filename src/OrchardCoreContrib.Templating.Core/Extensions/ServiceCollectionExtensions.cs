@@ -8,34 +8,21 @@ namespace Microsoft.Extensions.DependencyInjection;
 public static class ServiceCollectionExtensions
 {
     /// <summary>
-    /// Registers the necessary services for templating, including the <see cref="TemplateEngineManager"/> and the default <see cref="ITemplateRenderer"/> implementation.
-    /// </summary>
-    /// <param name="services">The <see cref="IServiceCollection"/> to add the services to.</param>
-    /// <returns>The <see cref="IServiceCollection"/> with the templating services added.</returns>
-    public static IServiceCollection AddTemplating(this IServiceCollection services)
-    {
-        services.AddSingleton<TemplateEngineManager>();
-        services.AddSingleton<ITemplateEngineFactory>(sp => sp.GetRequiredService<TemplateEngineManager>());
-        services.AddSingleton<ITemplateRenderer, DefaultTemplateRenderer>();
-
-        return services;
-    }
-
-    /// <summary>
     /// Registers a specific implementation of <see cref="ITemplateEngine"/> and ensures it is registered with the <see cref="TemplateEngineManager"/>.
     /// </summary>
     /// <typeparam name="TTemplateEngine">The type of the template engine to register.</typeparam>
     /// <param name="services">The <see cref="IServiceCollection"/> to add the services to.</param>
+    /// <param name="key">The key of the template engine.</param>
     /// <returns>The <see cref="IServiceCollection"/> with the template engine added.</returns>
-    public static IServiceCollection AddTemplateEngine<TTemplateEngine>(this IServiceCollection services) where TTemplateEngine : class, ITemplateEngine
+    public static IServiceCollection AddTemplateEngine<TTemplateEngine>(this IServiceCollection services, string key) where TTemplateEngine : class, ITemplateEngine
     {
-        services.AddSingleton<ITemplateEngine, TTemplateEngine>();
-        services.PostConfigure<TemplateEngineManager>(manager =>
-        {
-            var engine = services.BuildServiceProvider().GetRequiredService<TTemplateEngine>();
+        services.AddKeyedSingleton<ITemplateEngine, TTemplateEngine>(key);
+        //services.PostConfigure<TemplateEngineManager>(manager =>
+        //{
+        //    var engine = services.BuildServiceProvider().GetRequiredService<TTemplateEngine>();
 
-            manager.RegisterEngine(engine);
-        });
+        //    manager.RegisterEngine(engine, key);
+        //});
 
         return services;
     }
