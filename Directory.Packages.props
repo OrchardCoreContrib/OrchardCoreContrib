@@ -7,6 +7,7 @@
 		<PackageVersion Include="Microsoft.AspNetCore.Html.Abstractions" Version="2.3.10" />
 		<PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.24" />
 		<PackageVersion Include="Microsoft.AspNetCore.Razor" Version="2.3.0" />
+		<PackageVersion Include="Microsoft.Data.Sqlite.Core" Version="10.0.9" />
 		<PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="10.0.5" />
 		<PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.6.0" />
 		<PackageVersion Include="Microsoft.Extensions.Localization.Abstractions" Version="10.0.8" />
@@ -46,6 +47,7 @@
 		<PackageVersion Include="OrchardCore.Workflows" Version="$(OrchardCoreVersion)" />
 		<PackageVersion Include="OrchardCoreContrib.Testing" Version="1.0.0-beta3" />
 		<PackageVersion Include="Shortcodes" Version="1.3.6" />
+		<PackageVersion Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.3" />
 		<PackageVersion Include="System.Text.Json" Version="10.0.8" />
 		<PackageVersion Include="xunit" Version="2.9.3" />
 		<PackageVersion Include="xunit.analyzers" Version="2.0.0-pre.51" />
