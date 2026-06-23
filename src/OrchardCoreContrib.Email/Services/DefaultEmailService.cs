@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using OrchardCore.Email;
-using OrchardCore.Infrastructure;
+using OrchardCoreContrib.Infrastructure;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 

@@ -104,7 +104,7 @@ public partial class GlobalSettingsAccessorTests
     {
         var mockSite = new Mock<ISite>();
 
-        mockSite.Setup(s => s.GetOrCreate<T>())
+        mockSite.Setup(s => s.As<T>())
             .Returns(obj);
 
         return mockSite.Object;
