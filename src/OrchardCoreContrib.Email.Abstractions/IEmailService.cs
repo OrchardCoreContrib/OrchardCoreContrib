@@ -1,5 +1,5 @@
 ﻿using OrchardCore.Email;
-using OrchardCore.Infrastructure;
+using OrchardCoreContrib.Infrastructure;
 
 namespace OrchardCoreContrib.Email;
 
