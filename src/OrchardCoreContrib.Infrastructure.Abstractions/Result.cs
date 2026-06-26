@@ -79,10 +79,7 @@ public class Result
     /// </summary>
     /// <param name="error">The error message.</param>
     /// <returns>A failed result instance with the specified error message.</returns>
-    public static Result Failed(LocalizedString error) => Failed(new ResultError
-    {
-        Message = error,
-    });
+    public static Result Failed(LocalizedString error) => Failed(new ResultError { Message = error });
 
     /// <summary>
     /// Returns a failed result instance with the specified error message.
@@ -92,4 +89,13 @@ public class Result
     /// <returns>A failed result instance with the specified error message.</returns>
     public static Result<TValue> Failed<TValue>(params ResultError[] errors)
         => new(default, false, [.. errors]);
+
+    /// <summary>
+    /// Returns a failed result instance with the specified error message.
+    /// </summary>
+    /// <typeparam name="TValue">The type of the value returned by the operation.</typeparam>
+    /// <param name="error">The error message.</param>
+    /// <returns>A failed result instance with the specified error message.</returns>
+    public static Result<TValue> Failed<TValue>(LocalizedString error)
+        => Failed<TValue>(new ResultError { Message = error });
 }

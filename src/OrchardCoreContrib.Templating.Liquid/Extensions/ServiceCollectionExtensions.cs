@@ -15,7 +15,7 @@ public static class ServiceCollectionExtensions
     /// <returns>The updated <see cref="IServiceCollection"/>.</returns>
     public static IServiceCollection AddLiquidTemplating(this IServiceCollection services)
     {
-        services.AddSingleton<ITemplateEngine, LiquidTemplateEngine>();
+        services.AddKeyedSingleton<ITemplateEngine, LiquidTemplateEngine>("Liquid");
 
         return services;
     }

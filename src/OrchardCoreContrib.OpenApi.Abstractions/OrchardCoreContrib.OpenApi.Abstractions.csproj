@@ -28,7 +28,6 @@
 
 	<ItemGroup>
 	  <PackageReference Include="Microsoft.OpenApi" />
-	  <PackageReference Include="System.Text.Json" />
 	</ItemGroup>
 
 </Project>

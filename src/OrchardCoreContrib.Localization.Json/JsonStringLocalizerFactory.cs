@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Localization;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using OrchardCore.Localization;
 
@@ -14,19 +13,17 @@ namespace OrchardCoreContrib.Localization.Json;
 /// </remarks>
 /// <param name="localizationManager"></param>
 /// <param name="requestLocalizationOptions"></param>
-/// <param name="logger"></param>
 public class JsonStringLocalizerFactory(
     ILocalizationManager localizationManager,
-    IOptions<RequestLocalizationOptions> requestLocalizationOptions,
-    ILogger<JsonStringLocalizerFactory> logger) : IStringLocalizerFactory
+    IOptions<RequestLocalizationOptions> requestLocalizationOptions) : IStringLocalizerFactory
 {
     private readonly bool _fallBackToParentCulture = requestLocalizationOptions.Value.FallBackToParentUICultures;
 
     /// <inheritedoc />
     public IStringLocalizer Create(Type resourceSource)
-        => new JsonStringLocalizer(localizationManager, _fallBackToParentCulture, logger);
+        => new JsonStringLocalizer(localizationManager, _fallBackToParentCulture);
 
     /// <inheritedoc />
     public IStringLocalizer Create(string baseName, string location)
-        => new JsonStringLocalizer(localizationManager, _fallBackToParentCulture, logger);
+        => new JsonStringLocalizer(localizationManager, _fallBackToParentCulture);
 }
