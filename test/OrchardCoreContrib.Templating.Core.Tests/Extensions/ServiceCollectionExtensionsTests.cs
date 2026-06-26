@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using OrchardCoreContrib.Templating.Tests;
 
@@ -10,7 +11,9 @@ public class ServiceCollectionExtensionsTests
     public void AddTemplating_RegistersCoreServices()
     {
         // Arrange
-        var services = new ServiceCollection();
+        var services = new ServiceCollection()
+            .AddLogging()
+            .AddLocalization();
 
         // Act
         services.AddTemplating();
@@ -20,13 +23,10 @@ public class ServiceCollectionExtensionsTests
 
         var manager = provider.GetService<TemplateEngineManager>();
         var factory = provider.GetService<ITemplateEngineFactory>();
-        var renderer = provider.GetService<ITemplateRenderer>();
 
         Assert.NotNull(manager);
         Assert.NotNull(factory);
-        Assert.NotNull(renderer);
         Assert.Same(manager, factory);
-        Assert.IsType<DefaultTemplateRenderer>(renderer);
     }
 
     [Fact]

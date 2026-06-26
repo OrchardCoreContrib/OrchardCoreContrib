@@ -30,7 +30,7 @@ public partial class SmtpServiceTests
             From = "occ@gmail.com",
             To = "hishambinateya@gmail.com",
             Subject = "Test",
-            Body = "Test message."
+            TextBody = "Test message."
         };
 
         // Act & Assert
