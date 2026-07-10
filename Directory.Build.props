@@ -4,14 +4,14 @@
 		<LangVersion>latest</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>disable</Nullable>
-		<!--<TreatWarningsAsErrors>true</TreatWarningsAsErrors>-->
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 		<AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
 		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 		<NoWarn>NU1507</NoWarn>
 
 		<SolutionParentDir>$([System.IO.Path]::GetFullPath('$(SolutionDir)..\'))</SolutionParentDir>
-		<OrchardCoreVersion>3.0.0</OrchardCoreVersion>
+		<OrchardCoreVersion>3.0.1</OrchardCoreVersion>
 		<OrchardCoreContribTestingPath>$(SolutionParentDir)OrchardCoreContrib.Testing\src</OrchardCoreContribTestingPath>
 		<IsLocalProject>false</IsLocalProject>
 	</PropertyGroup>
