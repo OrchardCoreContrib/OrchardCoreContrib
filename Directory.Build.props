@@ -14,5 +14,8 @@
 		<OrchardCoreVersion>3.0.1</OrchardCoreVersion>
 		<OrchardCoreContribTestingPath>$(SolutionParentDir)OrchardCoreContrib.Testing\src</OrchardCoreContribTestingPath>
 		<IsLocalProject>false</IsLocalProject>
+
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)OrchardCoreContrib.snk</AssemblyOriginatorKeyFile>
 	</PropertyGroup>
 </Project>
