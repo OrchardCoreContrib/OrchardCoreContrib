@@ -48,6 +48,6 @@
 		<PackageVersion Include="xunit" Version="2.9.3" />
 		<PackageVersion Include="xunit.analyzers" Version="2.0.0-pre.51" />
 		<PackageVersion Include="xunit.runner.visualstudio" Version="4.0.0-pre.4" />
-		<PackageVersion Include="YesSql.Core" Version="5.4.7" />
+		<PackageVersion Include="YesSql.Core" Version="6.0.0" />
 	</ItemGroup>
 </Project>
