@@ -15,6 +15,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="AngleSharp" />
+		<PackageReference Include="System.Security.Cryptography.Xml" NoWarn="NU1510" />
 		<PackageReference Include="OrchardCore.Logging.NLog" />
 		<PackageReference Include="OrchardCore.Application.Cms.Targets" />
 	</ItemGroup>
