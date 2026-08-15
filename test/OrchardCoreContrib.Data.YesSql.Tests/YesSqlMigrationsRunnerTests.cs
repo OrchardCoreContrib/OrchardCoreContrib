@@ -56,15 +56,15 @@ public class YesSqlMigrationsRunnerTests
         var records = new List<object>();
         var session = new Mock<ISession>();
         session
-            .Setup(s => s.SaveAsync(It.IsAny<object>()))
-            .Callback<object>((obj) =>
+            .Setup(s => s.SaveAsync(It.IsAny<object>(), It.IsAny<bool>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
+            .Callback<object, bool, string, CancellationToken>((obj, _, _, _) =>
             {
                 records.RemoveAll(r => r.GetType() == obj.GetType());
                 records.Add(obj);
             });
         session
-            .Setup(s => s.GetAsync<DataMigrationRecord>(It.IsAny<long[]>()))
-            .Returns<long[]>(_ => Task.FromResult(records.OfType<DataMigrationRecord>()));
+            .Setup(s => s.GetAsync<DataMigrationRecord>(It.IsAny<long[]>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
+            .Returns<long[], string, CancellationToken>((_, _, _) => Task.FromResult(records.OfType<DataMigrationRecord>()));
         session
             .Setup(s => s.Query(It.IsAny<string>()))
             .Returns<string>(_ =>
