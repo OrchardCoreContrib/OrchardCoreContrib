@@ -60,7 +60,7 @@ public static class NavigationItemBuilderExtensions
     /// <returns>The configured navigation item builder.</returns>
     public static NavigationItemBuilder Tenants(this NavigationItemBuilder builder, IEnumerable<string> tenantNames)
     {
-        Guard.ArgumentNotNullOrEmpty(tenantNames);
+        Guard.ArgumentNotEmpty(tenantNames);
 
         if (tenantNames.Contains(CurrentTenant, StringComparer.OrdinalIgnoreCase))
         {

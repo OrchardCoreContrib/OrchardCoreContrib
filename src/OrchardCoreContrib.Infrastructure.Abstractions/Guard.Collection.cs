@@ -8,127 +8,63 @@ namespace OrchardCoreContrib.Infrastructure;
 public static partial class Guard
 {
     /// <summary>
-    /// Asserts that the input value must be null.
+    /// Ensures that the input collection must not be null.
     /// </summary>
-    /// <param name="value">The collection to be tested.</param>
-    /// <param name="name">The name of the tested collection.</param>
-    /// <exception cref="ArgumentNullException">Thrown when the collection is not <see langword="null" />.</exception>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void ArgumentIsNull<TType>(IEnumerable<TType> value, [CallerArgumentExpression(nameof(value))] string name = null)
-    {
-        if (value is not null)
-        {
-            throw new ArgumentNullException(name, "Value must be null.");
-        }
-    }
-
-    /// <summary>
-    /// Asserts that the input value must not be null.
-    /// </summary>
-    /// <param name="value">The collection to be tested.</param>
+    /// <param name="collection">The collection to be tested.</param>
     /// <param name="name">The name of the tested collection.</param>
     /// <exception cref="ArgumentNullException">Thrown when the collection is <see langword="null" />.</exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void ArgumentNotNull<TType>(IEnumerable<TType> value, [CallerArgumentExpression(nameof(value))] string name = null)
+    public static void ArgumentNotNull<TType>(IEnumerable<TType> collection, [CallerArgumentExpression(nameof(collection))] string name = null)
     {
-        if (value is null)
+        if (collection is null)
         {
-            throw new ArgumentNullException(name, "Value must not be null.");
+            throw new ArgumentNullException(name, "Collection must not be null.");
         }
     }
 
     /// <summary>
-    /// Asserts that the input value must be empty.
+    /// Ensures that the input collection must not be empty.
     /// </summary>
-    /// <param name="value">The collection to be tested.</param>
-    /// <param name="name">The name of the tested collection.</param>
-    /// <exception cref="ArgumentException">Thrown when the collection is not empty.</exception>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void ArgumentIsEmpty<TType>(IEnumerable<TType> value, [CallerArgumentExpression(nameof(value))] string name = null)
-    {
-        Guard.ArgumentNotNull(value);
-
-        if (value.Any())
-        {
-            throw new ArgumentException("Collection must be empty.", name);
-        }
-    }
-
-    /// <summary>
-    /// Asserts that the input value must not be empty.
-    /// </summary>
-    /// <param name="value">The collection to be tested.</param>
+    /// <param name="collection">The collection to be tested.</param>
     /// <param name="name">The name of the tested collection.</param>
     /// <exception cref="ArgumentException">Thrown when the collection is empty.</exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void ArgumentIsNotEmpty<TType>(IEnumerable<TType> value, [CallerArgumentExpression(nameof(value))] string name = null)
+    public static void ArgumentNotEmpty<TType>(IEnumerable<TType> collection, [CallerArgumentExpression(nameof(collection))] string name = null)
     {
-        Guard.ArgumentNotNull(value);
+        Guard.ArgumentNotNull(collection, name);
 
-        if (!value.Any())
+        if (!collection.Any())
         {
             throw new ArgumentException("Collection must not be empty.", name);
         }
     }
 
     /// <summary>
-    /// Asserts that the input value must not be null or empty.
+    /// Ensures that the collection must not contain null elements.
     /// </summary>
-    /// <param name="value">The collection to be tested.</param>
-    /// <param name="name">The name of the tested collection.</param>
-    /// <exception cref="ArgumentNullOrEmptyException">Thrown when the collection is <see langword="null" /> or empty.</exception>
-    [Obsolete("Use the generic version of this method instead to avoid unnecessary boxing.", true)]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void ArgumentNotNullOrEmpty(IEnumerable<object> value, [CallerArgumentExpression(nameof(value))] string name = null)
-        => ArgumentNotNullOrEmpty<object>(value, name);
-
-    /// <summary>
-    /// Asserts that the input value must not be null or empty.
-    /// </summary>
-    /// <param name="value">The collection to be tested.</param>
-    /// <param name="name">The name of the tested collection.</param>
-    /// <exception cref="ArgumentNullOrEmptyException">Thrown when the collection is <see langword="null" /> or empty.</exception>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void ArgumentNotNullOrEmpty<TType>(IEnumerable<TType> value, [CallerArgumentExpression(nameof(value))] string name = null)
-    {
-        Guard.ArgumentNotNull(value);
-
-        if (!value.Any())
-        {
-            throw new ArgumentException("Collection cannot be empty.", name);
-        }
-    }
-
-    /// <summary>
-    /// Asserts that the collection must not contain null elements.
-    /// </summary>
-    /// <param name="value">The collection to be tested.</param>
+    /// <param name="collection">The collection to be tested.</param>
     /// <param name="name">The name of the tested collection.</param>
     /// <exception cref="ArgumentException">Thrown when the collection contains <see langword="null" /> elements.</exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void ArgumentDoesNotContainNullElements<TType>(IEnumerable<TType> value, [CallerArgumentExpression(nameof(value))] string name = null)
+    public static void ArgumentDoesNotContainNullElements<TType>(IEnumerable<TType> collection, [CallerArgumentExpression(nameof(collection))] string name = null)
     {
-        Guard.ArgumentNotNull(value);
-
-        if (value.Any(item => item is null))
+        if (collection.Any(item => item is null))
         {
             throw new ArgumentException("Collection contains null elements.", name);
         }
     }
 
     /// <summary>
-    /// Asserts that the collection must not contain duplicate elements.
+    /// Ensures that the collection must not contain duplicate elements.
     /// </summary>
-    /// <param name="value">The collection to be tested.</param>
+    /// <param name="collection">The collection to be tested.</param>
     /// <param name="name">The name of the tested collection.</param>
     /// <exception cref="ArgumentException">Thrown when the collection contains duplicate elements.</exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void ArgumentContainsDuplicateElements<TType>(IEnumerable<TType> value, [CallerArgumentExpression(nameof(value))] string name = null)
+    public static void ArgumentDoesNotContainDuplicateElements<TType>(IEnumerable<TType> collection, [CallerArgumentExpression(nameof(collection))] string name = null)
     {
-        Guard.ArgumentNotNull(value);
-
         var items = new HashSet<TType>();
-        foreach (var item in value)
+        foreach (var item in collection)
         {
             if (!items.Add(item))
             {
