@@ -22,7 +22,7 @@ public class YesSqlMigrationRunner(
     public async Task MigrateAsync(string moduleId, long targetMigrationId = 0)
     {
         Guard.ArgumentNotNullOrEmpty(moduleId);
-        Guard.ArgumentIsPositive(targetMigrationId);
+        Guard.ArgumentNotNegativeOrZero(targetMigrationId);
 
         var pendingMigrations = await GetPendingMigrationsAsync();
 
@@ -75,7 +75,7 @@ public class YesSqlMigrationRunner(
     public async Task RollbackAsync(string moduleId, long targetMigrationId = 0)
     {
         Guard.ArgumentNotNullOrEmpty(moduleId);
-        Guard.ArgumentIsPositive(targetMigrationId);
+        Guard.ArgumentNotNegativeOrZero(targetMigrationId);
 
         var appliedMigrations = (await migrationsHistory.GetAppliedMigrationsAsync())
             .Where(m => m.DataMigrationClass.StartsWith(moduleId))

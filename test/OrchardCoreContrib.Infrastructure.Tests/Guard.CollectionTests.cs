@@ -5,29 +5,6 @@ namespace OrchardCoreContrib.Infrastructure.Tests;
 public class GuardCollectionTests
 {
     [Fact]
-    public void ArgumentIsNull_WhenCollectionIsNotNull_ThrowsArgumentNullException()
-    {
-        // Arrange
-        var value = new[] { 1 };
-
-        // Act
-        var exception = Assert.Throws<ArgumentNullException>(() => Guard.ArgumentIsNull(value));
-
-        // Assert
-        Assert.Equal(nameof(value), exception.ParamName);
-    }
-
-    [Fact]
-    public void ArgumentIsNull_WhenCollectionIsNull_DoesNotThrow()
-    {
-        // Arrange
-        int[] value = null;
-
-        // Act
-        Guard.ArgumentIsNull(value);
-    }
-
-    [Fact]
     public void ArgumentNotNull_WhenCollectionIsNull_ThrowsArgumentNullException()
     {
         // Arrange
@@ -51,51 +28,13 @@ public class GuardCollectionTests
     }
 
     [Fact]
-    public void ArgumentIsEmpty_WhenCollectionNull_ThrowsArgumentNullException()
-    {
-        // Arrange
-        int[] value = null;
-
-        // Act
-        var exception = Assert.Throws<ArgumentNullException>(() => Guard.ArgumentIsEmpty(value));
-
-        // Assert
-        Assert.Equal(nameof(value), exception.ParamName);
-        Assert.Equal($"Value must not be null. (Parameter '{nameof(value)}')", exception.Message);
-    }
-
-    [Fact]
-    public void ArgumentIsEmpty_WhenCollectionNullOrNotEmpty_ThrowsArgumentException()
-    {
-        // Arrange
-        var value = new int[] { 1, 2, 3 };
-
-        // Act
-        var exception = Assert.Throws<ArgumentException>(() => Guard.ArgumentIsEmpty(value));
-
-        // Assert
-        Assert.Equal(nameof(value), exception.ParamName);
-        Assert.Equal($"Collection must be empty. (Parameter '{nameof(value)}')", exception.Message);
-    }
-
-    [Fact]
-    public void ArgumentIsEmpty_WhenCollectionIsNotNull_DoesNotThrow()
+    public void ArgumentNotEmpty_WhenCollectionIsEmpty_ThrowsArgumentException()
     {
         // Arrange
         var value = Array.Empty<int>();
 
         // Act
-        Guard.ArgumentIsEmpty(value);
-    }
-
-    [Fact]
-    public void ArgumentIsNotEmpty_WhenCollectionIsEmpty_ThrowsArgumentException()
-    {
-        // Arrange
-        var value = Array.Empty<int>();
-
-        // Act
-        var exception = Assert.Throws<ArgumentException>(() => Guard.ArgumentIsNotEmpty(value));
+        var exception = Assert.Throws<ArgumentException>(() => Guard.ArgumentNotEmpty(value));
 
         // Assert
         Assert.Equal(nameof(value), exception.ParamName);
@@ -103,50 +42,26 @@ public class GuardCollectionTests
     }
 
     [Fact]
-    public void ArgumentIsNotEmpty_WhenCollectionHasItems_DoesNotThrow()
+    public void ArgumentNotEmpty_WhenCollectionHasItems_DoesNotThrow()
     {
         // Arrange
         var value = new[] { 1 };
 
         // Act
-        Guard.ArgumentIsNotEmpty(value);
+        Guard.ArgumentNotEmpty(value);
     }
 
     [Fact]
-    public void ArgumentNotNullOrEmpty_WhenCollectionIsNull_ThrowsArgumentNullException()
+    public void ArgumentNotEmpty_WhenCollectionIsNull_ThrowsArgumentNullException()
     {
         // Arrange
         int[] value = null;
 
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(() => Guard.ArgumentNotNullOrEmpty(value));
+        var exception = Assert.Throws<ArgumentNullException>(() => Guard.ArgumentNotEmpty(value));
 
         // Assert
         Assert.Equal(nameof(value), exception.ParamName);
-    }
-
-    [Fact]
-    public void ArgumentNotNullOrEmpty_WhenCollectionIsEmpty_ThrowsArgumentException()
-    {
-        // Arrange
-        var value = Array.Empty<int>();
-
-        // Act
-        var exception = Assert.Throws<ArgumentException>(() => Guard.ArgumentNotNullOrEmpty(value));
-
-        // Assert
-        Assert.Equal(nameof(value), exception.ParamName);
-        Assert.Equal($"Collection cannot be empty. (Parameter '{nameof(value)}')", exception.Message);
-    }
-
-    [Fact]
-    public void ArgumentNotNullOrEmpty_WhenCollectionHasItems_DoesNotThrow()
-    {
-        // Arrange
-        var value = new[] { 1 };
-
-        // Act
-        Guard.ArgumentNotNullOrEmpty(value);
     }
 
     [Fact]
@@ -180,7 +95,7 @@ public class GuardCollectionTests
         int[] value = [1, 1, 2];
 
         // Act
-        var exception = Assert.Throws<ArgumentException>(() => Guard.ArgumentContainsDuplicateElements(value));
+        var exception = Assert.Throws<ArgumentException>(() => Guard.ArgumentDoesNotContainDuplicateElements(value));
 
         // Assert
         Assert.Equal(nameof(value), exception.ParamName);
@@ -194,6 +109,6 @@ public class GuardCollectionTests
         int[] value = [1, 2, 3];
 
         // Act
-        Guard.ArgumentContainsDuplicateElements(value);
+        Guard.ArgumentDoesNotContainDuplicateElements(value);
     }
 }

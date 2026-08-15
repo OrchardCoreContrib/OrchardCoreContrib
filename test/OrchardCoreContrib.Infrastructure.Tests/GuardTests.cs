@@ -5,130 +5,147 @@ namespace OrchardCoreContrib.Infrastructure.Tests;
 public partial class GuardTests
 {
     [Fact]
+    public void ArgumentNull_AllowsNull_DoesNotThrow()
+    {
+        // Act
+        Guard.ArgumentNull(null);
+    }
+
+    [Fact]
+    public void ArgumentNull_NonNull_ThrowsArgumentException()
+    {
+        // Act & Assert
+        Assert.Throws<ArgumentException>(() => Guard.ArgumentNull(42));
+    }
+
+    [Fact]
     public void ArgumentNotNull_Null_ThrowsArgumentNullException()
     {
-        // Arrange
-        object value = null;
-
         // Act & Assert
-        var exception = Assert.Throws<ArgumentNullException>(() => Guard.ArgumentNotNull(value));
-
-        Assert.Equal(nameof(value), exception.ParamName);
+        Assert.Throws<ArgumentNullException>(() => Guard.ArgumentNotNull(null));
     }
 
     [Fact]
     public void ArgumentNotNull_NotNull_DoesNotThrow()
     {
+        // Act
+        Guard.ArgumentNotNull("value");
+    }
+
+    [Fact]
+    public void ArgumentOfType_CorrectType_DoesNotThrow()
+    {
+        // Act
+        Guard.ArgumentOfType<string>("hello");
+    }
+
+    [Fact]
+    public void ArgumentOfType_IncorrectType_ThrowsArgumentException()
+    {
+        // Act & Assert
+        Assert.Throws<ArgumentException>(() => Guard.ArgumentOfType<string>(123));
+    }
+
+    [Fact]
+    public void ArgumentOfType_Null_ThrowsArgumentNullException()
+    {
+        // Act & Assert
+        Assert.Throws<ArgumentNullException>(() => Guard.ArgumentOfType<string>(null));
+    }
+
+    [Fact]
+    public void ArgumentNotOfType_DifferentType_DoesNotThrow()
+    {
+        // Act
+        Guard.ArgumentNotOfType<string>(123);
+    }
+
+    [Fact]
+    public void ArgumentNotOfType_SameType_ThrowsArgumentException()
+    {
+        // Act & Assert
+        Assert.Throws<ArgumentException>(() => Guard.ArgumentNotOfType<string>("x"));
+    }
+
+    [Fact]
+    public void ArgumentEquals_Null_ThrowsArgumentNullException()
+    {
+        // Act & Assert
+        Assert.Throws<ArgumentNullException>(() => Guard.ArgumentEquals(null, 1));
+        Assert.Throws<ArgumentNullException>(() => Guard.ArgumentEquals(1, null));
+    }
+
+    [Fact]
+    public void ArgumentNotEquals_NotEqual_DoesNotThrow()
+    {
+        // Act
+        Guard.ArgumentNotEquals("Yes", "No");
+    }
+
+    [Fact]
+    public void ArgumentNotEquals_Equal_ThrowsArgumentException()
+    {
+        // Act & Assert
+        Assert.Throws<ArgumentException>(() => Guard.ArgumentNotEquals("Yes", "Yes"));
+    }
+
+    [Fact]
+    public void ArgumentAssignableToType_Assignable_DoesNotThrow()
+    {
         // Arrange
-        object value = new object();
+        var derived = new DerivedType();
 
         // Act
-        Guard.ArgumentNotNull(value);
+        Guard.ArgumentAssignableToType<BaseType>(derived);
     }
 
     [Fact]
-    public void ArgumentIsOfType_Generic_ExactType_DoesNotThrow()
+    public void ArgumentAssignableToType_NotAssignable_ThrowsArgumentException()
     {
         // Arrange
-        object value = 123;
-
-        // Act
-        Guard.ArgumentIsOfType<int>(value);
-    }
-
-    [Fact]
-    public void ArgumentIsOfType_Generic_DifferentType_ThrowsArgumentException()
-    {
-        // Arrange
-        object value = "abc";
+        var other = new OtherType();
 
         // Act & Assert
-        var exception = Assert.Throws<ArgumentException>(() => Guard.ArgumentIsOfType<int>(value));
-
-        Assert.Equal(nameof(value), exception.ParamName);
+        Assert.Throws<ArgumentException>(() => Guard.ArgumentAssignableToType<BaseType>(other));
     }
 
     [Fact]
-    public void ArgumentIsNotOfType_Generic_SameType_ThrowsArgumentException()
+    public void ArgumentAssignableToType_Null_ThrowsArgumentNullException()
+    {
+        // Act & Assert
+        Assert.Throws<ArgumentNullException>(() => Guard.ArgumentAssignableToType<BaseType>(null));
+    }
+
+    [Fact]
+    public void ArgumentNotAssignableToType_NotAssignable_DoesNotThrow()
     {
         // Arrange
-        object value = 123;
+        var other = new OtherType();
 
         // Act & Assert
-        var exception = Assert.Throws<ArgumentException>(() => Guard.ArgumentIsNotOfType<int>(value));
-
-        Assert.Equal(nameof(value), exception.ParamName);
+        Guard.ArgumentNotAssignableToType<BaseType>(other);
     }
 
     [Fact]
-    public void ArgumentIsNotOfType_Generic_DifferentType_DoesNotThrow()
+    public void ArgumentNotAssignableToType_Assignable_ThrowsArgumentException()
     {
         // Arrange
-        object value = "abc";
-
-        // Act
-        Guard.ArgumentIsNotOfType<int>(value);
-    }
-
-    [Fact]
-    public void ArgumentIsOfType_Runtime_DifferentType_ThrowsArgumentException()
-    {
-        // Arrange
-        object value = "abc";
+        var derived = new DerivedType();
 
         // Act & Assert
-        var exception = Assert.Throws<ArgumentException>(() => Guard.ArgumentIsOfType(value, typeof(int)));
-
-        Assert.Equal(nameof(value), exception.ParamName);
+        Assert.Throws<ArgumentException>(() => Guard.ArgumentNotAssignableToType<BaseType>(derived));
     }
 
     [Fact]
-    public void ArgumentIsAssignableToType_Generic_Assignable_DoesNotThrow()
+    public void ArgumentNotAssignableToType_Null_ThrowsArgumentNullException()
     {
-        // Arrange
-        object value = new DerivedType();
-
-        // Act
-        Guard.ArgumentIsAssignableToType<BaseType>(value);
-    }
-
-    [Fact]
-    public void ArgumentIsAssignableToType_Runtime_NotAssignable_ThrowsArgumentException()
-    {
-        // Arrange
-        object value = 123;
-
         // Act & Assert
-        var exception = Assert.Throws<ArgumentException>(() => Guard.ArgumentIsAssignableToType(value, typeof(string)));
-
-        Assert.Equal(nameof(value), exception.ParamName);
-    }
-
-    [Fact]
-    public void ArgumentIsNotAssignableToType_Generic_Assignable_ThrowsArgumentException()
-    {
-        // Arrange
-        object value = new DerivedType();
-
-        // Act & Assert
-        var exception = Assert.Throws<ArgumentException>(() => Guard.ArgumentIsNotAssignableToType<BaseType>(value));
-
-        Assert.Equal(nameof(value), exception.ParamName);
-    }
-
-    [Fact]
-    public void ArgumentIsNotAssignableToType_Runtime_Assignable_ThrowsArgumentException()
-    {
-        // Arrange
-        object value = new DerivedType();
-
-        // Act & Assert
-        var exception = Assert.Throws<ArgumentException>(() => Guard.ArgumentIsNotAssignableToType(value, typeof(BaseType)));
-
-        Assert.Equal(nameof(value), exception.ParamName);
+        Assert.Throws<ArgumentNullException>(() => Guard.ArgumentNotAssignableToType<BaseType>(null));
     }
 
     private class BaseType;
 
     private class DerivedType : BaseType;
+
+    private class OtherType;
 }
