@@ -1,6 +1,6 @@
 ﻿<Project>
 	<ItemGroup>
-		<PackageVersion Include="AngleSharp" Version="1.7.1" />
+		<PackageVersion Include="AngleSharp" Version="1.7.2" />
 		<PackageVersion Include="coverlet.collector" Version="10.0.1" />
 		<PackageVersion Include="linq2db" Version="6.4.0" />
 		<PackageVersion Include="MailKit" Version="4.17.0" />
